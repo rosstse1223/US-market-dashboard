@@ -1,12 +1,45 @@
 {
-  "updated": "24 Mar 2026, 23:04 HKT",
+  "updated": "24 Mar 2026, 23:18 HKT",
   "indices": [
+    {
+      "ticker": "^VIX",
+      "name": "Volatility (VIX)",
+      "price": 26.33,
+      "daily_chg": 0.69,
+      "intraday_chg": 1.62,
+      "ema10": "above_up",
+      "ema20": "above_up",
+      "sma50": "above_up",
+      "sma200": "above_up"
+    },
+    {
+      "ticker": "IWM",
+      "name": "Russell 2000",
+      "price": 248.82,
+      "daily_chg": 0.55,
+      "intraday_chg": 1.35,
+      "ema10": "above_up",
+      "ema20": "below_down",
+      "sma50": "below_down",
+      "sma200": "above_up"
+    },
+    {
+      "ticker": "DIA",
+      "name": "Dow Jones",
+      "price": 462.93,
+      "daily_chg": 0.21,
+      "intraday_chg": 0.98,
+      "ema10": "below_down",
+      "ema20": "below_down",
+      "sma50": "below_down",
+      "sma200": "below_up"
+    },
     {
       "ticker": "SPY",
       "name": "S&P 500",
-      "price": 655.15,
-      "daily_chg": -0.03,
-      "intraday_chg": 0.59,
+      "price": 655.55,
+      "daily_chg": 0.03,
+      "intraday_chg": 0.65,
       "ema10": "below_down",
       "ema20": "below_down",
       "sma50": "below_down",
@@ -15,123 +48,13 @@
     {
       "ticker": "QQQ",
       "name": "NASDAQ 100",
-      "price": 586.0,
-      "daily_chg": -0.34,
-      "intraday_chg": 0.2,
+      "price": 586.6,
+      "daily_chg": -0.24,
+      "intraday_chg": 0.3,
       "ema10": "below_down",
       "ema20": "below_down",
       "sma50": "below_down",
       "sma200": "below_up"
-    },
-    {
-      "ticker": "DIA",
-      "name": "Dow Jones",
-      "price": 462.68,
-      "daily_chg": 0.15,
-      "intraday_chg": 0.93,
-      "ema10": "below_down",
-      "ema20": "below_down",
-      "sma50": "below_down",
-      "sma200": "below_up"
-    },
-    {
-      "ticker": "IWM",
-      "name": "Russell 2000",
-      "price": 248.44,
-      "daily_chg": 0.4,
-      "intraday_chg": 1.19,
-      "ema10": "below_down",
-      "ema20": "below_down",
-      "sma50": "below_down",
-      "sma200": "above_up"
-    },
-    {
-      "ticker": "^VIX",
-      "name": "Volatility (VIX)",
-      "price": 26.42,
-      "daily_chg": 1.03,
-      "intraday_chg": 1.97,
-      "ema10": "above_up",
-      "ema20": "above_up",
-      "sma50": "above_up",
-      "sma200": "above_up"
-    },
-    {
-      "ticker": "^FTSE",
-      "name": "FTSE 100",
-      "price": 9917.73,
-      "daily_chg": 0.24,
-      "intraday_chg": 0.24,
-      "ema10": "below_down",
-      "ema20": "below_down",
-      "sma50": "below_down",
-      "sma200": "above_up"
-    },
-    {
-      "ticker": "^N225",
-      "name": "Nikkei 225",
-      "price": 52252.28,
-      "daily_chg": 1.43,
-      "intraday_chg": -0.24,
-      "ema10": "below_down",
-      "ema20": "below_down",
-      "sma50": "below_up",
-      "sma200": "above_up"
-    },
-    {
-      "ticker": "^HSI",
-      "name": "Hang Seng",
-      "price": 25063.71,
-      "daily_chg": 2.79,
-      "intraday_chg": 1.23,
-      "ema10": "below_down",
-      "ema20": "below_down",
-      "sma50": "below_down",
-      "sma200": "below_up"
-    },
-    {
-      "ticker": "^GDAXI",
-      "name": "DAX",
-      "price": 22509.92,
-      "daily_chg": -0.64,
-      "intraday_chg": -0.74,
-      "ema10": "below_down",
-      "ema20": "below_down",
-      "sma50": "below_down",
-      "sma200": "below_down"
-    },
-    {
-      "ticker": "^FCHI",
-      "name": "CAC 40",
-      "price": 7716.7,
-      "daily_chg": -0.12,
-      "intraday_chg": -0.35,
-      "ema10": "below_down",
-      "ema20": "below_down",
-      "sma50": "below_down",
-      "sma200": "below_down"
-    },
-    {
-      "ticker": "EEM",
-      "name": "Emerging Markets",
-      "price": 56.7,
-      "daily_chg": -1.06,
-      "intraday_chg": 1.02,
-      "ema10": "below_down",
-      "ema20": "below_down",
-      "sma50": "below_down",
-      "sma200": "above_up"
-    },
-    {
-      "ticker": "GLD",
-      "name": "Gold ETF",
-      "price": 405.39,
-      "daily_chg": 0.33,
-      "intraday_chg": 1.29,
-      "ema10": "below_down",
-      "ema20": "below_down",
-      "sma50": "below_down",
-      "sma200": "above_up"
     }
   ]
 }
