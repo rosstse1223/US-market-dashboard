@@ -22,7 +22,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install required packages
-        run: pip install yfinance pandas pytz
+        run: pip install yfinance pandas pytz lxml
 
       - name: Run data fetch script
         run: python scripts/fetch_data.py
@@ -32,7 +32,6 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/indices.json
-          # Only commits if the file actually changed (skips empty commits)
           git diff --staged --quiet || \
             git commit -m "data: auto-update indices $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push
