@@ -67,15 +67,12 @@
     thead th:hover { color: #c9d1d9; background: #161b22; }
     thead th.sort-asc,
     thead th.sort-desc { color: #58a6ff; }
-    thead th::after          { content: ' ⇅'; font-size: .65rem; opacity: .3; transition: opacity .15s; }
-    thead th:hover::after    { opacity: .6; }
+    thead th::after           { content: ' ⇅'; font-size: .65rem; opacity: .3; transition: opacity .15s; }
+    thead th:hover::after     { opacity: .6; }
     thead th.sort-asc::after  { content: ' ▲'; opacity: 1; color: #58a6ff; }
     thead th.sort-desc::after { content: ' ▼'; opacity: 1; color: #58a6ff; }
 
-    tbody tr {
-      border-bottom: 1px solid #1c2128;
-      transition: background .12s;
-    }
+    tbody tr { border-bottom: 1px solid #1c2128; transition: background .12s; }
     tbody tr:hover { background: #1c2128; }
     tbody tr:last-child { border-bottom: none; }
 
@@ -131,18 +128,33 @@
       font-family: 'Courier New', monospace;
       text-align: center;
     }
-    /* 80-99  strong */
-    .rs-5 { background: rgba(35,134,54,.30);  color: #3fb950; border: 1px solid rgba(63,185,80,.35); }
-    /* 60-79  moderate-strong */
-    .rs-4 { background: rgba(70,180,70,.20);  color: #7ee787; border: 1px solid rgba(70,180,70,.30); }
-    /* 40-59  neutral */
-    .rs-3 { background: rgba(187,162,0,.22);  color: #e3b341; border: 1px solid rgba(187,162,0,.30); }
-    /* 20-39  weak */
-    .rs-2 { background: rgba(219,109,40,.22); color: #db6d28; border: 1px solid rgba(219,109,40,.30); }
-    /* 1-19   very weak */
-    .rs-1 { background: rgba(248,81,73,.20);  color: #f85149; border: 1px solid rgba(248,81,73,.28); }
-    /* N/A */
+    .rs-5  { background: rgba(35,134,54,.30);   color: #3fb950; border: 1px solid rgba(63,185,80,.35); }
+    .rs-4  { background: rgba(70,180,70,.20);   color: #7ee787; border: 1px solid rgba(70,180,70,.30); }
+    .rs-3  { background: rgba(187,162,0,.22);   color: #e3b341; border: 1px solid rgba(187,162,0,.30); }
+    .rs-2  { background: rgba(219,109,40,.22);  color: #db6d28; border: 1px solid rgba(219,109,40,.30); }
+    .rs-1  { background: rgba(248,81,73,.20);   color: #f85149; border: 1px solid rgba(248,81,73,.28); }
     .rs-na { background: rgba(110,118,129,.12); color: #6e7681; border: 1px solid rgba(110,118,129,.18); }
+
+    /* ── ATR multiple badge ── */
+    .atr-badge {
+      display: inline-block;
+      min-width: 52px;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: .80rem;
+      font-weight: 700;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+    }
+    /* Positive (price above 50-MA) */
+    .atr-ext-high { background: rgba(248,81,73,.22);   color: #f85149; border: 1px solid rgba(248,81,73,.35); }  /* > 7x  : very extended */
+    .atr-ext-mod  { background: rgba(219,109,40,.22);  color: #db6d28; border: 1px solid rgba(219,109,40,.30); } /* 4–7x  : extended      */
+    .atr-pos-norm { background: rgba(35,134,54,.22);   color: #3fb950; border: 1px solid rgba(63,185,80,.28); }  /* 0–4x  : healthy above */
+    /* Negative (price below 50-MA) */
+    .atr-neg-mild { background: rgba(187,162,0,.22);   color: #e3b341; border: 1px solid rgba(187,162,0,.30); }  /* -4–0x : mild pullback */
+    .atr-neg-deep { background: rgba(248,81,73,.20);   color: #f85149; border: 1px solid rgba(248,81,73,.28); }  /* < -4x : deep below   */
+    /* N/A */
+    .atr-na       { background: rgba(110,118,129,.12); color: #6e7681; border: 1px solid rgba(110,118,129,.18); }
 
     /* ── Legend ── */
     .legend {
@@ -187,24 +199,33 @@
           <th data-col="sma50"        data-type="ma">SMA 50</th>
           <th data-col="sma200"       data-type="ma">SMA 200</th>
           <th data-col="rs_rating"    data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
+          <th data-col="atr_multiple" data-type="number">ATRx 50-MA<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(ATR14 / SMA50)</small></th>
         </tr>
       </thead>
       <tbody id="indices-body">
-        <tr><td colspan="9" class="loading-msg">⏳ Loading indices data…</td></tr>
+        <tr><td colspan="10" class="loading-msg">⏳ Loading indices data…</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="legend">
+    <!-- MA legend -->
     <div class="legend-item"><span class="ma-pill ma-above-up">▲ Above</span>  Price &gt; MA &amp; MA rising</div>
     <div class="legend-item"><span class="ma-pill ma-above-down">▼ Above</span> Price &gt; MA &amp; MA falling</div>
     <div class="legend-item"><span class="ma-pill ma-below-up">▲ Below</span>  Price &lt; MA &amp; MA rising</div>
     <div class="legend-item"><span class="ma-pill ma-below-down">▼ Below</span> Price &lt; MA &amp; MA falling</div>
-    <div class="legend-item" style="margin-left:16px"><span class="rs-badge rs-5">80–99</span> RS: Leading</div>
+    <!-- RS legend -->
+    <div class="legend-item" style="margin-left:8px"><span class="rs-badge rs-5">80–99</span> RS: Leading</div>
     <div class="legend-item"><span class="rs-badge rs-4">60–79</span> RS: Above avg</div>
     <div class="legend-item"><span class="rs-badge rs-3">40–59</span> RS: Neutral</div>
     <div class="legend-item"><span class="rs-badge rs-2">20–39</span> RS: Lagging</div>
     <div class="legend-item"><span class="rs-badge rs-1">1–19</span>  RS: Weak</div>
+    <!-- ATR legend -->
+    <div class="legend-item" style="margin-left:8px"><span class="atr-badge atr-ext-high">&gt;7x</span>  Very extended</div>
+    <div class="legend-item"><span class="atr-badge atr-ext-mod">4–7x</span>  Extended</div>
+    <div class="legend-item"><span class="atr-badge atr-pos-norm">0–4x</span>  Healthy above</div>
+    <div class="legend-item"><span class="atr-badge atr-neg-mild">-4–0x</span> Mild pullback</div>
+    <div class="legend-item"><span class="atr-badge atr-neg-deep">&lt;-4x</span> Deep below</div>
   </div>
 </div>
 
@@ -244,6 +265,18 @@
     return `<span class="rs-badge ${tier}">${val}</span>`;
   }
 
+  function atrBadge(val) {
+    if (val == null) return '<span class="atr-badge atr-na">N/A</span>';
+    let cls;
+    if      (val > 7)  cls = 'atr-ext-high';
+    else if (val > 4)  cls = 'atr-ext-mod';
+    else if (val >= 0) cls = 'atr-pos-norm';
+    else if (val >= -4) cls = 'atr-neg-mild';
+    else               cls = 'atr-neg-deep';
+    const sign = val > 0 ? '+' : '';
+    return `<span class="atr-badge ${cls}">${sign}${val.toFixed(1)}x</span>`;
+  }
+
   // ── Render one table row ──────────────────────────────────────────
   function renderRow(row) {
     const fmt = (n) => n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -261,6 +294,7 @@
       <td>${maPill(row.sma50)}</td>
       <td>${maPill(row.sma200)}</td>
       <td>${rsBadge(row.rs_rating)}</td>
+      <td>${atrBadge(row.atr_multiple)}</td>
     `;
     return tr;
   }
@@ -326,7 +360,7 @@
 
       if (!json.indices || json.indices.length === 0) {
         document.getElementById('indices-body').innerHTML =
-          '<tr><td colspan="9" class="loading-msg">No data found.</td></tr>';
+          '<tr><td colspan="10" class="loading-msg">No data found.</td></tr>';
         return;
       }
 
@@ -334,7 +368,7 @@
       renderTable();
     } catch (err) {
       document.getElementById('indices-body').innerHTML =
-        `<tr><td colspan="9" class="loading-msg">❌ Error loading data: ${err.message}</td></tr>`;
+        `<tr><td colspan="10" class="loading-msg">❌ Error loading data: ${err.message}</td></tr>`;
     }
   }
 
