@@ -23,15 +23,8 @@
       gap: 12px;
       margin-bottom: 24px;
     }
-    header h1 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #e6edf3;
-    }
-    #updated-time {
-      font-size: 0.78rem;
-      color: #6e7681;
-    }
+    header h1 { font-size: 1.4rem; font-weight: 700; color: #e6edf3; }
+    #updated-time { font-size: 0.78rem; color: #6e7681; }
 
     .section-card {
       background: #161b22;
@@ -51,11 +44,10 @@
       background: #0d1117;
     }
 
-    /* ── Scrollable wrapper for narrow screens ── */
     .table-wrap { overflow-x: auto; }
-
     table { width: 100%; border-collapse: collapse; }
 
+    /* ── Sortable header styles ── */
     thead th {
       padding: 9px 14px;
       text-align: left;
@@ -67,8 +59,28 @@
       border-bottom: 1px solid #21262d;
       background: #0d1117;
       white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      transition: color .15s, background .15s;
     }
     thead th:not(:first-child) { text-align: center; }
+    thead th:hover { color: #c9d1d9; background: #161b22; }
+
+    /* Active sort column highlight */
+    thead th.sort-asc,
+    thead th.sort-desc { color: #58a6ff; }
+
+    /* Sort arrow indicator */
+    thead th::after {
+      content: ' ⇅';
+      font-size: .65rem;
+      opacity: .3;
+      transition: opacity .15s;
+    }
+    thead th:hover::after   { opacity: .6; }
+    thead th.sort-asc::after  { content: ' ▲'; opacity: 1; color: #58a6ff; }
+    thead th.sort-desc::after { content: ' ▼'; opacity: 1; color: #58a6ff; }
 
     tbody tr {
       border-bottom: 1px solid #1c2128;
@@ -152,14 +164,14 @@
     <table id="indices-table">
       <thead>
         <tr>
-          <th>Ticker</th>
-          <th>Price</th>
-          <th>Daily Chg</th>
-          <th>Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
-          <th>EMA 10</th>
-          <th>EMA 20</th>
-          <th>SMA 50</th>
-          <th>SMA 200</th>
+          <th data-col="ticker"       data-type="string">Ticker</th>
+          <th data-col="price"        data-type="number">Price</th>
+          <th data-col="daily_chg"    data-type="number">Daily Chg</th>
+          <th data-col="intraday_chg" data-type="number">Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
+          <th data-col="ema10"        data-type="ma">EMA 10</th>
+          <th data-col="ema20"        data-type="ma">EMA 20</th>
+          <th data-col="sma50"        data-type="ma">SMA 50</th>
+          <th data-col="sma200"       data-type="ma">SMA 200</th>
         </tr>
       </thead>
       <tbody id="indices-body">
@@ -177,6 +189,17 @@
 </div>
 
 <script>
+  // ── MA tag → numeric sort rank (best → worst: 4 → 1) ──────────────
+  const MA_RANK = { above_up: 4, above_down: 3, below_up: 2, below_down: 1 };
+
+  // ── Holds the raw data array so sorting never re-fetches ──────────
+  let tableData = [];
+
+  // ── Sort state ────────────────────────────────────────────────────
+  let sortCol = null;      // which data-col is active
+  let sortDir = 'asc';    // 'asc' | 'desc'
+
+  // ─────────────────────────────────────────────────────────────────
   function fmtChg(val) {
     if (val == null) return '<span class="chg chg-zero">N/A</span>';
     const sign = val > 0 ? '+' : '';
@@ -195,6 +218,84 @@
     return `<span class="ma-pill ${m.cls}">${m.label}</span>`;
   }
 
+  function renderRow(row) {
+    const fmt = (n) => n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>
+        <div class="ticker-sym">${row.ticker}</div>
+        <div class="ticker-full">${row.name}</div>
+      </td>
+      <td><span class="price-val">${fmt(row.price)}</span></td>
+      <td>${fmtChg(row.daily_chg)}</td>
+      <td>${fmtChg(row.intraday_chg)}</td>
+      <td>${maPill(row.ema10)}</td>
+      <td>${maPill(row.ema20)}</td>
+      <td>${maPill(row.sma50)}</td>
+      <td>${maPill(row.sma200)}</td>
+    `;
+    return tr;
+  }
+
+  // ── Re-render tbody from current tableData in sort order ──────────
+  function renderTable() {
+    const tbody = document.getElementById('indices-body');
+    tbody.innerHTML = '';
+
+    const sorted = [...tableData].sort((a, b) => {
+      if (!sortCol) return 0;
+
+      const th   = document.querySelector(`th[data-col="${sortCol}"]`);
+      const type = th ? th.dataset.type : 'string';
+
+      let va, vb;
+      if (type === 'ma') {
+        va = MA_RANK[a[sortCol]] ?? 0;
+        vb = MA_RANK[b[sortCol]] ?? 0;
+      } else if (type === 'number') {
+        va = a[sortCol] ?? -Infinity;
+        vb = b[sortCol] ?? -Infinity;
+      } else {
+        va = (a[sortCol] ?? '').toString().toLowerCase();
+        vb = (b[sortCol] ?? '').toString().toLowerCase();
+      }
+
+      if (va < vb) return sortDir === 'asc' ? -1 :  1;
+      if (va > vb) return sortDir === 'asc' ?  1 : -1;
+      return 0;
+    });
+
+    sorted.forEach(row => tbody.appendChild(renderRow(row)));
+  }
+
+  // ── Attach click listeners to every <th> ─────────────────────────
+  function initSorting() {
+    document.querySelectorAll('#indices-table thead th').forEach(th => {
+      th.addEventListener('click', () => {
+        const col = th.dataset.col;
+        if (!col) return;
+
+        if (sortCol === col) {
+          // Same column → flip direction
+          sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+        } else {
+          // New column → default descending (highest value first)
+          sortCol = col;
+          sortDir = col === 'ticker' ? 'asc' : 'desc';
+        }
+
+        // Update header arrow classes
+        document.querySelectorAll('#indices-table thead th').forEach(h => {
+          h.classList.remove('sort-asc', 'sort-desc');
+        });
+        th.classList.add(sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
+
+        renderTable();
+      });
+    });
+  }
+
+  // ── Fetch data on page load ───────────────────────────────────────
   async function loadIndices() {
     try {
       const res  = await fetch('data/indices.json?v=' + Date.now());
@@ -204,32 +305,14 @@
       document.getElementById('updated-time').textContent =
         '🕒 Last updated: ' + (json.updated || 'unknown');
 
-      const tbody = document.getElementById('indices-body');
-      tbody.innerHTML = '';
-
       if (!json.indices || json.indices.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" class="loading-msg">No data found.</td></tr>';
+        document.getElementById('indices-body').innerHTML =
+          '<tr><td colspan="8" class="loading-msg">No data found.</td></tr>';
         return;
       }
 
-      json.indices.forEach(row => {
-        const fmt = (n) => n.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>
-            <div class="ticker-sym">${row.ticker}</div>
-            <div class="ticker-full">${row.name}</div>
-          </td>
-          <td><span class="price-val">${fmt(row.price)}</span></td>
-          <td>${fmtChg(row.daily_chg)}</td>
-          <td>${fmtChg(row.intraday_chg)}</td>
-          <td>${maPill(row.ema10)}</td>
-          <td>${maPill(row.ema20)}</td>
-          <td>${maPill(row.sma50)}</td>
-          <td>${maPill(row.sma200)}</td>
-        `;
-        tbody.appendChild(tr);
-      });
+      tableData = json.indices;
+      renderTable();
 
     } catch (err) {
       document.getElementById('indices-body').innerHTML =
@@ -237,6 +320,7 @@
     }
   }
 
+  initSorting();
   loadIndices();
 </script>
 
