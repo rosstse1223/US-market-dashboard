@@ -14,46 +14,71 @@ INDICES = [
     {"ticker": "QQQ",  "name": "NASDAQ 100"},
 ]
 
-# ── Hardcoded S&P 500 universe (200 liquid stocks across all sectors) ─
+# ── ~490 S&P 500 stocks across all sectors (hardcoded, no web scraping) ─
 SP500_UNIVERSE = [
-    # Technology
+    # Technology (~65)
     "AAPL","MSFT","NVDA","AVGO","ORCL","CRM","AMD","QCOM","TXN","AMAT",
     "KLAC","LRCX","ADI","MU","SNPS","CDNS","FTNT","PANW","CRWD","NOW",
     "ADBE","INTU","INTC","HPQ","HPE","CSCO","IBM","DELL","STX","WDC",
-    # Communication Services
+    "FICO","ANSS","MPWR","TER","KEYS","ROP","TRMB","AKAM","NTAP","ZBRA",
+    "VRSN","CTSH","GLW","ON","MCHP","NXPI","ENTG","PAYC","ZS","FSLR",
+    "ENPH","ACN","MSCI","IT","GDDY","FISV","FIS","GPN","BR","TYL",
+    "NDAQ","PLTR","WDAY","TTD","FFIV",
+    # Communication Services (~24)
     "META","GOOGL","GOOG","NFLX","DIS","CMCSA","T","VZ","TMUS","CHTR",
     "EA","TTWO","NWSA","OMC","IPG","LYV","WBD","PARA",
-    # Consumer Discretionary
+    "MTCH","SNAP","FOXA","FOX","IAC","PINS",
+    # Consumer Discretionary (~60)
     "AMZN","TSLA","HD","MCD","NKE","SBUX","LOW","TJX","BKNG","CMG",
     "MAR","HLT","ORLY","AZO","ROST","YUM","DHI","LEN","PHM","NVR",
     "TSCO","EBAY","ETSY","BBY","DRI","LVS","MGM","WYNN","HAS","MHK",
-    # Consumer Staples
+    "APTV","BWA","GM","F","GPC","KMX","GRMN","POOL","RCL","CCL",
+    "NCLH","PVH","RL","LULU","ULTA","EXPE","ABNB","SNA","SWK","GNRC",
+    "FND","FIVE","DKNG","PENN","CZR","NVT","BLDR","MTH","TREX","CRI",
+    # Consumer Staples (~35)
     "WMT","COST","PG","KO","PEP","PM","MO","MDLZ","CL","GIS",
     "KMB","SYY","ADM","MKC","K","HRL","CAG","CPB","CHD","CLX",
-    # Healthcare
+    "EL","STZ","BG","TAP","KVUE","USFD","POST","INGR","WBA","SFM",
+    "HSY","EPC","COTY","MNST","CELH",
+    # Healthcare (~60)
     "LLY","UNH","JNJ","ABBV","MRK","ABT","TMO","DHR","PFE","AMGN",
     "GILD","ISRG","SYK","BDX","BSX","EW","ZBH","BAX","HOLX","RMD",
     "IDXX","IQV","CRL","CTLT","VTRS","HUM","CVS","CI","CNC","MOH",
-    # Financials
+    "BIIB","REGN","VRTX","MRNA","BMY","ZTS","MCK","ABC","CAH","DXCM",
+    "PODD","ALGN","STE","DGX","LH","MTD","WAT","A","GEHC","HCA",
+    "THC","UHS","DVA","HSIC","PDCO","INCY","EXAS","VEEV","TECH","SEM",
+    # Financials (~64)
     "BRK-B","JPM","BAC","WFC","GS","MS","C","AXP","BLK","SCHW",
     "CB","PGR","AIG","MET","PRU","AFL","TRV","ALL","HIG","WRB",
     "V","MA","PYPL","COF","DFS","SYF","AMP","BEN","IVZ","TROW",
-    # Industrials
+    "BX","KKR","APO","ARES","RJF","LNC","GL","PFG","MMC","AON",
+    "WTW","CINF","ACGL","BK","STT","NTRS","RF","HBAN","CFG","KEY",
+    "USB","PNC","TFC","FITB","MTB","ZION","CMA","ALLY","CBOE","ICE",
+    "CME","SPGI","MCO","FDS",
+    # Industrials (~60)
     "CAT","DE","HON","UPS","RTX","LMT","GE","MMM","EMR","ETN",
     "PH","ITW","ROK","CMI","PCAR","FDX","CSX","UNP","NSC","DAL",
     "UAL","LUV","AAL","WM","RSG","FAST","GWW","XYL","IEX","AME",
-    # Energy
-    "XOM","CVX","COP","SLB","EOG","PXD","MPC","VLO","PSX","HAL",
-    "DVN","FANG","HES","APA","OXY","BKR","NOV","FTI",
-    # Materials
+    "TDG","TT","IR","CARR","OTIS","GEV","LHX","NOC","GD","BA",
+    "AXON","LDOS","SAIC","BAH","J","MAS","ALLE","HII","TXT","HUBB",
+    "FLR","PWR","ACM","NDSN","CHRW","EXPD","JBHT","ODFL","SAIA","RXO",
+    # Energy (~28)
+    "XOM","CVX","COP","SLB","EOG","MPC","VLO","PSX","HAL","DVN",
+    "FANG","HES","APA","OXY","BKR","NOV","FTI","MRO","EQT","CTRA",
+    "OVV","PR","AR","RRC","SM","CNX","LNG","TRGP",
+    # Materials (~35)
     "LIN","APD","SHW","ECL","PPG","NEM","FCX","NUE","STLD","CF",
     "MOS","ALB","CE","EMN","IFF","FMC","SON","PKG","IP","WRK",
-    # Utilities
+    "VMC","MLM","CRH","DOW","DD","LYB","RPM","ATI","CMC","RS",
+    "OLN","AXTA","SEE","OI","AVNT",
+    # Utilities (~30)
     "NEE","DUK","SO","D","AEP","EXC","SRE","XEL","ES","WEC",
     "ETR","FE","PPL","EIX","PCG","AWK","AES","CMS","NI","PNW",
-    # Real Estate
+    "ATO","CNP","NRG","EVRG","LNT","OGS","WTRG","SWX","UGI","VST",
+    # Real Estate (~30)
     "AMT","PLD","CCI","EQIX","PSA","O","WELL","DLR","SPG","AVB",
     "EQR","MAA","UDR","CPT","ESS","EXR","VICI","CBRE","ARE","BXP",
+    "WY","HST","KIM","REG","FRT","NNN","STAG","CUBE","LSI","IRM",
 ]
 
 # ── RS Rating helpers ─────────────────────────────────────────────────
@@ -121,15 +146,13 @@ def calc_atr_multiple(df, atr_len=14, ma_len=50):
       A  = ATR% = ATR(14) / Close * 100
       B  = % distance from SMA50 = (Close - SMA50) / SMA50 * 100
       Result = B / A
-    Returns None if not enough data or ATR% is zero.
     """
     if len(df) < max(atr_len, ma_len) + 1:
         return None
 
-    # True Range = max(H-L, |H-PrevC|, |L-PrevC|)
-    high  = df["High"]
-    low   = df["Low"]
-    close = df["Close"]
+    high       = df["High"]
+    low        = df["Low"]
+    close      = df["Close"]
     prev_close = close.shift(1)
 
     tr = pd.concat([
@@ -138,9 +161,7 @@ def calc_atr_multiple(df, atr_len=14, ma_len=50):
         (low  - prev_close).abs()
     ], axis=1).max(axis=1)
 
-    # Wilder's smoothing (same as TradingView's ta.atr default)
-    atr = tr.ewm(alpha=1 / atr_len, adjust=False).mean()
-
+    atr   = tr.ewm(alpha=1 / atr_len, adjust=False).mean()
     sma50 = close.rolling(ma_len).mean()
 
     last_close = float(close.iloc[-1])
@@ -150,11 +171,9 @@ def calc_atr_multiple(df, atr_len=14, ma_len=50):
     if last_close == 0 or last_atr == 0 or pd.isna(last_sma50):
         return None
 
-    atr_pct        = last_atr / last_close * 100          # A
-    pct_from_50ma  = (last_close - last_sma50) / last_sma50 * 100  # B
-    atr_multiple   = pct_from_50ma / atr_pct              # B / A
-
-    return round(atr_multiple, 2)
+    atr_pct       = last_atr / last_close * 100
+    pct_from_50ma = (last_close - last_sma50) / last_sma50 * 100
+    return round(pct_from_50ma / atr_pct, 2)
 
 
 os.makedirs("data", exist_ok=True)
@@ -212,7 +231,7 @@ for item in INDICES:
         rs_raw    = calc_rs_raw(df["Close"])
         rs_rating = raw_to_rating(rs_raw, universe_scores)
 
-        # ── ATR% multiple from 50-MA ───────────────────────────────────
+        # ── ATR% multiple from 50-MA ──────────────────────────────────
         atr_multiple = calc_atr_multiple(df, atr_len=14, ma_len=50)
 
         results.append({
