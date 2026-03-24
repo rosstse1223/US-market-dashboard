@@ -7,18 +7,11 @@ import pytz
 
 # ── Tickers to track ──────────────────────────────────────────────────
 INDICES = [
-    {"ticker": "SPY",    "name": "S&P 500"},
-    {"ticker": "QQQ",    "name": "NASDAQ 100"},
-    {"ticker": "DIA",    "name": "Dow Jones"},
-    {"ticker": "IWM",    "name": "Russell 2000"},
-    {"ticker": "^VIX",   "name": "Volatility (VIX)"},
-    {"ticker": "^FTSE",  "name": "FTSE 100"},
-    {"ticker": "^N225",  "name": "Nikkei 225"},
-    {"ticker": "^HSI",   "name": "Hang Seng"},
-    {"ticker": "^GDAXI", "name": "DAX"},
-    {"ticker": "^FCHI",  "name": "CAC 40"},
-    {"ticker": "EEM",    "name": "Emerging Markets"},
-    {"ticker": "GLD",    "name": "Gold ETF"},
+    {"ticker": "^VIX", "name": "Volatility (VIX)"},
+    {"ticker": "IWM",  "name": "Russell 2000"},
+    {"ticker": "DIA",  "name": "Dow Jones"},
+    {"ticker": "SPY",  "name": "S&P 500"},
+    {"ticker": "QQQ",  "name": "NASDAQ 100"},
 ]
 
 os.makedirs("data", exist_ok=True)
@@ -65,7 +58,7 @@ for item in INDICES:
 
         def ma_tag(price_above_ma, ma_is_rising):
             """Return a 4-state label for price vs MA and MA trend direction."""
-            if price_above_ma and ma_is_rising:      return "above_up"
+            if price_above_ma and ma_is_rising:       return "above_up"
             elif price_above_ma and not ma_is_rising: return "above_down"
             elif not price_above_ma and ma_is_rising: return "below_up"
             else:                                     return "below_down"
