@@ -47,7 +47,7 @@
     .table-wrap { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; }
 
-    /* ── Sortable header styles ── */
+    /* ── Sortable headers ── */
     thead th {
       padding: 9px 14px;
       text-align: left;
@@ -61,24 +61,14 @@
       white-space: nowrap;
       cursor: pointer;
       user-select: none;
-      position: relative;
       transition: color .15s, background .15s;
     }
     thead th:not(:first-child) { text-align: center; }
     thead th:hover { color: #c9d1d9; background: #161b22; }
-
-    /* Active sort column highlight */
     thead th.sort-asc,
     thead th.sort-desc { color: #58a6ff; }
-
-    /* Sort arrow indicator */
-    thead th::after {
-      content: ' ⇅';
-      font-size: .65rem;
-      opacity: .3;
-      transition: opacity .15s;
-    }
-    thead th:hover::after   { opacity: .6; }
+    thead th::after          { content: ' ⇅'; font-size: .65rem; opacity: .3; transition: opacity .15s; }
+    thead th:hover::after    { opacity: .6; }
     thead th.sort-asc::after  { content: ' ▲'; opacity: 1; color: #58a6ff; }
     thead th.sort-desc::after { content: ' ▼'; opacity: 1; color: #58a6ff; }
 
@@ -86,7 +76,7 @@
       border-bottom: 1px solid #1c2128;
       transition: background .12s;
     }
-    tbody tr:hover  { background: #1c2128; }
+    tbody tr:hover { background: #1c2128; }
     tbody tr:last-child { border-bottom: none; }
 
     td { padding: 10px 14px; white-space: nowrap; }
@@ -130,6 +120,30 @@
     .ma-below-up   { background: rgba(219,109,40,.22); color: #db6d28; border: 1px solid rgba(219,109,40,.28); }
     .ma-below-down { background: rgba(248,81,73,.20);  color: #f85149; border: 1px solid rgba(248,81,73,.28); }
 
+    /* ── RS Rating badge ── */
+    .rs-badge {
+      display: inline-block;
+      min-width: 38px;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: .80rem;
+      font-weight: 700;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+    }
+    /* 80-99  strong */
+    .rs-5 { background: rgba(35,134,54,.30);  color: #3fb950; border: 1px solid rgba(63,185,80,.35); }
+    /* 60-79  moderate-strong */
+    .rs-4 { background: rgba(70,180,70,.20);  color: #7ee787; border: 1px solid rgba(70,180,70,.30); }
+    /* 40-59  neutral */
+    .rs-3 { background: rgba(187,162,0,.22);  color: #e3b341; border: 1px solid rgba(187,162,0,.30); }
+    /* 20-39  weak */
+    .rs-2 { background: rgba(219,109,40,.22); color: #db6d28; border: 1px solid rgba(219,109,40,.30); }
+    /* 1-19   very weak */
+    .rs-1 { background: rgba(248,81,73,.20);  color: #f85149; border: 1px solid rgba(248,81,73,.28); }
+    /* N/A */
+    .rs-na { background: rgba(110,118,129,.12); color: #6e7681; border: 1px solid rgba(110,118,129,.18); }
+
     /* ── Legend ── */
     .legend {
       display: flex;
@@ -172,10 +186,11 @@
           <th data-col="ema20"        data-type="ma">EMA 20</th>
           <th data-col="sma50"        data-type="ma">SMA 50</th>
           <th data-col="sma200"       data-type="ma">SMA 200</th>
+          <th data-col="rs_rating"    data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
         </tr>
       </thead>
       <tbody id="indices-body">
-        <tr><td colspan="8" class="loading-msg">⏳ Loading indices data…</td></tr>
+        <tr><td colspan="9" class="loading-msg">⏳ Loading indices data…</td></tr>
       </tbody>
     </table>
   </div>
@@ -185,21 +200,21 @@
     <div class="legend-item"><span class="ma-pill ma-above-down">▼ Above</span> Price &gt; MA &amp; MA falling</div>
     <div class="legend-item"><span class="ma-pill ma-below-up">▲ Below</span>  Price &lt; MA &amp; MA rising</div>
     <div class="legend-item"><span class="ma-pill ma-below-down">▼ Below</span> Price &lt; MA &amp; MA falling</div>
+    <div class="legend-item" style="margin-left:16px"><span class="rs-badge rs-5">80–99</span> RS: Leading</div>
+    <div class="legend-item"><span class="rs-badge rs-4">60–79</span> RS: Above avg</div>
+    <div class="legend-item"><span class="rs-badge rs-3">40–59</span> RS: Neutral</div>
+    <div class="legend-item"><span class="rs-badge rs-2">20–39</span> RS: Lagging</div>
+    <div class="legend-item"><span class="rs-badge rs-1">1–19</span>  RS: Weak</div>
   </div>
 </div>
 
 <script>
-  // ── MA tag → numeric sort rank (best → worst: 4 → 1) ──────────────
   const MA_RANK = { above_up: 4, above_down: 3, below_up: 2, below_down: 1 };
-
-  // ── Holds the raw data array so sorting never re-fetches ──────────
   let tableData = [];
+  let sortCol   = null;
+  let sortDir   = 'asc';
 
-  // ── Sort state ────────────────────────────────────────────────────
-  let sortCol = null;      // which data-col is active
-  let sortDir = 'asc';    // 'asc' | 'desc'
-
-  // ─────────────────────────────────────────────────────────────────
+  // ── Formatting helpers ────────────────────────────────────────────
   function fmtChg(val) {
     if (val == null) return '<span class="chg chg-zero">N/A</span>';
     const sign = val > 0 ? '+' : '';
@@ -218,9 +233,21 @@
     return `<span class="ma-pill ${m.cls}">${m.label}</span>`;
   }
 
+  function rsBadge(val) {
+    if (val == null) return '<span class="rs-badge rs-na">N/A</span>';
+    let tier;
+    if (val >= 80)      tier = 'rs-5';
+    else if (val >= 60) tier = 'rs-4';
+    else if (val >= 40) tier = 'rs-3';
+    else if (val >= 20) tier = 'rs-2';
+    else                tier = 'rs-1';
+    return `<span class="rs-badge ${tier}">${val}</span>`;
+  }
+
+  // ── Render one table row ──────────────────────────────────────────
   function renderRow(row) {
     const fmt = (n) => n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    const tr = document.createElement('tr');
+    const tr  = document.createElement('tr');
     tr.innerHTML = `
       <td>
         <div class="ticker-sym">${row.ticker}</div>
@@ -233,21 +260,20 @@
       <td>${maPill(row.ema20)}</td>
       <td>${maPill(row.sma50)}</td>
       <td>${maPill(row.sma200)}</td>
+      <td>${rsBadge(row.rs_rating)}</td>
     `;
     return tr;
   }
 
-  // ── Re-render tbody from current tableData in sort order ──────────
+  // ── Render entire sorted table ────────────────────────────────────
   function renderTable() {
     const tbody = document.getElementById('indices-body');
     tbody.innerHTML = '';
 
     const sorted = [...tableData].sort((a, b) => {
       if (!sortCol) return 0;
-
       const th   = document.querySelector(`th[data-col="${sortCol}"]`);
       const type = th ? th.dataset.type : 'string';
-
       let va, vb;
       if (type === 'ma') {
         va = MA_RANK[a[sortCol]] ?? 0;
@@ -259,7 +285,6 @@
         va = (a[sortCol] ?? '').toString().toLowerCase();
         vb = (b[sortCol] ?? '').toString().toLowerCase();
       }
-
       if (va < vb) return sortDir === 'asc' ? -1 :  1;
       if (va > vb) return sortDir === 'asc' ?  1 : -1;
       return 0;
@@ -268,28 +293,22 @@
     sorted.forEach(row => tbody.appendChild(renderRow(row)));
   }
 
-  // ── Attach click listeners to every <th> ─────────────────────────
+  // ── Attach sort click listeners ───────────────────────────────────
   function initSorting() {
     document.querySelectorAll('#indices-table thead th').forEach(th => {
       th.addEventListener('click', () => {
         const col = th.dataset.col;
         if (!col) return;
-
         if (sortCol === col) {
-          // Same column → flip direction
           sortDir = sortDir === 'asc' ? 'desc' : 'asc';
         } else {
-          // New column → default descending (highest value first)
           sortCol = col;
           sortDir = col === 'ticker' ? 'asc' : 'desc';
         }
-
-        // Update header arrow classes
         document.querySelectorAll('#indices-table thead th').forEach(h => {
           h.classList.remove('sort-asc', 'sort-desc');
         });
         th.classList.add(sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
-
         renderTable();
       });
     });
@@ -307,16 +326,15 @@
 
       if (!json.indices || json.indices.length === 0) {
         document.getElementById('indices-body').innerHTML =
-          '<tr><td colspan="8" class="loading-msg">No data found.</td></tr>';
+          '<tr><td colspan="9" class="loading-msg">No data found.</td></tr>';
         return;
       }
 
       tableData = json.indices;
       renderTable();
-
     } catch (err) {
       document.getElementById('indices-body').innerHTML =
-        `<tr><td colspan="8" class="loading-msg">❌ Error loading data: ${err.message}</td></tr>`;
+        `<tr><td colspan="9" class="loading-msg">❌ Error loading data: ${err.message}</td></tr>`;
     }
   }
 
