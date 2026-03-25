@@ -5,6 +5,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Market Dashboard</title>
   <style>
+
+/* ── Market Breadth cards ── */
+.breadth-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 16px;
+}
+.breadth-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 0 16px 16px;
+}
+@media (max-width: 700px) {
+  .breadth-grid-3,
+  .breadth-grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 420px) {
+  .breadth-grid-3,
+  .breadth-grid-4 { grid-template-columns: 1fr; }
+}
+.breadth-divider {
+  border: none;
+  border-top: 1px solid #21262d;
+  margin: 0;
+}
+.b-card {
+  background: #0d1117;
+  border: 1px solid #21262d;
+  border-radius: 8px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.b-label {
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #6e7681;
+  margin-bottom: 6px;
+}
+.b-value {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  line-height: 1.1;
+}
+.b-rating {
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-top: 2px;
+}
+.b-context {
+  font-size: 0.70rem;
+  color: #8b949e;
+  margin-top: 4px;
+}
+.b-date {
+  font-size: 0.63rem;
+  color: #484f58;
+  margin-top: 8px;
+}
+.b-source {
+  font-size: 0.62rem;
+  margin-top: 2px;
+}
+.b-source a {
+  color: #58a6ff;
+  text-decoration: none;
+  opacity: 0.55;
+  transition: opacity .15s;
+}
+.b-source a:hover { opacity: 1; }
+.b-na {
+  color: #484f58;
+  font-family: 'Courier New', monospace;
+  font-size: 1.4rem;
+}
+    
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -169,7 +252,28 @@
   </div>
 </div>
 
-  
+  <!-- ═════════════════════════ MARKET BREADTH ═════════════════════ -->
+<div class="section-card">
+  <div class="section-title">🌡️ Market Breadth</div>
+
+  <!-- Row 1: NAAIM · Total P/C Ratio · Fear & Greed -->
+  <div class="breadth-grid-3" id="breadth-row1">
+    <div class="b-card"><div class="b-label">NAAIM Exposure Index</div><div class="b-na">—</div></div>
+    <div class="b-card"><div class="b-label">Total Put/Call Ratio</div><div class="b-na">—</div></div>
+    <div class="b-card"><div class="b-label">Fear &amp; Greed Index</div><div class="b-na">—</div></div>
+  </div>
+
+  <hr class="breadth-divider">
+
+  <!-- Row 2: % >20MA · % >50MA · 52W Highs · 52W Lows -->
+  <div class="breadth-grid-4" id="breadth-row2">
+    <div class="b-card"><div class="b-label">% Above 20-Day MA</div><div class="b-na">—</div></div>
+    <div class="b-card"><div class="b-label">% Above 50-Day MA</div><div class="b-na">—</div></div>
+    <div class="b-card"><div class="b-label">52-Week Highs</div><div class="b-na">—</div></div>
+    <div class="b-card"><div class="b-label">52-Week Lows</div><div class="b-na">—</div></div>
+  </div>
+</div>
+
 <!-- ══════════════════════════ INDICES ════════════════════════════ -->
 <div class="section-card">
   <div class="section-title">📈 Indices — EOD Snapshot · Prev Close</div>
@@ -480,7 +584,10 @@ const sections = [
     { key: 'thematic',    jsonKey: 'thematic',    tableId: 'thematic-table',    bodyId: 'thematic-body',    legendId: 'thematic-legend'    },
 ];
 
+// Render breadth immediately from the JSON
+renderBreadth(json.breadth || null);
 
+      
       sections.forEach(({ key, jsonKey, tableId, bodyId, legendId }) => {
         if (json[jsonKey] && json[jsonKey].length > 0) {
           state[key].data = withLatest(json[jsonKey]);
@@ -506,6 +613,207 @@ initSorting('sectors-table',     'sectors-body',     'sectors');
 initSorting('sectors-ew-table',  'sectors-ew-body',  'sectors_ew');
 initSorting('commodities-table', 'commodities-body', 'commodities');
 initSorting('thematic-table',    'thematic-body',    'thematic');
+
+// ── Market Breadth color helpers ──────────────────────────────────
+function fgColor(s) {
+  if (s >= 75) return '#3fb950';
+  if (s >= 55) return '#7ee787';
+  if (s >= 45) return '#e3b341';
+  if (s >= 25) return '#db6d28';
+  return '#f85149';
+}
+function naaimColor(v) {
+  if (v >  90) return '#3fb950';
+  if (v >  60) return '#7ee787';
+  if (v >  30) return '#e3b341';
+  if (v >=  0) return '#db6d28';
+  return '#f85149';
+}
+function pcrColor(v) {
+  if (v >= 1.2) return '#3fb950';
+  if (v >= 0.9) return '#e3b341';
+  if (v >= 0.7) return '#db6d28';
+  return '#f85149';
+}
+function maColor(p) {
+  if (p >= 70) return '#3fb950';
+  if (p >= 50) return '#7ee787';
+  if (p >= 30) return '#e3b341';
+  if (p >= 15) return '#db6d28';
+  return '#f85149';
+}
+function highsColor(n) {
+  if (n >= 200) return '#3fb950';
+  if (n >= 100) return '#7ee787';
+  if (n >= 50)  return '#e3b341';
+  return '#db6d28';
+}
+function lowsColor(n) {
+  if (n <= 20)  return '#3fb950';
+  if (n <= 50)  return '#7ee787';
+  if (n <= 100) return '#e3b341';
+  if (n <= 200) return '#db6d28';
+  return '#f85149';
+}
+
+function bCard(label, valueHtml, ratingHtml, contextHtml, dateStr, sourceHref, sourceName) {
+  return `<div class="b-card">
+    <div class="b-label">${label}</div>
+    ${valueHtml}
+    ${ratingHtml  ? `<div class="b-rating">${ratingHtml}</div>`   : ''}
+    ${contextHtml ? `<div class="b-context">${contextHtml}</div>` : ''}
+    ${dateStr     ? `<div class="b-date">${dateStr}</div>`         : ''}
+    <div class="b-source"><a href="${sourceHref}" target="_blank" rel="noopener">${sourceName} ↗</a></div>
+  </div>`;
+}
+
+function renderBreadth(b) {
+  if (!b) return;
+
+  // ── Row 1 ──────────────────────────────────────────────────────
+  let naaimHtml, pcrHtml, fgHtml;
+
+  // NAAIM
+  if (b.naaim && b.naaim.value != null) {
+    const v = b.naaim.value;
+    const c = naaimColor(v);
+    const lbl = v > 90 ? 'Heavily Long' : v > 60 ? 'Moderately Long' :
+                v > 30 ? 'Cautious' : v >= 0 ? 'Defensive' : 'Short / Hedged';
+    naaimHtml = bCard(
+      'NAAIM Exposure Index',
+      `<div class="b-value" style="color:${c}">${v.toFixed(1)}</div>`,
+      `<span style="color:${c}">${lbl}</span>`,
+      'Active manager equity exposure (0–200)',
+      b.naaim.date ? `As of ${b.naaim.date}` : '',
+      'https://naaim.org/programs/naaim-exposure-index/',
+      'naaim.org'
+    );
+  } else {
+    naaimHtml = bCard('NAAIM Exposure Index',
+      '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
+      'https://naaim.org/programs/naaim-exposure-index/', 'naaim.org');
+  }
+
+  // Total P/C Ratio
+  if (b.cboe_pcr && b.cboe_pcr.value != null) {
+    const v = b.cboe_pcr.value;
+    const c = pcrColor(v);
+    const lbl = v >= 1.2 ? 'Elevated Fear' : v >= 0.9 ? 'Neutral' :
+                v >= 0.7 ? 'Complacent'    : 'Extreme Complacency';
+    pcrHtml = bCard(
+      'Total Put/Call Ratio',
+      `<div class="b-value" style="color:${c}">${v.toFixed(2)}</div>`,
+      `<span style="color:${c}">${lbl}</span>`,
+      '> 1.0 = more puts (fear) · < 0.7 = complacency',
+      b.cboe_pcr.date ? `As of ${b.cboe_pcr.date}` : '',
+      'https://www.cboe.com/us/options/market_statistics/daily/',
+      'cboe.com'
+    );
+  } else {
+    pcrHtml = bCard('Total Put/Call Ratio',
+      '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
+      'https://www.cboe.com/us/options/market_statistics/daily/', 'cboe.com');
+  }
+
+  // Fear & Greed
+  if (b.fear_greed && b.fear_greed.score != null) {
+    const v = b.fear_greed.score;
+    const c = fgColor(v);
+    fgHtml = bCard(
+      'Fear &amp; Greed Index',
+      `<div class="b-value" style="color:${c}">${v.toFixed(0)}</div>`,
+      `<span style="color:${c}">${b.fear_greed.rating}</span>`,
+      `Prev close: ${b.fear_greed.prev_close} · 1W ago: ${b.fear_greed.prev_week}`,
+      '',
+      'https://edition.cnn.com/markets/fear-and-greed',
+      'CNN'
+    );
+  } else {
+    fgHtml = bCard('Fear &amp; Greed Index',
+      '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
+      'https://edition.cnn.com/markets/fear-and-greed', 'CNN');
+  }
+
+  document.getElementById('breadth-row1').innerHTML = naaimHtml + pcrHtml + fgHtml;
+
+  // ── Row 2 ──────────────────────────────────────────────────────
+  let mmtwHtml, mmfiHtml, highsHtml, lowsHtml;
+
+  // % Above 20-Day MA (MMTW)
+  if (b.mmtw != null) {
+    const c = maColor(b.mmtw);
+    mmtwHtml = bCard(
+      '% Above 20-Day MA',
+      `<div class="b-value" style="color:${c}">${b.mmtw.toFixed(1)}<span style="font-size:1.2rem">%</span></div>`,
+      `<span style="color:${c}">${b.mmtw >= 70 ? 'Overbought' : b.mmtw >= 50 ? 'Broad Strength' : b.mmtw >= 30 ? 'Mixed' : b.mmtw >= 15 ? 'Broad Weakness' : 'Oversold'}</span>`,
+      'S&P 500 stocks above their 20-day average',
+      '',
+      'https://www.tradingview.com/symbols/INDEX-MMTW/',
+      'TradingView'
+    );
+  } else {
+    mmtwHtml = bCard('% Above 20-Day MA',
+      '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
+      'https://www.tradingview.com/symbols/INDEX-MMTW/', 'TradingView');
+  }
+
+  // % Above 50-Day MA (MMFI)
+  if (b.mmfi != null) {
+    const c = maColor(b.mmfi);
+    mmfiHtml = bCard(
+      '% Above 50-Day MA',
+      `<div class="b-value" style="color:${c}">${b.mmfi.toFixed(1)}<span style="font-size:1.2rem">%</span></div>`,
+      `<span style="color:${c}">${b.mmfi >= 70 ? 'Overbought' : b.mmfi >= 50 ? 'Broad Strength' : b.mmfi >= 30 ? 'Mixed' : b.mmfi >= 15 ? 'Broad Weakness' : 'Oversold'}</span>`,
+      'S&P 500 stocks above their 50-day average',
+      '',
+      'https://www.tradingview.com/symbols/INDEX-MMFI/',
+      'TradingView'
+    );
+  } else {
+    mmfiHtml = bCard('% Above 50-Day MA',
+      '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
+      'https://www.tradingview.com/symbols/INDEX-MMFI/', 'TradingView');
+  }
+
+  // 52-Week Highs
+  if (b.highs != null) {
+    const c = highsColor(b.highs);
+    highsHtml = bCard(
+      '52-Week Highs',
+      `<div class="b-value" style="color:${c}">${b.highs.toLocaleString()}</div>`,
+      `<span style="color:${c}">${b.highs >= 200 ? 'Very Broad' : b.highs >= 100 ? 'Healthy' : b.highs >= 50 ? 'Moderate' : 'Narrow'}</span>`,
+      'US stocks at new 52-week high',
+      '',
+      'https://www.barchart.com/stocks/highs-lows/summary',
+      'Barchart'
+    );
+  } else {
+    highsHtml = bCard('52-Week Highs',
+      '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
+      'https://www.barchart.com/stocks/highs-lows/summary', 'Barchart');
+  }
+
+  // 52-Week Lows
+  if (b.lows != null) {
+    const c = lowsColor(b.lows);
+    lowsHtml = bCard(
+      '52-Week Lows',
+      `<div class="b-value" style="color:${c}">${b.lows.toLocaleString()}</div>`,
+      `<span style="color:${c}">${b.lows <= 20 ? 'Minimal' : b.lows <= 50 ? 'Low' : b.lows <= 100 ? 'Moderate' : b.lows <= 200 ? 'Elevated' : 'High'}</span>`,
+      'US stocks at new 52-week low',
+      '',
+      'https://www.barchart.com/stocks/highs-lows/summary',
+      'Barchart'
+    );
+  } else {
+    lowsHtml = bCard('52-Week Lows',
+      '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
+      'https://www.barchart.com/stocks/highs-lows/summary', 'Barchart');
+  }
+
+  document.getElementById('breadth-row2').innerHTML = mmtwHtml + mmfiHtml + highsHtml + lowsHtml;
+}
+
 loadData();
 
 </script>
