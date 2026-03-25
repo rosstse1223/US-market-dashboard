@@ -722,6 +722,29 @@ def fetch_52wk_highs_lows():
 print("\n── Thematic ─────────────────────────────────────────")
 thematic_results = process_tickers(THEMATIC, df_spy, universe_scores)
 
+print("\n── Market Breadth ───────────────────────────────────")
+fear_greed  = fetch_fear_greed()
+naaim       = fetch_naaim()
+cboe_pcr    = fetch_cboe_pcr()
+mmtw_mmfi   = fetch_mmtw_mmfi()
+highs_lows  = fetch_52wk_highs_lows()
+
+breadth = {
+    "fear_greed": fear_greed,
+    "naaim":      naaim,
+    "cboe_pcr":   cboe_pcr,
+    "mmtw":       mmtw_mmfi.get("mmtw"),
+    "mmfi":       mmtw_mmfi.get("mmfi"),
+    "highs":      highs_lows.get("highs"),
+    "lows":       highs_lows.get("lows"),
+}
+print(f"[OK]   Breadth  F&G={fear_greed and fear_greed['score']}  "
+      f"NAAIM={naaim and naaim['value']}  "
+      f"PCR={cboe_pcr and cboe_pcr['value']}  "
+      f"MMTW={mmtw_mmfi.get('mmtw')}  MMFI={mmtw_mmfi.get('mmfi')}  "
+      f"Highs={highs_lows.get('highs')}  Lows={highs_lows.get('lows')}")
+
+
 print("\n── Commodities & Crypto ─────────────────────────────")
 commodities_results = process_tickers(COMMODITIES_CRYPTO, df_spy, universe_scores)
 
