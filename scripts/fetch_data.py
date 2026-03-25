@@ -15,6 +15,7 @@ INDICES = [
     {"ticker": "RSP",   "name": "S&P 500 Equal Weight"},
     {"ticker": "EDOW",  "name": "Dow 30 Equal Weight"},
     {"ticker": "QQQE",  "name": "NASDAQ 100 Equal Weight"},
+    {"ticker": "ARKK",  "name": "ARK Innovation ETF"},
     {"ticker": "DXY",   "yf_ticker": "DX-Y.NYB", "name": "US Dollar Index"},
     {"ticker": "US10Y", "yf_ticker": "^TNX",      "name": "10Y Treasury Yield"},
 ]
