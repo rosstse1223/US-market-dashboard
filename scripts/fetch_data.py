@@ -68,6 +68,90 @@ COMMODITIES_CRYPTO = [
     {"ticker": "ETHUSD", "yf_ticker": "ETH-USD", "name": "Ethereum"},
 ]
 
+# ── Thematic ETFs ─────────────────────────────────────────────────────
+THEMATIC = [
+    {"ticker": "SLV",  "name": "Silver"},
+    {"ticker": "USO",  "name": "US Oil Fund"},
+    {"ticker": "XOP",  "name": "Oil & Gas E&P"},
+    {"ticker": "REMX", "name": "Rare Earth/Strategic Metals"},
+    {"ticker": "SILJ", "name": "Junior Silver Miners"},
+    {"ticker": "GDXJ", "name": "Junior Gold Miners"},
+    {"ticker": "DXYZ", "name": "Destiny Tech100"},
+    {"ticker": "GDX",  "name": "Gold Miners"},
+    {"ticker": "COPX", "name": "Copper Miners"},
+    {"ticker": "GLD",  "name": "Gold"},
+    {"ticker": "UNG",  "name": "US Natural Gas"},
+    {"ticker": "SIL",  "name": "Silver Miners"},
+    {"ticker": "OIH",  "name": "Oil Services"},
+    {"ticker": "ITA",  "name": "Aerospace & Defense"},
+    {"ticker": "ITB",  "name": "US Home Construction"},
+    {"ticker": "XBI",  "name": "S&P Biotech"},
+    {"ticker": "LIT",  "name": "Lithium & Battery Tech"},
+    {"ticker": "AIQ",  "name": "Artificial Intelligence"},
+    {"ticker": "XME",  "name": "Metals & Mining"},
+    {"ticker": "XRT",  "name": "S&P Retail"},
+    {"ticker": "XHE",  "name": "Health Care Equipment"},
+    {"ticker": "UFO",  "name": "Space"},
+    {"ticker": "IGV",  "name": "Tech-Software Sector"},
+    {"ticker": "KWEB", "name": "China Internet"},
+    {"ticker": "SMH",  "name": "Semiconductors"},
+    {"ticker": "MAGS", "name": "Magnificent Seven"},
+    {"ticker": "ARKK", "name": "ARK Innovation"},
+    {"ticker": "IBIT", "name": "iShares Bitcoin Trust"},
+    {"ticker": "MSOS", "name": "US Cannabis"},
+    {"ticker": "JETS", "name": "Global Airlines"},
+    {"ticker": "ETHA", "name": "iShares Ethereum Trust"},
+    {"ticker": "KRE",  "name": "Regional Banking"},
+    {"ticker": "WGMI", "name": "Bitcoin Miners"},
+    {"ticker": "IEZ",  "name": "US Oil Equipment & Svcs"},
+    {"ticker": "TAN",  "name": "Solar Energy"},
+    {"ticker": "ICLN", "name": "Global Clean Energy"},
+    {"ticker": "DRNZ", "name": "Drone Economy"},
+    {"ticker": "ARKG", "name": "ARK Genomic Revolution"},
+    {"ticker": "CQQQ", "name": "China Technology"},
+    {"ticker": "XAR",  "name": "S&P Aerospace & Defense"},
+    {"ticker": "BOTZ", "name": "Robotics & AI"},
+    {"ticker": "NUKZ", "name": "Nuclear Energy"},
+    {"ticker": "ROBO", "name": "Global Robotics & AI"},
+    {"ticker": "NLR",  "name": "Uranium & Nuclear Energy"},
+    {"ticker": "ARKQ", "name": "ARK Autonomous Tech"},
+    {"ticker": "URA",  "name": "Uranium"},
+    {"ticker": "QTUM", "name": "Quantum Computing"},
+    {"ticker": "XHB",  "name": "S&P Homebuilders"},
+    {"ticker": "BLOK", "name": "Blockchain"},
+    {"ticker": "CIBR", "name": "Cybersecurity"},
+    {"ticker": "IAI",  "name": "US Broker-Dealers"},
+    {"ticker": "ARKX", "name": "ARK Space Exploration"},
+    {"ticker": "XSW",  "name": "S&P Software & Services"},
+    {"ticker": "IHI",  "name": "US Medical Devices"},
+    {"ticker": "IYT",  "name": "Transportation"},
+    {"ticker": "WCLD", "name": "Cloud Computing"},
+    {"ticker": "ARKW", "name": "ARK Next Gen Internet"},
+    {"ticker": "SOCL", "name": "Social Media"},
+    {"ticker": "BAI",  "name": "Broadscale AI"},
+    {"ticker": "CLOU", "name": "Cloud Computing (Global X)"},
+    {"ticker": "XTL",  "name": "S&P Telecom"},
+    {"ticker": "SLX",  "name": "Steel"},
+    {"ticker": "HACK", "name": "Cyber Security"},
+    {"ticker": "PBW",  "name": "WilderHill Clean Energy"},
+    {"ticker": "XHS",  "name": "Health Care Services"},
+    {"ticker": "PBJ",  "name": "Food & Beverage"},
+    {"ticker": "DRIV", "name": "Autonomous & EV"},
+    {"ticker": "PAVE", "name": "US Infrastructure"},
+    {"ticker": "KBE",  "name": "S&P Bank"},
+    {"ticker": "IDGT", "name": "Indxx Digital Assets"},
+    {"ticker": "PPH",  "name": "Pharmaceutical"},
+    {"ticker": "DTCR", "name": "Digital Currency"},
+    {"ticker": "IBUY", "name": "Online Retail"},
+    {"ticker": "KIE",  "name": "S&P Insurance"},
+    {"ticker": "SPPP", "name": "Platinum & Palladium"},
+    {"ticker": "COPJ", "name": "Junior Copper Miners"},
+    {"ticker": "SOLZ", "name": "Solana Strategy"},
+    {"ticker": "HYDR", "name": "Hydrogen"},
+    {"ticker": "PSIL", "name": "Psychedelics"},
+]
+
+
 # ── ~490 S&P 500 universe for RS Rating percentile ────────────────────
 SP500_UNIVERSE = [
     # Technology (~65)
@@ -333,6 +417,9 @@ sectors_results = process_tickers(SECTORS, df_spy, universe_scores)
 print("\n── EW Sectors ───────────────────────────────────────")
 sectors_ew_results = process_tickers(SECTORS_EW, df_spy, universe_scores)
 
+print("\n── Thematic ─────────────────────────────────────────")
+thematic_results = process_tickers(THEMATIC, df_spy, universe_scores)
+
 print("\n── Commodities & Crypto ─────────────────────────────")
 commodities_results = process_tickers(COMMODITIES_CRYPTO, df_spy, universe_scores)
 
@@ -346,6 +433,7 @@ with open("data/indices.json", "w") as fh:
         "sectors":      sectors_results,
         "sectors_ew":   sectors_ew_results,
         "commodities":  commodities_results,
+        "thematic":     thematic_results,
     }, fh, indent=2)
 
 print(f"\n✅  Saved → data/indices.json  ({updated})")
@@ -353,3 +441,4 @@ print(f"    Indices         : {len(indices_results)} tickers")
 print(f"    Sectors         : {len(sectors_results)} tickers")
 print(f"    EW Sectors      : {len(sectors_ew_results)} tickers")
 print(f"    Commodities     : {len(commodities_results)} tickers")
+print(f"    Thematic        : {len(thematic_results)} tickers")
