@@ -4,6 +4,10 @@ import json
 import os
 from datetime import datetime
 import pytz
+import urllib.request
+import re
+import io
+
 
 # ── Indices ───────────────────────────────────────────────────────────
 INDICES = [
@@ -390,6 +394,155 @@ def process_tickers(ticker_list, df_spy, universe_scores):
 
     return results
 
+# ─────────────────────────────────────────────────────────────────────
+# Market Breadth fetch helpers
+# ─────────────────────────────────────────────────────────────────────
+
+def fetch_fear_greed():
+    """CNN Fear & Greed via their dataviz API."""
+    try:
+        url = "https://production.dataviz.cnn.io/index/fearandgreed/graphdata"
+        req = urllib.request.Request(url, headers={
+            "User-Agent": "Mozilla/5.0",
+            "Accept":     "application/json",
+            "Referer":    "https://edition.cnn.com/markets/fear-and-greed",
+        })
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read())
+        fg = data["fear_and_greed"]
+        rating = fg["rating"].replace("_", " ").title()
+        return {
+            "score":      round(float(fg["score"]), 1),
+            "rating":     rating,
+            "prev_close": round(float(fg["previous_close"]), 1),
+            "prev_week":  round(float(fg.get("previous_1_week", fg["score"])), 1),
+        }
+    except Exception as e:
+        print(f"[WARN] Fear & Greed: {e}")
+        return None
+
+
+def fetch_naaim():
+    """NAAIM Exposure Index — scrape the weekly data table."""
+    try:
+        url = "https://naaim.org/programs/naaim-exposure-index/"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            html = resp.read().decode("utf-8")
+        rows = re.findall(r'<tr[^>]*>(.*?)</tr>', html, re.DOTALL | re.IGNORECASE)
+        for row in rows:
+            cells = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL)
+            cells = [re.sub(r'<[^>]+>', '', c).strip() for c in cells]
+            if len(cells) >= 2:
+                try:
+                    val = float(cells[1].replace(',', ''))
+                    if -50 <= val <= 300:
+                        return {"value": round(val, 2), "date": cells[0]}
+                except (ValueError, IndexError):
+                    pass
+        return None
+    except Exception as e:
+        print(f"[WARN] NAAIM: {e}")
+        return None
+
+
+def fetch_cboe_pcr():
+    """CBOE Total Put/Call Ratio — try CDN CSV endpoint."""
+    urls = [
+        "https://cdn.cboe.com/api/global/us_options_distribution/daily_stats.csv",
+        "https://www.cboe.com/data/us-options-market-statistics-daily-download/",
+    ]
+    for url in urls:
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                content = resp.read().decode("utf-8")
+            df_cboe = pd.read_csv(io.StringIO(content))
+            df_cboe.columns = [c.strip() for c in df_cboe.columns]
+            # Find the Total P/C column (name varies by CBOE version)
+            pcr_col = None
+            for col in df_cboe.columns:
+                cu = col.upper()
+                if ("TOTAL" in cu or "ALL" in cu) and ("P/C" in cu or "PUT" in cu or "RATIO" in cu):
+                    pcr_col = col
+                    break
+            # Fallback: last numeric column
+            if pcr_col is None:
+                for col in reversed(df_cboe.columns):
+                    try:
+                        pd.to_numeric(df_cboe[col].dropna())
+                        pcr_col = col
+                        break
+                    except Exception:
+                        pass
+            if pcr_col:
+                clean = df_cboe.dropna(subset=[pcr_col])
+                if not clean.empty:
+                    latest = clean.iloc[-1]
+                    return {
+                        "value": round(float(latest[pcr_col]), 2),
+                        "date":  str(latest.iloc[0]),
+                    }
+        except Exception as e:
+            print(f"[WARN] CBOE P/C ({url[:50]}…): {e}")
+    return None
+
+
+def fetch_mmtw_mmfi():
+    """% Stocks above 20-day (^MMTW) and 50-day (^MMFI) MA via yfinance."""
+    result = {}
+    for sym, key in [("^MMTW", "mmtw"), ("^MMFI", "mmfi")]:
+        try:
+            raw = yf.download(sym, period="5d", interval="1d",
+                              progress=False, auto_adjust=True)
+            if raw.empty:
+                result[key] = None
+                continue
+            if isinstance(raw.columns, pd.MultiIndex):
+                raw.columns = raw.columns.get_level_values(0)
+            result[key] = round(float(raw["Close"].dropna().iloc[-1]), 2)
+        except Exception as e:
+            print(f"[WARN] {sym}: {e}")
+            result[key] = None
+    return result
+
+
+def fetch_52wk_highs_lows():
+    """52-week Highs & Lows — scrape Barchart summary table."""
+    try:
+        url = "https://www.barchart.com/stocks/highs-lows/summary"
+        req = urllib.request.Request(url, headers={
+            "User-Agent":      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                               "AppleWebKit/537.36 (KHTML, like Gecko) "
+                               "Chrome/124.0.0.0 Safari/537.36",
+            "Accept":          "text/html,application/xhtml+xml",
+            "Accept-Language": "en-US,en;q=0.9",
+        })
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            html = resp.read().decode("utf-8")
+        rows = re.findall(r'<tr[^>]*>(.*?)</tr>', html, re.DOTALL | re.IGNORECASE)
+        highs = lows = None
+        for row in rows:
+            cells = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL)
+            cells = [re.sub(r'<[^>]+>', '', c).strip() for c in cells]
+            row_text = ' '.join(cells).lower()
+            if 'all' in row_text or 'total' in row_text:
+                nums = []
+                for c in cells:
+                    try:
+                        n = int(c.replace(',', ''))
+                        if n >= 0:
+                            nums.append(n)
+                    except ValueError:
+                        pass
+                if len(nums) >= 2:
+                    highs, lows = nums[0], nums[1]
+                    break
+        return {"highs": highs, "lows": lows}
+    except Exception as e:
+        print(f"[WARN] 52W H/L Barchart: {e}")
+        return {"highs": None, "lows": None}
+
 
 # ═════════════════════════════════════════════════════════════════════
 os.makedirs("data", exist_ok=True)
@@ -417,6 +570,155 @@ sectors_results = process_tickers(SECTORS, df_spy, universe_scores)
 print("\n── EW Sectors ───────────────────────────────────────")
 sectors_ew_results = process_tickers(SECTORS_EW, df_spy, universe_scores)
 
+# ─────────────────────────────────────────────────────────────────────
+# Market Breadth fetch helpers
+# ─────────────────────────────────────────────────────────────────────
+
+def fetch_fear_greed():
+    """CNN Fear & Greed via their dataviz API."""
+    try:
+        url = "https://production.dataviz.cnn.io/index/fearandgreed/graphdata"
+        req = urllib.request.Request(url, headers={
+            "User-Agent": "Mozilla/5.0",
+            "Accept":     "application/json",
+            "Referer":    "https://edition.cnn.com/markets/fear-and-greed",
+        })
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read())
+        fg = data["fear_and_greed"]
+        rating = fg["rating"].replace("_", " ").title()
+        return {
+            "score":      round(float(fg["score"]), 1),
+            "rating":     rating,
+            "prev_close": round(float(fg["previous_close"]), 1),
+            "prev_week":  round(float(fg.get("previous_1_week", fg["score"])), 1),
+        }
+    except Exception as e:
+        print(f"[WARN] Fear & Greed: {e}")
+        return None
+
+
+def fetch_naaim():
+    """NAAIM Exposure Index — scrape the weekly data table."""
+    try:
+        url = "https://naaim.org/programs/naaim-exposure-index/"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            html = resp.read().decode("utf-8")
+        rows = re.findall(r'<tr[^>]*>(.*?)</tr>', html, re.DOTALL | re.IGNORECASE)
+        for row in rows:
+            cells = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL)
+            cells = [re.sub(r'<[^>]+>', '', c).strip() for c in cells]
+            if len(cells) >= 2:
+                try:
+                    val = float(cells[1].replace(',', ''))
+                    if -50 <= val <= 300:
+                        return {"value": round(val, 2), "date": cells[0]}
+                except (ValueError, IndexError):
+                    pass
+        return None
+    except Exception as e:
+        print(f"[WARN] NAAIM: {e}")
+        return None
+
+
+def fetch_cboe_pcr():
+    """CBOE Total Put/Call Ratio — try CDN CSV endpoint."""
+    urls = [
+        "https://cdn.cboe.com/api/global/us_options_distribution/daily_stats.csv",
+        "https://www.cboe.com/data/us-options-market-statistics-daily-download/",
+    ]
+    for url in urls:
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                content = resp.read().decode("utf-8")
+            df_cboe = pd.read_csv(io.StringIO(content))
+            df_cboe.columns = [c.strip() for c in df_cboe.columns]
+            # Find the Total P/C column (name varies by CBOE version)
+            pcr_col = None
+            for col in df_cboe.columns:
+                cu = col.upper()
+                if ("TOTAL" in cu or "ALL" in cu) and ("P/C" in cu or "PUT" in cu or "RATIO" in cu):
+                    pcr_col = col
+                    break
+            # Fallback: last numeric column
+            if pcr_col is None:
+                for col in reversed(df_cboe.columns):
+                    try:
+                        pd.to_numeric(df_cboe[col].dropna())
+                        pcr_col = col
+                        break
+                    except Exception:
+                        pass
+            if pcr_col:
+                clean = df_cboe.dropna(subset=[pcr_col])
+                if not clean.empty:
+                    latest = clean.iloc[-1]
+                    return {
+                        "value": round(float(latest[pcr_col]), 2),
+                        "date":  str(latest.iloc[0]),
+                    }
+        except Exception as e:
+            print(f"[WARN] CBOE P/C ({url[:50]}…): {e}")
+    return None
+
+
+def fetch_mmtw_mmfi():
+    """% Stocks above 20-day (^MMTW) and 50-day (^MMFI) MA via yfinance."""
+    result = {}
+    for sym, key in [("^MMTW", "mmtw"), ("^MMFI", "mmfi")]:
+        try:
+            raw = yf.download(sym, period="5d", interval="1d",
+                              progress=False, auto_adjust=True)
+            if raw.empty:
+                result[key] = None
+                continue
+            if isinstance(raw.columns, pd.MultiIndex):
+                raw.columns = raw.columns.get_level_values(0)
+            result[key] = round(float(raw["Close"].dropna().iloc[-1]), 2)
+        except Exception as e:
+            print(f"[WARN] {sym}: {e}")
+            result[key] = None
+    return result
+
+
+def fetch_52wk_highs_lows():
+    """52-week Highs & Lows — scrape Barchart summary table."""
+    try:
+        url = "https://www.barchart.com/stocks/highs-lows/summary"
+        req = urllib.request.Request(url, headers={
+            "User-Agent":      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                               "AppleWebKit/537.36 (KHTML, like Gecko) "
+                               "Chrome/124.0.0.0 Safari/537.36",
+            "Accept":          "text/html,application/xhtml+xml",
+            "Accept-Language": "en-US,en;q=0.9",
+        })
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            html = resp.read().decode("utf-8")
+        rows = re.findall(r'<tr[^>]*>(.*?)</tr>', html, re.DOTALL | re.IGNORECASE)
+        highs = lows = None
+        for row in rows:
+            cells = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL)
+            cells = [re.sub(r'<[^>]+>', '', c).strip() for c in cells]
+            row_text = ' '.join(cells).lower()
+            if 'all' in row_text or 'total' in row_text:
+                nums = []
+                for c in cells:
+                    try:
+                        n = int(c.replace(',', ''))
+                        if n >= 0:
+                            nums.append(n)
+                    except ValueError:
+                        pass
+                if len(nums) >= 2:
+                    highs, lows = nums[0], nums[1]
+                    break
+        return {"highs": highs, "lows": lows}
+    except Exception as e:
+        print(f"[WARN] 52W H/L Barchart: {e}")
+        return {"highs": None, "lows": None}
+
 print("\n── Thematic ─────────────────────────────────────────")
 thematic_results = process_tickers(THEMATIC, df_spy, universe_scores)
 
@@ -429,6 +731,7 @@ updated = datetime.now(hkt).strftime("%d %b %Y, %H:%M HKT")
 with open("data/indices.json", "w") as fh:
     json.dump({
         "updated":      updated,
+        "breadth":      breadth,
         "indices":      indices_results,
         "sectors":      sectors_results,
         "sectors_ew":   sectors_ew_results,
@@ -437,8 +740,10 @@ with open("data/indices.json", "w") as fh:
     }, fh, indent=2)
 
 print(f"\n✅  Saved → data/indices.json  ({updated})")
+print(f"    Breadth         : 7 indicators")
 print(f"    Indices         : {len(indices_results)} tickers")
 print(f"    Sectors         : {len(sectors_results)} tickers")
 print(f"    EW Sectors      : {len(sectors_ew_results)} tickers")
 print(f"    Commodities     : {len(commodities_results)} tickers")
 print(f"    Thematic        : {len(thematic_results)} tickers")
+
