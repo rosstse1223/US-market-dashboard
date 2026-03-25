@@ -212,8 +212,8 @@
           <th data-col="ema20"        data-type="ma">EMA 20</th>
           <th data-col="sma50"        data-type="ma">SMA 50</th>
           <th data-col="sma200"       data-type="ma">SMA 200</th>
-          <th data-col="rs_rating"    data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
           <th data-col="atr_multiple" data-type="number">ATRx 50-MA<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(ATR14 / SMA50)</small></th>
+          <th data-col="rs_rating"    data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
           <th data-col="vars_latest"  data-type="number">VARS Histogram<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(20d · LB50 · SMA20)</small></th>
         </tr>
       </thead>
@@ -365,8 +365,8 @@
       <td>${maPill(row.ema20)}</td>
       <td>${maPill(row.sma50)}</td>
       <td>${maPill(row.sma200)}</td>
-      <td>${rsBadge(row.rs_rating)}</td>
       <td>${atrBadge(row.atr_multiple)}</td>
+      <td>${rsBadge(row.rs_rating)}</td>
       <td class="vars-cell">${varsSvg(row.vars_history)}</td>
     `;
     return tr;
