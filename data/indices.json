@@ -1,18 +1,18 @@
 {
-  "updated": "25 Mar 2026, 20:03 HKT",
+  "updated": "25 Mar 2026, 20:09 HKT",
   "indices": [
     {
       "ticker": "^VIX",
       "name": "Volatility (VIX)",
-      "price": 25.68,
-      "daily_chg": -4.71,
-      "intraday_chg": -0.43,
+      "price": 25.47,
+      "daily_chg": -5.49,
+      "intraday_chg": -1.24,
       "ema10": "above_up",
       "ema20": "above_up",
       "sma50": "above_up",
       "sma200": "above_up",
       "rs_rating": 96,
-      "atr_multiple": 1.53,
+      "atr_multiple": 1.46,
       "vars_history": [
         {
           "v": 1.3236,
@@ -170,7 +170,7 @@
           "m": 2.5516
         },
         {
-          "v": 2.7133,
+          "v": 2.7134,
           "m": 2.5433
         },
         {
@@ -391,8 +391,8 @@
       "ema20": "below_down",
       "sma50": "below_down",
       "sma200": "below_up",
-      "rs_rating": 47,
-      "atr_multiple": -2.32,
+      "rs_rating": 46,
+      "atr_multiple": -2.39,
       "vars_history": [
         {
           "v": -1.6121,
@@ -467,12 +467,12 @@
           "m": -0.6659
         },
         {
-          "v": 0.5594,
-          "m": -0.5081
+          "v": 0.4922,
+          "m": -0.5115
         },
         {
-          "v": 0.3794,
-          "m": -0.3785
+          "v": 0.3107,
+          "m": -0.3853
         }
       ]
     }
