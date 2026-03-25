@@ -14,7 +14,7 @@ INDICES = [
     {"ticker": "QQQ",  "name": "NASDAQ 100"},
 ]
 
-# ── ~490 S&P 500 stocks across all sectors (hardcoded, no web scraping) ─
+# ── ~490 S&P 500 universe for RS Rating percentile ────────────────────
 SP500_UNIVERSE = [
     # Technology (~65)
     "AAPL","MSFT","NVDA","AVGO","ORCL","CRM","AMD","QCOM","TXN","AMAT",
@@ -81,10 +81,25 @@ SP500_UNIVERSE = [
     "WY","HST","KIM","REG","FRT","NNN","STAG","CUBE","LSI","IRM",
 ]
 
-# ── RS Rating helpers ─────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────────────
+# Helper: Wilder ATR series
+# ─────────────────────────────────────────────────────────────────────
+def calc_atr_series(df, atr_len=14):
+    high       = df["High"]
+    low        = df["Low"]
+    close      = df["Close"]
+    prev_close = close.shift(1)
+    tr = pd.concat([
+        high - low,
+        (high - prev_close).abs(),
+        (low  - prev_close).abs()
+    ], axis=1).max(axis=1)
+    return tr.ewm(alpha=1 / atr_len, adjust=False).mean()
 
+# ─────────────────────────────────────────────────────────────────────
+# RS Rating helpers
+# ─────────────────────────────────────────────────────────────────────
 def calc_rs_raw(closes):
-    """RS Score = 40%*P3 + 20%*P6 + 20%*P9 + 20%*P12"""
     c = closes.dropna().values
     n = len(c)
     if n < 64:
@@ -100,14 +115,12 @@ def calc_rs_raw(closes):
     return 0.4 * p3 + 0.2 * p6 + 0.2 * p9 + 0.2 * p12
 
 def raw_to_rating(raw_score, universe_scores):
-    """Convert a raw RS score to 1-99 by percentile-ranking vs the universe."""
     if raw_score is None or not universe_scores:
         return None
     pct = sum(1 for s in universe_scores if s < raw_score) / len(universe_scores)
     return max(1, min(99, round(pct * 98 + 1)))
 
 def build_universe():
-    """Batch-download universe stocks, return list of raw RS scores."""
     print(f"[INFO] Batch-downloading {len(SP500_UNIVERSE)} universe stocks (1y)…")
     try:
         raw_uni = yf.download(
@@ -121,64 +134,96 @@ def build_universe():
     except Exception as e:
         print(f"[WARN] Universe download failed: {e}")
         return []
-
     scores = []
     for t in SP500_UNIVERSE:
         try:
-            if isinstance(raw_uni.columns, pd.MultiIndex):
-                closes = raw_uni[t]["Close"].dropna()
-            else:
-                closes = raw_uni["Close"].dropna()
+            closes = raw_uni[t]["Close"].dropna() if isinstance(raw_uni.columns, pd.MultiIndex) \
+                     else raw_uni["Close"].dropna()
             score = calc_rs_raw(closes)
             if score is not None:
                 scores.append(score)
         except Exception:
             pass
-
     print(f"[INFO] Universe built: {len(scores)} valid stocks")
     return scores
 
-# ── ATR% multiple from 50-MA helper ──────────────────────────────────
-
+# ─────────────────────────────────────────────────────────────────────
+# ATR% multiple from 50-MA
+# ─────────────────────────────────────────────────────────────────────
 def calc_atr_multiple(df, atr_len=14, ma_len=50):
-    """
-    Replicates the TradingView indicator by jfsrev:
-      A  = ATR% = ATR(14) / Close * 100
-      B  = % distance from SMA50 = (Close - SMA50) / SMA50 * 100
-      Result = B / A
-    """
     if len(df) < max(atr_len, ma_len) + 1:
         return None
-
-    high       = df["High"]
-    low        = df["Low"]
-    close      = df["Close"]
-    prev_close = close.shift(1)
-
-    tr = pd.concat([
-        high - low,
-        (high - prev_close).abs(),
-        (low  - prev_close).abs()
-    ], axis=1).max(axis=1)
-
-    atr   = tr.ewm(alpha=1 / atr_len, adjust=False).mean()
-    sma50 = close.rolling(ma_len).mean()
-
-    last_close = float(close.iloc[-1])
+    atr   = calc_atr_series(df, atr_len)
+    sma50 = df["Close"].rolling(ma_len).mean()
+    last_close = float(df["Close"].iloc[-1])
     last_atr   = float(atr.iloc[-1])
     last_sma50 = float(sma50.iloc[-1])
-
     if last_close == 0 or last_atr == 0 or pd.isna(last_sma50):
         return None
-
     atr_pct       = last_atr / last_close * 100
     pct_from_50ma = (last_close - last_sma50) / last_sma50 * 100
     return round(pct_from_50ma / atr_pct, 2)
 
+# ─────────────────────────────────────────────────────────────────────
+# VARS — Volatility Adjusted Relative Strength histogram
+# Settings: lookback=50, ma_len=20, atr_len=14, n_bars=20
+# ─────────────────────────────────────────────────────────────────────
+def calc_vars_history(df_stock, df_spy, lookback=50, ma_len=20, atr_len=14, n_bars=20):
+    """
+    Formula (per Oanda/jfsrev documentation):
+      daily_vars  = (dClose_stock / ATR_stock) - (dClose_spy / ATR_spy)
+      VARS line   = rolling_sum(daily_vars, lookback)
+      MA line     = SMA(ma_len) of VARS line
+    Returns list of last n_bars dicts: [{v: float, m: float}, ...]
+    """
+    # Align both series on common trading dates
+    common = df_stock.index.intersection(df_spy.index)
+    min_len = lookback + ma_len + n_bars + 5
+    if len(common) < min_len:
+        return None
 
+    s = df_stock.loc[common][["High","Low","Close"]].copy()
+    b = df_spy.loc[common][["High","Low","Close"]].copy()
+
+    atr_s = calc_atr_series(s, atr_len)
+    atr_b = calc_atr_series(b, atr_len)
+
+    # Vol-adjusted daily changes (replace 0 ATR with NaN to avoid div/0)
+    delta_s = s["Close"].diff() / atr_s.replace(0, float("nan"))
+    delta_b = b["Close"].diff() / atr_b.replace(0, float("nan"))
+
+    daily_vars = (delta_s - delta_b).fillna(0)
+
+    vars_line = daily_vars.rolling(lookback).sum()
+    ma_line   = vars_line.rolling(ma_len).mean()
+
+    # Collect last n_bars valid rows
+    combined = pd.DataFrame({"v": vars_line, "m": ma_line}).dropna()
+    if len(combined) < n_bars:
+        return None
+
+    tail = combined.iloc[-n_bars:]
+    return [{"v": round(float(r.v), 4), "m": round(float(r.m), 4)}
+            for _, r in tail.iterrows()]
+
+
+# ═════════════════════════════════════════════════════════════════════
 os.makedirs("data", exist_ok=True)
 
-# ── Build RS comparison universe once ────────────────────────────────
+# ── Pre-fetch SPY as VARS benchmark ───────────────────────────────────
+print("[INFO] Fetching SPY benchmark data for VARS…")
+try:
+    spy_raw = yf.download("SPY", period="1y", interval="1d",
+                          progress=False, auto_adjust=True)
+    if isinstance(spy_raw.columns, pd.MultiIndex):
+        spy_raw.columns = spy_raw.columns.get_level_values(0)
+    df_spy = spy_raw[["High","Low","Close"]].dropna()
+    print(f"[INFO] SPY benchmark ready ({len(df_spy)} rows)")
+except Exception as e:
+    df_spy = None
+    print(f"[WARN] SPY fetch failed: {e} — VARS will show N/A")
+
+# ── Build RS comparison universe ──────────────────────────────────────
 universe_scores = build_universe()
 
 results = []
@@ -186,13 +231,8 @@ results = []
 for item in INDICES:
     ticker = item["ticker"]
     try:
-        raw = yf.download(
-            ticker,
-            period="1y",
-            interval="1d",
-            progress=False,
-            auto_adjust=True
-        )
+        raw = yf.download(ticker, period="1y", interval="1d",
+                          progress=False, auto_adjust=True)
 
         if raw.empty or len(raw) < 50:
             print(f"[SKIP] {ticker}: not enough data ({len(raw)} rows)")
@@ -201,7 +241,7 @@ for item in INDICES:
         if isinstance(raw.columns, pd.MultiIndex):
             raw.columns = raw.columns.get_level_values(0)
 
-        df = raw[["Open", "High", "Low", "Close"]].copy()
+        df = raw[["Open","High","Low","Close"]].copy()
         df.dropna(subset=["Close"], inplace=True)
 
         # ── Moving averages ───────────────────────────────────────────
@@ -234,6 +274,15 @@ for item in INDICES:
         # ── ATR% multiple from 50-MA ──────────────────────────────────
         atr_multiple = calc_atr_multiple(df, atr_len=14, ma_len=50)
 
+        # ── VARS histogram (last 20 bars) ─────────────────────────────
+        vars_history = None
+        if df_spy is not None:
+            vars_history = calc_vars_history(
+                df[["High","Low","Close"]],
+                df_spy,
+                lookback=50, ma_len=20, atr_len=14, n_bars=20
+            )
+
         results.append({
             "ticker":       ticker,
             "name":         item["name"],
@@ -246,8 +295,9 @@ for item in INDICES:
             "sma200": ma_tag(price > float(last["SMA200"]), float(last["SMA200"]) > float(prev["SMA200"])),
             "rs_rating":    rs_rating,
             "atr_multiple": atr_multiple,
+            "vars_history": vars_history,
         })
-        print(f"[OK]   {ticker}  RS={rs_rating}  ATRx={atr_multiple}")
+        print(f"[OK]   {ticker}  RS={rs_rating}  ATRx={atr_multiple}  VARS={'ok' if vars_history else 'N/A'}")
 
     except Exception as exc:
         print(f"[ERR]  {ticker}: {exc}")
