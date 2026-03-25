@@ -152,88 +152,99 @@
 <!-- ══════════════════════════ INDICES ════════════════════════════ -->
 <div class="section-card">
   <div class="section-title">📈 Indices — EOD Snapshot · Prev Close</div>
-  <div class="table-wrap">
-    <table id="indices-table">
-      <thead><tr>
-        <th data-col="ticker"       data-type="string">Ticker</th>
-        <th data-col="price"        data-type="number">Price</th>
-        <th data-col="daily_chg"    data-type="number">Daily Chg</th>
-        <th data-col="intraday_chg" data-type="number">Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
-        <th data-col="ema10"        data-type="ma">EMA 10</th>
-        <th data-col="ema20"        data-type="ma">EMA 20</th>
-        <th data-col="sma50"        data-type="ma">SMA 50</th>
-        <th data-col="sma200"       data-type="ma">SMA 200</th>
-        <th data-col="atr_multiple" data-type="number">ATRx 50-MA<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(ATR14 / SMA50)</small></th>
-        <th data-col="rs_rating"    data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
-        <th data-col="vars_latest"  data-type="number">VARS Histogram<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(20d · LB50 · SMA20)</small></th>
-      </tr></thead>
-      <tbody id="indices-body">
-        <tr><td colspan="11" class="loading-msg">⏳ Loading…</td></tr>
-      </tbody>
-    </table>
-  </div>
+  <div class="table-wrap"><table id="indices-table">
+    <thead><tr>
+      <th data-col="ticker"       data-type="string">Ticker</th>
+      <th data-col="price"        data-type="number">Price</th>
+      <th data-col="daily_chg"    data-type="number">Daily Chg</th>
+      <th data-col="intraday_chg" data-type="number">Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
+      <th data-col="ema10"        data-type="ma">EMA 10</th>
+      <th data-col="ema20"        data-type="ma">EMA 20</th>
+      <th data-col="sma50"        data-type="ma">SMA 50</th>
+      <th data-col="sma200"       data-type="ma">SMA 200</th>
+      <th data-col="atr_multiple" data-type="number">ATRx 50-MA<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(ATR14 / SMA50)</small></th>
+      <th data-col="rs_rating"    data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
+      <th data-col="vars_latest"  data-type="number">VARS Histogram<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(20d · LB50 · SMA20)</small></th>
+    </tr></thead>
+    <tbody id="indices-body"><tr><td colspan="11" class="loading-msg">⏳ Loading…</td></tr></tbody>
+  </table></div>
   <div class="legend" id="indices-legend"></div>
 </div>
 
 <!-- ══════════════════════════ SECTORS ═══════════════════════════ -->
 <div class="section-card">
   <div class="section-title">🏭 Sectors — EOD Snapshot · Prev Close</div>
-  <div class="table-wrap">
-    <table id="sectors-table">
-      <thead><tr>
-        <th data-col="ticker"       data-type="string">Ticker</th>
-        <th data-col="price"        data-type="number">Price</th>
-        <th data-col="daily_chg"    data-type="number">Daily Chg</th>
-        <th data-col="intraday_chg" data-type="number">Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
-        <th data-col="ema10"        data-type="ma">EMA 10</th>
-        <th data-col="ema20"        data-type="ma">EMA 20</th>
-        <th data-col="sma50"        data-type="ma">SMA 50</th>
-        <th data-col="sma200"       data-type="ma">SMA 200</th>
-        <th data-col="atr_multiple" data-type="number">ATRx 50-MA<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(ATR14 / SMA50)</small></th>
-        <th data-col="rs_rating"    data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
-        <th data-col="vars_latest"  data-type="number">VARS Histogram<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(20d · LB50 · SMA20)</small></th>
-      </tr></thead>
-      <tbody id="sectors-body">
-        <tr><td colspan="11" class="loading-msg">⏳ Loading…</td></tr>
-      </tbody>
-    </table>
-  </div>
+  <div class="table-wrap"><table id="sectors-table">
+    <thead><tr>
+      <th data-col="ticker"       data-type="string">Ticker</th>
+      <th data-col="price"        data-type="number">Price</th>
+      <th data-col="daily_chg"    data-type="number">Daily Chg</th>
+      <th data-col="intraday_chg" data-type="number">Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
+      <th data-col="ema10"        data-type="ma">EMA 10</th>
+      <th data-col="ema20"        data-type="ma">EMA 20</th>
+      <th data-col="sma50"        data-type="ma">SMA 50</th>
+      <th data-col="sma200"       data-type="ma">SMA 200</th>
+      <th data-col="atr_multiple" data-type="number">ATRx 50-MA<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(ATR14 / SMA50)</small></th>
+      <th data-col="rs_rating"    data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
+      <th data-col="vars_latest"  data-type="number">VARS Histogram<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(20d · LB50 · SMA20)</small></th>
+    </tr></thead>
+    <tbody id="sectors-body"><tr><td colspan="11" class="loading-msg">⏳ Loading…</td></tr></tbody>
+  </table></div>
   <div class="legend" id="sectors-legend"></div>
 </div>
 
 <!-- ══════════════════════════ EW SECTORS ════════════════════════ -->
 <div class="section-card">
   <div class="section-title">⚖️ EW Sectors — EOD Snapshot · Prev Close</div>
-  <div class="table-wrap">
-    <table id="sectors-ew-table">
-      <thead><tr>
-        <th data-col="ticker"       data-type="string">Ticker</th>
-        <th data-col="price"        data-type="number">Price</th>
-        <th data-col="daily_chg"    data-type="number">Daily Chg</th>
-        <th data-col="intraday_chg" data-type="number">Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
-        <th data-col="ema10"        data-type="ma">EMA 10</th>
-        <th data-col="ema20"        data-type="ma">EMA 20</th>
-        <th data-col="sma50"        data-type="ma">SMA 50</th>
-        <th data-col="sma200"       data-type="ma">SMA 200</th>
-        <th data-col="atr_multiple" data-type="number">ATRx 50-MA<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(ATR14 / SMA50)</small></th>
-        <th data-col="rs_rating"    data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
-        <th data-col="vars_latest"  data-type="number">VARS Histogram<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(20d · LB50 · SMA20)</small></th>
-      </tr></thead>
-      <tbody id="sectors-ew-body">
-        <tr><td colspan="11" class="loading-msg">⏳ Loading…</td></tr>
-      </tbody>
-    </table>
-  </div>
+  <div class="table-wrap"><table id="sectors-ew-table">
+    <thead><tr>
+      <th data-col="ticker"       data-type="string">Ticker</th>
+      <th data-col="price"        data-type="number">Price</th>
+      <th data-col="daily_chg"    data-type="number">Daily Chg</th>
+      <th data-col="intraday_chg" data-type="number">Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
+      <th data-col="ema10"        data-type="ma">EMA 10</th>
+      <th data-col="ema20"        data-type="ma">EMA 20</th>
+      <th data-col="sma50"        data-type="ma">SMA 50</th>
+      <th data-col="sma200"       data-type="ma">SMA 200</th>
+      <th data-col="atr_multiple" data-type="number">ATRx 50-MA<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(ATR14 / SMA50)</small></th>
+      <th data-col="rs_rating"    data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
+      <th data-col="vars_latest"  data-type="number">VARS Histogram<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(20d · LB50 · SMA20)</small></th>
+    </tr></thead>
+    <tbody id="sectors-ew-body"><tr><td colspan="11" class="loading-msg">⏳ Loading…</td></tr></tbody>
+  </table></div>
   <div class="legend" id="sectors-ew-legend"></div>
+</div>
+
+<!-- ══════════════════════ COMMODITIES & CRYPTO ══════════════════ -->
+<div class="section-card">
+  <div class="section-title">🪙 Commodities &amp; Crypto — EOD Snapshot · Prev Close</div>
+  <div class="table-wrap"><table id="commodities-table">
+    <thead><tr>
+      <th data-col="ticker"       data-type="string">Ticker</th>
+      <th data-col="price"        data-type="number">Price</th>
+      <th data-col="daily_chg"    data-type="number">Daily Chg</th>
+      <th data-col="intraday_chg" data-type="number">Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
+      <th data-col="ema10"        data-type="ma">EMA 10</th>
+      <th data-col="ema20"        data-type="ma">EMA 20</th>
+      <th data-col="sma50"        data-type="ma">SMA 50</th>
+      <th data-col="sma200"       data-type="ma">SMA 200</th>
+      <th data-col="atr_multiple" data-type="number">ATRx 50-MA<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(ATR14 / SMA50)</small></th>
+      <th data-col="rs_rating"    data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
+      <th data-col="vars_latest"  data-type="number">VARS Histogram<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(20d · LB50 · SMA20)</small></th>
+    </tr></thead>
+    <tbody id="commodities-body"><tr><td colspan="11" class="loading-msg">⏳ Loading…</td></tr></tbody>
+  </table></div>
+  <div class="legend" id="commodities-legend"></div>
 </div>
 
 <script>
   const MA_RANK = { above_up: 4, above_down: 3, below_up: 2, below_down: 1 };
 
   const state = {
-    indices:    { data: [], sortCol: null, sortDir: 'asc' },
-    sectors:    { data: [], sortCol: null, sortDir: 'asc' },
-    sectors_ew: { data: [], sortCol: null, sortDir: 'asc' },
+    indices:     { data: [], sortCol: null, sortDir: 'asc' },
+    sectors:     { data: [], sortCol: null, sortDir: 'asc' },
+    sectors_ew:  { data: [], sortCol: null, sortDir: 'asc' },
+    commodities: { data: [], sortCol: null, sortDir: 'asc' },
   };
 
   function fmtChg(val) {
@@ -416,9 +427,10 @@
         '🕒 Last updated: ' + (json.updated || 'unknown');
 
       const sections = [
-        { key: 'indices',    jsonKey: 'indices',    tableId: 'indices-table',    bodyId: 'indices-body',    legendId: 'indices-legend' },
-        { key: 'sectors',    jsonKey: 'sectors',    tableId: 'sectors-table',    bodyId: 'sectors-body',    legendId: 'sectors-legend' },
-        { key: 'sectors_ew', jsonKey: 'sectors_ew', tableId: 'sectors-ew-table', bodyId: 'sectors-ew-body', legendId: 'sectors-ew-legend' },
+        { key: 'indices',     jsonKey: 'indices',     tableId: 'indices-table',     bodyId: 'indices-body',     legendId: 'indices-legend'     },
+        { key: 'sectors',     jsonKey: 'sectors',     tableId: 'sectors-table',     bodyId: 'sectors-body',     legendId: 'sectors-legend'     },
+        { key: 'sectors_ew',  jsonKey: 'sectors_ew',  tableId: 'sectors-ew-table',  bodyId: 'sectors-ew-body',  legendId: 'sectors-ew-legend'  },
+        { key: 'commodities', jsonKey: 'commodities', tableId: 'commodities-table', bodyId: 'commodities-body', legendId: 'commodities-legend' },
       ];
 
       sections.forEach(({ key, jsonKey, tableId, bodyId, legendId }) => {
@@ -433,16 +445,17 @@
       });
 
     } catch (err) {
-      ['indices-body','sectors-body','sectors-ew-body'].forEach(id => {
+      ['indices-body','sectors-body','sectors-ew-body','commodities-body'].forEach(id => {
         document.getElementById(id).innerHTML =
           `<tr><td colspan="11" class="loading-msg">❌ Error: ${err.message}</td></tr>`;
       });
     }
   }
 
-  initSorting('indices-table',    'indices-body',    'indices');
-  initSorting('sectors-table',    'sectors-body',    'sectors');
-  initSorting('sectors-ew-table', 'sectors-ew-body', 'sectors_ew');
+  initSorting('indices-table',     'indices-body',     'indices');
+  initSorting('sectors-table',     'sectors-body',     'sectors');
+  initSorting('sectors-ew-table',  'sectors-ew-body',  'sectors_ew');
+  initSorting('commodities-table', 'commodities-body', 'commodities');
   loadData();
 </script>
 
