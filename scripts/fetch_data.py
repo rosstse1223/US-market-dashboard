@@ -669,11 +669,14 @@ def compute_full_52wk_highs_lows():
                     if len(c) < 20:
                         continue
                     total      += 1
-                    last_close  = float(c.iloc[-1])
-                    high_52w    = float(h.max())
-                    low_52w     = float(lo.min())
-                    if last_close >= high_52w * 0.985: highs += 1
-                    if last_close <= low_52w  * 1.015: lows  += 1
+today_high = float(h.iloc[-1])
+today_low  = float(lo.iloc[-1])
+high_52w   = float(h.max())   # includes today
+low_52w    = float(lo.min())  # includes today
+# New 52-week high = today's high IS the 52-week high
+if today_high >= high_52w * 0.9999: highs += 1
+if today_low  <= low_52w  * 1.0001: lows  += 1
+
                 except Exception:
                     pass
             print(f"[INFO] 52W H/L batch {batch_num}/{batches} done  "
@@ -720,27 +723,65 @@ sectors_ew_results = process_tickers(SECTORS_EW, df_spy, universe_scores)
 # ─────────────────────────────────────────────────────────────────────
 
 def fetch_fear_greed():
-    """CNN Fear & Greed via their dataviz API."""
+    """
+    Fear & Greed via the fear-and-greed PyPI package.
+    Falls back to direct urllib if package unavailable.
+    """
+    # Method 1: PyPI package (most reliable)
     try:
-        url = "https://production.dataviz.cnn.io/index/fearandgreed/graphdata"
-        req = urllib.request.Request(url, headers={
-            "User-Agent": "Mozilla/5.0",
-            "Accept":     "application/json",
-            "Referer":    "https://edition.cnn.com/markets/fear-and-greed",
-        })
+        import fear_and_greed
+        data = fear_and_greed.get()
+        return {
+            "score":      round(float(data.value), 1),
+            "rating":     str(data.description).replace("_", " ").title(),
+            "prev_close": round(float(data.value), 1),
+            "prev_week":  round(float(data.value), 1),
+        }
+    except Exception:
+        pass
+
+    # Method 2: Alternative.me stock market F&G (not crypto)
+    try:
+        url = "https://fear-and-greed-index.p.rapidapi.com/v1/fgi"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=10) as resp:
             data = json.loads(resp.read())
-        fg = data["fear_and_greed"]
-        rating = fg["rating"].replace("_", " ").title()
+        score = float(data["fgi"]["now"]["value"])
+        rating = data["fgi"]["now"]["valueText"]
         return {
-            "score":      round(float(fg["score"]), 1),
+            "score":      round(score, 1),
             "rating":     rating,
-            "prev_close": round(float(fg["previous_close"]), 1),
-            "prev_week":  round(float(fg.get("previous_1_week", fg["score"])), 1),
+            "prev_close": round(float(data["fgi"]["previousClose"]["value"]), 1),
+            "prev_week":  round(float(data["fgi"]["oneWeekAgo"]["value"]), 1),
         }
     except Exception as e:
         print(f"[WARN] Fear & Greed: {e}")
         return None
+
+
+def fetch_cboe_pcr():
+    """
+    CBOE Total Put/Call Ratio via Yahoo Finance (^PCALL symbol).
+    Falls back to equity P/C (^PCE) if total unavailable.
+    """
+    for sym, label in [("^PCALL", "Total P/C"), ("^PCE", "Equity P/C")]:
+        try:
+            raw = yf.download(sym, period="5d", interval="1d",
+                              progress=False, auto_adjust=True)
+            if raw is None or raw.empty:
+                continue
+            if isinstance(raw.columns, pd.MultiIndex):
+                raw.columns = raw.columns.get_level_values(0)
+            closes = raw["Close"].dropna()
+            if closes.empty:
+                continue
+            val  = round(float(closes.iloc[-1]), 2)
+            date = str(closes.index[-1].date())
+            print(f"[OK]   CBOE {label} = {val}  ({sym})")
+            return {"value": val, "date": date}
+        except Exception as e:
+            print(f"[WARN] CBOE P/C {sym}: {e}")
+    return None
 
 
 def fetch_naaim():
@@ -890,7 +931,8 @@ print(f"[OK]   Breadth  F&G={fear_greed and fear_greed['score']}  "
       f"NAAIM={naaim and naaim['value']}  "
       f"PCR={cboe_pcr and cboe_pcr['value']}  "
       f"MMTW={mmtw}  MMFI={mmfi}  "
-      f"Highs={sp5_highs}  Lows={sp5_lows}")
+f"Highs={full_highs}  Lows={full_lows}")
+
 
 print("\n── Commodities & Crypto ─────────────────────────────")
 commodities_results = process_tickers(COMMODITIES_CRYPTO, df_spy, universe_scores)
