@@ -5,89 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Market Dashboard</title>
   <style>
-
-/* ── Market Breadth cards ── */
-.breadth-grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  padding: 16px;
-}
-.breadth-grid-4 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  padding: 0 16px 16px;
-}
-@media (max-width: 700px) {
-  .breadth-grid-3,
-  .breadth-grid-4 { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 420px) {
-  .breadth-grid-3,
-  .breadth-grid-4 { grid-template-columns: 1fr; }
-}
-.breadth-divider {
-  border: none;
-  border-top: 1px solid #21262d;
-  margin: 0;
-}
-.b-card {
-  background: #0d1117;
-  border: 1px solid #21262d;
-  border-radius: 8px;
-  padding: 16px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  min-width: 0;
-}
-.b-label {
-  font-size: 0.64rem;
-  font-weight: 600;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: #6e7681;
-  margin-bottom: 6px;
-}
-.b-value {
-  font-size: 2rem;
-  font-weight: 700;
-  font-family: 'Courier New', monospace;
-  line-height: 1.1;
-}
-.b-rating {
-  font-size: 0.78rem;
-  font-weight: 600;
-  margin-top: 2px;
-}
-.b-context {
-  font-size: 0.70rem;
-  color: #8b949e;
-  margin-top: 4px;
-}
-.b-date {
-  font-size: 0.63rem;
-  color: #484f58;
-  margin-top: 8px;
-}
-.b-source {
-  font-size: 0.62rem;
-  margin-top: 2px;
-}
-.b-source a {
-  color: #58a6ff;
-  text-decoration: none;
-  opacity: 0.55;
-  transition: opacity .15s;
-}
-.b-source a:hover { opacity: 1; }
-.b-na {
-  color: #484f58;
-  font-family: 'Courier New', monospace;
-  font-size: 1.4rem;
-}
-    
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -223,6 +140,39 @@
     .legend-swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; }
 
     .loading-msg { padding: 28px; text-align: center; color: #6e7681; font-style: italic; }
+
+    /* ── Market Breadth cards ── */
+    .breadth-grid-3 {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; padding: 16px;
+    }
+    .breadth-grid-4 {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 12px; padding: 0 16px 16px;
+    }
+    @media (max-width: 700px) {
+      .breadth-grid-3, .breadth-grid-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 420px) {
+      .breadth-grid-3, .breadth-grid-4 { grid-template-columns: 1fr; }
+    }
+    .breadth-divider { border: none; border-top: 1px solid #21262d; margin: 0; }
+    .b-card {
+      background: #0d1117; border: 1px solid #21262d; border-radius: 8px;
+      padding: 16px 18px; display: flex; flex-direction: column; gap: 3px; min-width: 0;
+    }
+    .b-label {
+      font-size: 0.64rem; font-weight: 600; letter-spacing: 1.2px;
+      text-transform: uppercase; color: #6e7681; margin-bottom: 6px;
+    }
+    .b-value { font-size: 2rem; font-weight: 700; font-family: 'Courier New', monospace; line-height: 1.1; }
+    .b-rating { font-size: 0.78rem; font-weight: 600; margin-top: 2px; }
+    .b-context { font-size: 0.70rem; color: #8b949e; margin-top: 4px; }
+    .b-date { font-size: 0.63rem; color: #484f58; margin-top: 8px; }
+    .b-source { font-size: 0.62rem; margin-top: 2px; }
+    .b-source a { color: #58a6ff; text-decoration: none; opacity: 0.55; transition: opacity .15s; }
+    .b-source a:hover { opacity: 1; }
+    .b-na { color: #484f58; font-family: 'Courier New', monospace; font-size: 1.4rem; }
   </style>
 </head>
 <body>
@@ -235,7 +185,7 @@
 <!-- ══════════════════════ ECONOMIC CALENDAR ═════════════════════ -->
 <div class="section-card">
   <div class="section-title">🗓️ Economic Calendar — United States</div>
-  <div class="tradingview-widget-container" style="padding: 0;">
+  <div class="tradingview-widget-container" style="padding:0">
     <div class="tradingview-widget-container__widget"></div>
     <script type="text/javascript"
       src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
@@ -252,20 +202,15 @@
   </div>
 </div>
 
-  <!-- ═════════════════════════ MARKET BREADTH ═════════════════════ -->
+<!-- ═════════════════════════ MARKET BREADTH ═════════════════════ -->
 <div class="section-card">
   <div class="section-title">🌡️ Market Breadth</div>
-
-  <!-- Row 1: NAAIM · Total P/C Ratio · Fear & Greed -->
   <div class="breadth-grid-3" id="breadth-row1">
     <div class="b-card"><div class="b-label">NAAIM Exposure Index</div><div class="b-na">—</div></div>
     <div class="b-card"><div class="b-label">Total Put/Call Ratio</div><div class="b-na">—</div></div>
     <div class="b-card"><div class="b-label">Fear &amp; Greed Index</div><div class="b-na">—</div></div>
   </div>
-
   <hr class="breadth-divider">
-
-  <!-- Row 2: % >20MA · % >50MA · 52W Highs · 52W Lows -->
   <div class="breadth-grid-4" id="breadth-row2">
     <div class="b-card"><div class="b-label">% Above 20-Day MA</div><div class="b-na">—</div></div>
     <div class="b-card"><div class="b-label">% Above 50-Day MA</div><div class="b-na">—</div></div>
@@ -283,6 +228,7 @@
       <th data-col="price"        data-type="number">Price</th>
       <th data-col="daily_chg"    data-type="number">Daily Chg</th>
       <th data-col="intraday_chg" data-type="number">Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
+      <th data-col="chg_5d"       data-type="number">5D Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(5 Trading Days)</small></th>
       <th data-col="ema10"        data-type="ma">EMA 10</th>
       <th data-col="ema20"        data-type="ma">EMA 20</th>
       <th data-col="sma50"        data-type="ma">SMA 50</th>
@@ -291,7 +237,7 @@
       <th data-col="rs_rating"    data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
       <th data-col="vars_latest"  data-type="number">VARS Histogram<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(20d · LB50 · SMA20)</small></th>
     </tr></thead>
-    <tbody id="indices-body"><tr><td colspan="11" class="loading-msg">⏳ Loading…</td></tr></tbody>
+    <tbody id="indices-body"><tr><td colspan="12" class="loading-msg">⏳ Loading…</td></tr></tbody>
   </table></div>
   <div class="legend" id="indices-legend"></div>
 </div>
@@ -305,6 +251,7 @@
       <th data-col="price"        data-type="number">Price</th>
       <th data-col="daily_chg"    data-type="number">Daily Chg</th>
       <th data-col="intraday_chg" data-type="number">Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
+      <th data-col="chg_5d"       data-type="number">5D Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(5 Trading Days)</small></th>
       <th data-col="ema10"        data-type="ma">EMA 10</th>
       <th data-col="ema20"        data-type="ma">EMA 20</th>
       <th data-col="sma50"        data-type="ma">SMA 50</th>
@@ -313,7 +260,7 @@
       <th data-col="rs_rating"    data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
       <th data-col="vars_latest"  data-type="number">VARS Histogram<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(20d · LB50 · SMA20)</small></th>
     </tr></thead>
-    <tbody id="sectors-body"><tr><td colspan="11" class="loading-msg">⏳ Loading…</td></tr></tbody>
+    <tbody id="sectors-body"><tr><td colspan="12" class="loading-msg">⏳ Loading…</td></tr></tbody>
   </table></div>
   <div class="legend" id="sectors-legend"></div>
 </div>
@@ -327,6 +274,7 @@
       <th data-col="price"        data-type="number">Price</th>
       <th data-col="daily_chg"    data-type="number">Daily Chg</th>
       <th data-col="intraday_chg" data-type="number">Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
+      <th data-col="chg_5d"       data-type="number">5D Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(5 Trading Days)</small></th>
       <th data-col="ema10"        data-type="ma">EMA 10</th>
       <th data-col="ema20"        data-type="ma">EMA 20</th>
       <th data-col="sma50"        data-type="ma">SMA 50</th>
@@ -335,7 +283,7 @@
       <th data-col="rs_rating"    data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
       <th data-col="vars_latest"  data-type="number">VARS Histogram<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(20d · LB50 · SMA20)</small></th>
     </tr></thead>
-    <tbody id="sectors-ew-body"><tr><td colspan="11" class="loading-msg">⏳ Loading…</td></tr></tbody>
+    <tbody id="sectors-ew-body"><tr><td colspan="12" class="loading-msg">⏳ Loading…</td></tr></tbody>
   </table></div>
   <div class="legend" id="sectors-ew-legend"></div>
 </div>
@@ -349,6 +297,7 @@
       <th data-col="price"        data-type="number">Price</th>
       <th data-col="daily_chg"    data-type="number">Daily Chg</th>
       <th data-col="intraday_chg" data-type="number">Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
+      <th data-col="chg_5d"       data-type="number">5D Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(5 Trading Days)</small></th>
       <th data-col="ema10"        data-type="ma">EMA 10</th>
       <th data-col="ema20"        data-type="ma">EMA 20</th>
       <th data-col="sma50"        data-type="ma">SMA 50</th>
@@ -357,7 +306,7 @@
       <th data-col="rs_rating"    data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
       <th data-col="vars_latest"  data-type="number">VARS Histogram<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(20d · LB50 · SMA20)</small></th>
     </tr></thead>
-    <tbody id="commodities-body"><tr><td colspan="11" class="loading-msg">⏳ Loading…</td></tr></tbody>
+    <tbody id="commodities-body"><tr><td colspan="12" class="loading-msg">⏳ Loading…</td></tr></tbody>
   </table></div>
   <div class="legend" id="commodities-legend"></div>
 </div>
@@ -371,6 +320,7 @@
       <th data-col="price"        data-type="number">Price</th>
       <th data-col="daily_chg"    data-type="number">Daily Chg</th>
       <th data-col="intraday_chg" data-type="number">Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
+      <th data-col="chg_5d"       data-type="number">5D Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(5 Trading Days)</small></th>
       <th data-col="ema10"        data-type="ma">EMA 10</th>
       <th data-col="ema20"        data-type="ma">EMA 20</th>
       <th data-col="sma50"        data-type="ma">SMA 50</th>
@@ -379,24 +329,23 @@
       <th data-col="rs_rating"    data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
       <th data-col="vars_latest"  data-type="number">VARS Histogram<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(20d · LB50 · SMA20)</small></th>
     </tr></thead>
-    <tbody id="thematic-body"><tr><td colspan="11" class="loading-msg">⏳ Loading…</td></tr></tbody>
+    <tbody id="thematic-body"><tr><td colspan="12" class="loading-msg">⏳ Loading…</td></tr></tbody>
   </table></div>
   <div class="legend" id="thematic-legend"></div>
 </div>
 
-  
 <script>
   const MA_RANK = { above_up: 4, above_down: 3, below_up: 2, below_down: 1 };
 
-const state = {
+  const state = {
     indices:     { data: [], sortCol: null, sortDir: 'asc' },
     sectors:     { data: [], sortCol: null, sortDir: 'asc' },
     sectors_ew:  { data: [], sortCol: null, sortDir: 'asc' },
     commodities: { data: [], sortCol: null, sortDir: 'asc' },
     thematic:    { data: [], sortCol: null, sortDir: 'asc' },
-};
+  };
 
-
+  // ── Formatting helpers ────────────────────────────────────────────
   function fmtChg(val) {
     if (val == null) return '<span class="chg chg-zero">N/A</span>';
     const sign = val > 0 ? '+' : '';
@@ -439,8 +388,7 @@ const state = {
   }
 
   function varsSvg(data) {
-    if (!data || data.length === 0)
-      return '<span class="vars-na">N/A</span>';
+    if (!data || data.length === 0) return '<span class="vars-na">N/A</span>';
     const W = 96, H = 40, padX = 2, padY = 3;
     const vals = data.map(d => d.v);
     const mas  = data.map(d => d.m);
@@ -470,6 +418,7 @@ const state = {
     return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="display:block;margin:auto">${zeroLine}${bars}${maLine}</svg>`;
   }
 
+  // ── Render one row ────────────────────────────────────────────────
   function renderRow(row) {
     const fmt = n => n.toLocaleString(undefined,
       { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -479,6 +428,7 @@ const state = {
       <td><span class="price-val">${fmt(row.price)}</span></td>
       <td>${fmtChg(row.daily_chg)}</td>
       <td>${fmtChg(row.intraday_chg)}</td>
+      <td>${fmtChg(row.chg_5d)}</td>
       <td>${maPill(row.ema10)}</td>
       <td>${maPill(row.ema20)}</td>
       <td>${maPill(row.sma50)}</td>
@@ -490,6 +440,7 @@ const state = {
     return tr;
   }
 
+  // ── Render sorted table ───────────────────────────────────────────
   function renderTable(tableId, bodyId, stateKey) {
     const tbody = document.getElementById(bodyId);
     tbody.innerHTML = '';
@@ -516,6 +467,7 @@ const state = {
     sorted.forEach(row => tbody.appendChild(renderRow(row)));
   }
 
+  // ── Sort listeners ────────────────────────────────────────────────
   function initSorting(tableId, bodyId, stateKey) {
     document.querySelectorAll(`#${tableId} thead th`).forEach(th => {
       th.addEventListener('click', () => {
@@ -536,6 +488,7 @@ const state = {
     });
   }
 
+  // ── Legend ────────────────────────────────────────────────────────
   function buildLegend(legendId) {
     document.getElementById(legendId).innerHTML = `
       <div class="legend-item"><span class="ma-pill ma-above-up">▲ Above</span> Price &gt; MA &amp; MA rising</div>
@@ -555,7 +508,7 @@ const state = {
       <div class="legend-item" style="margin-left:8px"><span class="legend-swatch" style="background:#58a6ff"></span> VARS bars</div>
       <div class="legend-item"><span class="legend-swatch" style="background:#e3b341;border-radius:0;height:2px;width:14px"></span> SMA20 line</div>
       <div class="legend-item"><span class="legend-swatch" style="background:#444c56"></span> Zero line</div>
-      <div class="legend-item" style="color:#8b949e">↕ Click header to sort by latest VARS value</div>
+      <div class="legend-item" style="color:#8b949e">↕ Click any header to sort</div>
     `;
   }
 
@@ -567,6 +520,172 @@ const state = {
     }));
   }
 
+  // ── Market Breadth color helpers ──────────────────────────────────
+  function fgColor(s) {
+    if (s >= 75) return '#3fb950';
+    if (s >= 55) return '#7ee787';
+    if (s >= 45) return '#e3b341';
+    if (s >= 25) return '#db6d28';
+    return '#f85149';
+  }
+  function naaimColor(v) {
+    if (v >  90) return '#3fb950';
+    if (v >  60) return '#7ee787';
+    if (v >  30) return '#e3b341';
+    if (v >=  0) return '#db6d28';
+    return '#f85149';
+  }
+  function pcrColor(v) {
+    if (v >= 1.2) return '#3fb950';
+    if (v >= 0.9) return '#e3b341';
+    if (v >= 0.7) return '#db6d28';
+    return '#f85149';
+  }
+  function maColor(p) {
+    if (p >= 70) return '#3fb950';
+    if (p >= 50) return '#7ee787';
+    if (p >= 30) return '#e3b341';
+    if (p >= 15) return '#db6d28';
+    return '#f85149';
+  }
+  function highsColor(n) {
+    if (n >= 200) return '#3fb950';
+    if (n >= 100) return '#7ee787';
+    if (n >= 50)  return '#e3b341';
+    return '#db6d28';
+  }
+  function lowsColor(n) {
+    if (n <= 20)  return '#3fb950';
+    if (n <= 50)  return '#7ee787';
+    if (n <= 100) return '#e3b341';
+    if (n <= 200) return '#db6d28';
+    return '#f85149';
+  }
+
+  function bCard(label, valueHtml, ratingHtml, contextHtml, dateStr, sourceHref, sourceName) {
+    return `<div class="b-card">
+      <div class="b-label">${label}</div>
+      ${valueHtml}
+      ${ratingHtml  ? `<div class="b-rating">${ratingHtml}</div>`   : ''}
+      ${contextHtml ? `<div class="b-context">${contextHtml}</div>` : ''}
+      ${dateStr     ? `<div class="b-date">${dateStr}</div>`         : ''}
+      <div class="b-source"><a href="${sourceHref}" target="_blank" rel="noopener">${sourceName} ↗</a></div>
+    </div>`;
+  }
+
+  function renderBreadth(b) {
+    if (!b) return;
+
+    // ── Row 1 ────────────────────────────────────────────────────
+    let naaimHtml, pcrHtml, fgHtml;
+
+    if (b.naaim && b.naaim.value != null) {
+      const v = b.naaim.value, c = naaimColor(v);
+      const lbl = v > 90 ? 'Heavily Long' : v > 60 ? 'Moderately Long' :
+                  v > 30 ? 'Cautious' : v >= 0 ? 'Defensive' : 'Short / Hedged';
+      naaimHtml = bCard('NAAIM Exposure Index',
+        `<div class="b-value" style="color:${c}">${v.toFixed(1)}</div>`,
+        `<span style="color:${c}">${lbl}</span>`,
+        'Active manager equity exposure (0–200)',
+        b.naaim.date ? `As of ${b.naaim.date}` : '',
+        'https://naaim.org/programs/naaim-exposure-index/', 'naaim.org');
+    } else {
+      naaimHtml = bCard('NAAIM Exposure Index',
+        '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
+        'https://naaim.org/programs/naaim-exposure-index/', 'naaim.org');
+    }
+
+    if (b.cboe_pcr && b.cboe_pcr.value != null) {
+      const v = b.cboe_pcr.value, c = pcrColor(v);
+      const lbl = v >= 1.2 ? 'Elevated Fear' : v >= 0.9 ? 'Neutral' :
+                  v >= 0.7 ? 'Complacent'    : 'Extreme Complacency';
+      pcrHtml = bCard('Total Put/Call Ratio',
+        `<div class="b-value" style="color:${c}">${v.toFixed(2)}</div>`,
+        `<span style="color:${c}">${lbl}</span>`,
+        '> 1.0 = more puts (fear) · < 0.7 = complacency',
+        b.cboe_pcr.date ? `As of ${b.cboe_pcr.date}` : '',
+        'https://www.cboe.com/us/options/market_statistics/daily/', 'cboe.com');
+    } else {
+      pcrHtml = bCard('Total Put/Call Ratio',
+        '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
+        'https://www.cboe.com/us/options/market_statistics/daily/', 'cboe.com');
+    }
+
+    if (b.fear_greed && b.fear_greed.score != null) {
+      const v = b.fear_greed.score, c = fgColor(v);
+      fgHtml = bCard('Fear &amp; Greed Index',
+        `<div class="b-value" style="color:${c}">${v.toFixed(0)}</div>`,
+        `<span style="color:${c}">${b.fear_greed.rating}</span>`,
+        `Prev close: ${b.fear_greed.prev_close} · 1W ago: ${b.fear_greed.prev_week}`,
+        '',
+        'https://edition.cnn.com/markets/fear-and-greed', 'CNN');
+    } else {
+      fgHtml = bCard('Fear &amp; Greed Index',
+        '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
+        'https://edition.cnn.com/markets/fear-and-greed', 'CNN');
+    }
+
+    document.getElementById('breadth-row1').innerHTML = naaimHtml + pcrHtml + fgHtml;
+
+    // ── Row 2 ────────────────────────────────────────────────────
+    let mmtwHtml, mmfiHtml, highsHtml, lowsHtml;
+
+    if (b.mmtw != null) {
+      const c = maColor(b.mmtw);
+      mmtwHtml = bCard('% Above 20-Day MA',
+        `<div class="b-value" style="color:${c}">${b.mmtw.toFixed(1)}<span style="font-size:1.2rem">%</span></div>`,
+        `<span style="color:${c}">${b.mmtw >= 70 ? 'Overbought' : b.mmtw >= 50 ? 'Broad Strength' : b.mmtw >= 30 ? 'Mixed' : b.mmtw >= 15 ? 'Broad Weakness' : 'Oversold'}</span>`,
+        'S&P 500 stocks above their 20-day average', '',
+        'https://www.tradingview.com/symbols/INDEX-MMTW/', 'TradingView');
+    } else {
+      mmtwHtml = bCard('% Above 20-Day MA',
+        '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
+        'https://www.tradingview.com/symbols/INDEX-MMTW/', 'TradingView');
+    }
+
+    if (b.mmfi != null) {
+      const c = maColor(b.mmfi);
+      mmfiHtml = bCard('% Above 50-Day MA',
+        `<div class="b-value" style="color:${c}">${b.mmfi.toFixed(1)}<span style="font-size:1.2rem">%</span></div>`,
+        `<span style="color:${c}">${b.mmfi >= 70 ? 'Overbought' : b.mmfi >= 50 ? 'Broad Strength' : b.mmfi >= 30 ? 'Mixed' : b.mmfi >= 15 ? 'Broad Weakness' : 'Oversold'}</span>`,
+        'S&P 500 stocks above their 50-day average', '',
+        'https://www.tradingview.com/symbols/INDEX-MMFI/', 'TradingView');
+    } else {
+      mmfiHtml = bCard('% Above 50-Day MA',
+        '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
+        'https://www.tradingview.com/symbols/INDEX-MMFI/', 'TradingView');
+    }
+
+    if (b.highs != null) {
+      const c = highsColor(b.highs);
+      highsHtml = bCard('52-Week Highs',
+        `<div class="b-value" style="color:${c}">${b.highs.toLocaleString()}</div>`,
+        `<span style="color:${c}">${b.highs >= 200 ? 'Very Broad' : b.highs >= 100 ? 'Healthy' : b.highs >= 50 ? 'Moderate' : 'Narrow'}</span>`,
+        'US stocks at new 52-week high', '',
+        'https://www.barchart.com/stocks/highs-lows/summary', 'Barchart');
+    } else {
+      highsHtml = bCard('52-Week Highs',
+        '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
+        'https://www.barchart.com/stocks/highs-lows/summary', 'Barchart');
+    }
+
+    if (b.lows != null) {
+      const c = lowsColor(b.lows);
+      lowsHtml = bCard('52-Week Lows',
+        `<div class="b-value" style="color:${c}">${b.lows.toLocaleString()}</div>`,
+        `<span style="color:${c}">${b.lows <= 20 ? 'Minimal' : b.lows <= 50 ? 'Low' : b.lows <= 100 ? 'Moderate' : b.lows <= 200 ? 'Elevated' : 'High'}</span>`,
+        'US stocks at new 52-week low', '',
+        'https://www.barchart.com/stocks/highs-lows/summary', 'Barchart');
+    } else {
+      lowsHtml = bCard('52-Week Lows',
+        '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
+        'https://www.barchart.com/stocks/highs-lows/summary', 'Barchart');
+    }
+
+    document.getElementById('breadth-row2').innerHTML = mmtwHtml + mmfiHtml + highsHtml + lowsHtml;
+  }
+
+  // ── Load data ─────────────────────────────────────────────────────
   async function loadData() {
     try {
       const res  = await fetch('data/indices.json?v=' + Date.now());
@@ -576,18 +695,16 @@ const state = {
       document.getElementById('updated-time').textContent =
         '🕒 Last updated: ' + (json.updated || 'unknown');
 
-const sections = [
-    { key: 'indices',     jsonKey: 'indices',     tableId: 'indices-table',     bodyId: 'indices-body',     legendId: 'indices-legend'     },
-    { key: 'sectors',     jsonKey: 'sectors',     tableId: 'sectors-table',     bodyId: 'sectors-body',     legendId: 'sectors-legend'     },
-    { key: 'sectors_ew',  jsonKey: 'sectors_ew',  tableId: 'sectors-ew-table',  bodyId: 'sectors-ew-body',  legendId: 'sectors-ew-legend'  },
-    { key: 'commodities', jsonKey: 'commodities', tableId: 'commodities-table', bodyId: 'commodities-body', legendId: 'commodities-legend' },
-    { key: 'thematic',    jsonKey: 'thematic',    tableId: 'thematic-table',    bodyId: 'thematic-body',    legendId: 'thematic-legend'    },
-];
+      renderBreadth(json.breadth || null);
 
-// Render breadth immediately from the JSON
-renderBreadth(json.breadth || null);
+      const sections = [
+        { key: 'indices',     jsonKey: 'indices',     tableId: 'indices-table',     bodyId: 'indices-body',     legendId: 'indices-legend'     },
+        { key: 'sectors',     jsonKey: 'sectors',     tableId: 'sectors-table',     bodyId: 'sectors-body',     legendId: 'sectors-legend'     },
+        { key: 'sectors_ew',  jsonKey: 'sectors_ew',  tableId: 'sectors-ew-table',  bodyId: 'sectors-ew-body',  legendId: 'sectors-ew-legend'  },
+        { key: 'commodities', jsonKey: 'commodities', tableId: 'commodities-table', bodyId: 'commodities-body', legendId: 'commodities-legend' },
+        { key: 'thematic',    jsonKey: 'thematic',    tableId: 'thematic-table',    bodyId: 'thematic-body',    legendId: 'thematic-legend'    },
+      ];
 
-      
       sections.forEach(({ key, jsonKey, tableId, bodyId, legendId }) => {
         if (json[jsonKey] && json[jsonKey].length > 0) {
           state[key].data = withLatest(json[jsonKey]);
@@ -595,227 +712,24 @@ renderBreadth(json.breadth || null);
           buildLegend(legendId);
         } else {
           document.getElementById(bodyId).innerHTML =
-            '<tr><td colspan="11" class="loading-msg">No data found.</td></tr>';
+            '<tr><td colspan="12" class="loading-msg">No data found.</td></tr>';
         }
       });
 
     } catch (err) {
-['indices-body','sectors-body','sectors-ew-body','commodities-body','thematic-body'].forEach(id => {
-    document.getElementById(id).innerHTML =
-        `<tr><td colspan="11" class="loading-msg">❌ Error: ${err.message}</td></tr>`;
-});
-
+      ['indices-body','sectors-body','sectors-ew-body','commodities-body','thematic-body'].forEach(id => {
+        document.getElementById(id).innerHTML =
+          `<tr><td colspan="12" class="loading-msg">❌ Error: ${err.message}</td></tr>`;
+      });
     }
   }
 
-initSorting('indices-table',     'indices-body',     'indices');
-initSorting('sectors-table',     'sectors-body',     'sectors');
-initSorting('sectors-ew-table',  'sectors-ew-body',  'sectors_ew');
-initSorting('commodities-table', 'commodities-body', 'commodities');
-initSorting('thematic-table',    'thematic-body',    'thematic');
-
-// ── Market Breadth color helpers ──────────────────────────────────
-function fgColor(s) {
-  if (s >= 75) return '#3fb950';
-  if (s >= 55) return '#7ee787';
-  if (s >= 45) return '#e3b341';
-  if (s >= 25) return '#db6d28';
-  return '#f85149';
-}
-function naaimColor(v) {
-  if (v >  90) return '#3fb950';
-  if (v >  60) return '#7ee787';
-  if (v >  30) return '#e3b341';
-  if (v >=  0) return '#db6d28';
-  return '#f85149';
-}
-function pcrColor(v) {
-  if (v >= 1.2) return '#3fb950';
-  if (v >= 0.9) return '#e3b341';
-  if (v >= 0.7) return '#db6d28';
-  return '#f85149';
-}
-function maColor(p) {
-  if (p >= 70) return '#3fb950';
-  if (p >= 50) return '#7ee787';
-  if (p >= 30) return '#e3b341';
-  if (p >= 15) return '#db6d28';
-  return '#f85149';
-}
-function highsColor(n) {
-  if (n >= 200) return '#3fb950';
-  if (n >= 100) return '#7ee787';
-  if (n >= 50)  return '#e3b341';
-  return '#db6d28';
-}
-function lowsColor(n) {
-  if (n <= 20)  return '#3fb950';
-  if (n <= 50)  return '#7ee787';
-  if (n <= 100) return '#e3b341';
-  if (n <= 200) return '#db6d28';
-  return '#f85149';
-}
-
-function bCard(label, valueHtml, ratingHtml, contextHtml, dateStr, sourceHref, sourceName) {
-  return `<div class="b-card">
-    <div class="b-label">${label}</div>
-    ${valueHtml}
-    ${ratingHtml  ? `<div class="b-rating">${ratingHtml}</div>`   : ''}
-    ${contextHtml ? `<div class="b-context">${contextHtml}</div>` : ''}
-    ${dateStr     ? `<div class="b-date">${dateStr}</div>`         : ''}
-    <div class="b-source"><a href="${sourceHref}" target="_blank" rel="noopener">${sourceName} ↗</a></div>
-  </div>`;
-}
-
-function renderBreadth(b) {
-  if (!b) return;
-
-  // ── Row 1 ──────────────────────────────────────────────────────
-  let naaimHtml, pcrHtml, fgHtml;
-
-  // NAAIM
-  if (b.naaim && b.naaim.value != null) {
-    const v = b.naaim.value;
-    const c = naaimColor(v);
-    const lbl = v > 90 ? 'Heavily Long' : v > 60 ? 'Moderately Long' :
-                v > 30 ? 'Cautious' : v >= 0 ? 'Defensive' : 'Short / Hedged';
-    naaimHtml = bCard(
-      'NAAIM Exposure Index',
-      `<div class="b-value" style="color:${c}">${v.toFixed(1)}</div>`,
-      `<span style="color:${c}">${lbl}</span>`,
-      'Active manager equity exposure (0–200)',
-      b.naaim.date ? `As of ${b.naaim.date}` : '',
-      'https://naaim.org/programs/naaim-exposure-index/',
-      'naaim.org'
-    );
-  } else {
-    naaimHtml = bCard('NAAIM Exposure Index',
-      '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
-      'https://naaim.org/programs/naaim-exposure-index/', 'naaim.org');
-  }
-
-  // Total P/C Ratio
-  if (b.cboe_pcr && b.cboe_pcr.value != null) {
-    const v = b.cboe_pcr.value;
-    const c = pcrColor(v);
-    const lbl = v >= 1.2 ? 'Elevated Fear' : v >= 0.9 ? 'Neutral' :
-                v >= 0.7 ? 'Complacent'    : 'Extreme Complacency';
-    pcrHtml = bCard(
-      'Total Put/Call Ratio',
-      `<div class="b-value" style="color:${c}">${v.toFixed(2)}</div>`,
-      `<span style="color:${c}">${lbl}</span>`,
-      '> 1.0 = more puts (fear) · < 0.7 = complacency',
-      b.cboe_pcr.date ? `As of ${b.cboe_pcr.date}` : '',
-      'https://www.cboe.com/us/options/market_statistics/daily/',
-      'cboe.com'
-    );
-  } else {
-    pcrHtml = bCard('Total Put/Call Ratio',
-      '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
-      'https://www.cboe.com/us/options/market_statistics/daily/', 'cboe.com');
-  }
-
-  // Fear & Greed
-  if (b.fear_greed && b.fear_greed.score != null) {
-    const v = b.fear_greed.score;
-    const c = fgColor(v);
-    fgHtml = bCard(
-      'Fear &amp; Greed Index',
-      `<div class="b-value" style="color:${c}">${v.toFixed(0)}</div>`,
-      `<span style="color:${c}">${b.fear_greed.rating}</span>`,
-      `Prev close: ${b.fear_greed.prev_close} · 1W ago: ${b.fear_greed.prev_week}`,
-      '',
-      'https://edition.cnn.com/markets/fear-and-greed',
-      'CNN'
-    );
-  } else {
-    fgHtml = bCard('Fear &amp; Greed Index',
-      '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
-      'https://edition.cnn.com/markets/fear-and-greed', 'CNN');
-  }
-
-  document.getElementById('breadth-row1').innerHTML = naaimHtml + pcrHtml + fgHtml;
-
-  // ── Row 2 ──────────────────────────────────────────────────────
-  let mmtwHtml, mmfiHtml, highsHtml, lowsHtml;
-
-  // % Above 20-Day MA (MMTW)
-  if (b.mmtw != null) {
-    const c = maColor(b.mmtw);
-    mmtwHtml = bCard(
-      '% Above 20-Day MA',
-      `<div class="b-value" style="color:${c}">${b.mmtw.toFixed(1)}<span style="font-size:1.2rem">%</span></div>`,
-      `<span style="color:${c}">${b.mmtw >= 70 ? 'Overbought' : b.mmtw >= 50 ? 'Broad Strength' : b.mmtw >= 30 ? 'Mixed' : b.mmtw >= 15 ? 'Broad Weakness' : 'Oversold'}</span>`,
-      'S&P 500 stocks above their 20-day average',
-      '',
-      'https://www.tradingview.com/symbols/INDEX-MMTW/',
-      'TradingView'
-    );
-  } else {
-    mmtwHtml = bCard('% Above 20-Day MA',
-      '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
-      'https://www.tradingview.com/symbols/INDEX-MMTW/', 'TradingView');
-  }
-
-  // % Above 50-Day MA (MMFI)
-  if (b.mmfi != null) {
-    const c = maColor(b.mmfi);
-    mmfiHtml = bCard(
-      '% Above 50-Day MA',
-      `<div class="b-value" style="color:${c}">${b.mmfi.toFixed(1)}<span style="font-size:1.2rem">%</span></div>`,
-      `<span style="color:${c}">${b.mmfi >= 70 ? 'Overbought' : b.mmfi >= 50 ? 'Broad Strength' : b.mmfi >= 30 ? 'Mixed' : b.mmfi >= 15 ? 'Broad Weakness' : 'Oversold'}</span>`,
-      'S&P 500 stocks above their 50-day average',
-      '',
-      'https://www.tradingview.com/symbols/INDEX-MMFI/',
-      'TradingView'
-    );
-  } else {
-    mmfiHtml = bCard('% Above 50-Day MA',
-      '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
-      'https://www.tradingview.com/symbols/INDEX-MMFI/', 'TradingView');
-  }
-
-  // 52-Week Highs
-  if (b.highs != null) {
-    const c = highsColor(b.highs);
-    highsHtml = bCard(
-      '52-Week Highs',
-      `<div class="b-value" style="color:${c}">${b.highs.toLocaleString()}</div>`,
-      `<span style="color:${c}">${b.highs >= 200 ? 'Very Broad' : b.highs >= 100 ? 'Healthy' : b.highs >= 50 ? 'Moderate' : 'Narrow'}</span>`,
-      'US stocks at new 52-week high',
-      '',
-      'https://www.barchart.com/stocks/highs-lows/summary',
-      'Barchart'
-    );
-  } else {
-    highsHtml = bCard('52-Week Highs',
-      '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
-      'https://www.barchart.com/stocks/highs-lows/summary', 'Barchart');
-  }
-
-  // 52-Week Lows
-  if (b.lows != null) {
-    const c = lowsColor(b.lows);
-    lowsHtml = bCard(
-      '52-Week Lows',
-      `<div class="b-value" style="color:${c}">${b.lows.toLocaleString()}</div>`,
-      `<span style="color:${c}">${b.lows <= 20 ? 'Minimal' : b.lows <= 50 ? 'Low' : b.lows <= 100 ? 'Moderate' : b.lows <= 200 ? 'Elevated' : 'High'}</span>`,
-      'US stocks at new 52-week low',
-      '',
-      'https://www.barchart.com/stocks/highs-lows/summary',
-      'Barchart'
-    );
-  } else {
-    lowsHtml = bCard('52-Week Lows',
-      '<div class="b-na">N/A</div>', '', 'Data unavailable', '',
-      'https://www.barchart.com/stocks/highs-lows/summary', 'Barchart');
-  }
-
-  document.getElementById('breadth-row2').innerHTML = mmtwHtml + mmfiHtml + highsHtml + lowsHtml;
-}
-
-loadData();
-
+  initSorting('indices-table',     'indices-body',     'indices');
+  initSorting('sectors-table',     'sectors-body',     'sectors');
+  initSorting('sectors-ew-table',  'sectors-ew-body',  'sectors_ew');
+  initSorting('commodities-table', 'commodities-body', 'commodities');
+  initSorting('thematic-table',    'thematic-body',    'thematic');
+  loadData();
 </script>
 
 </body>
