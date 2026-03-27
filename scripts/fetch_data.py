@@ -638,7 +638,7 @@ except Exception as e:
     df_spy = None
     print(f"[WARN] SPY fetch failed: {e}")
 
-universe_scores = build_universe()
+universe_scores, raw_uni = build_universe()
 
 print("\n── Indices ──────────────────────────────────────────")
 indices_results = process_tickers(INDICES, df_spy, universe_scores)
