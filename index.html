@@ -661,7 +661,7 @@
       highsHtml = bCard('52-Week Highs',
         `<div class="b-value" style="color:${c}">${b.highs.toLocaleString()}</div>`,
         `<span style="color:${c}">${b.highs >= 200 ? 'Very Broad' : b.highs >= 100 ? 'Healthy' : b.highs >= 50 ? 'Moderate' : 'Narrow'}</span>`,
-        'US stocks at new 52-week high', '',
+        'All regular US stocks (NYSE · NASDAQ · AMEX)', '',
         'https://www.barchart.com/stocks/highs-lows/summary', 'Barchart');
     } else {
       highsHtml = bCard('52-Week Highs',
@@ -674,7 +674,7 @@
       lowsHtml = bCard('52-Week Lows',
         `<div class="b-value" style="color:${c}">${b.lows.toLocaleString()}</div>`,
         `<span style="color:${c}">${b.lows <= 20 ? 'Minimal' : b.lows <= 50 ? 'Low' : b.lows <= 100 ? 'Moderate' : b.lows <= 200 ? 'Elevated' : 'High'}</span>`,
-        'US stocks at new 52-week low', '',
+        'All regular US stocks (NYSE · NASDAQ · AMEX)', '',
         'https://www.barchart.com/stocks/highs-lows/summary', 'Barchart');
     } else {
       lowsHtml = bCard('52-Week Lows',
