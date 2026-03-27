@@ -268,7 +268,7 @@ def build_universe():
         )
     except Exception as e:
         print(f"[WARN] Universe download failed: {e}")
-        return []
+        return [], None
     scores = []
     for t in SP500_UNIVERSE:
         try:
@@ -280,7 +280,8 @@ def build_universe():
         except Exception:
             pass
     print(f"[INFO] Universe built: {len(scores)} valid stocks")
-    return scores
+    return scores, raw_uni
+
 
 def calc_atr_multiple(df, atr_len=14, ma_len=50):
     if len(df) < max(atr_len, ma_len) + 1:
@@ -408,27 +409,32 @@ def process_tickers(ticker_list, df_spy, universe_scores):
 # ─────────────────────────────────────────────────────────────────────
 
 def fetch_fear_greed():
-    """CNN Fear & Greed via their dataviz API."""
+    """CNN Fear & Greed via dataviz API using requests."""
     try:
+        import requests
         url = "https://production.dataviz.cnn.io/index/fearandgreed/graphdata"
-        req = urllib.request.Request(url, headers={
-            "User-Agent": "Mozilla/5.0",
-            "Accept":     "application/json",
-            "Referer":    "https://edition.cnn.com/markets/fear-and-greed",
-        })
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            data = json.loads(resp.read())
-        fg = data["fear_and_greed"]
-        rating = fg["rating"].replace("_", " ").title()
+        headers = {
+            "User-Agent":      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                               "AppleWebKit/537.36 (KHTML, like Gecko) "
+                               "Chrome/124.0.0.0 Safari/537.36",
+            "Accept":          "application/json, text/plain, */*",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Origin":          "https://edition.cnn.com",
+            "Referer":         "https://edition.cnn.com/markets/fear-and-greed",
+        }
+        resp = requests.get(url, headers=headers, timeout=15)
+        resp.raise_for_status()
+        fg = resp.json()["fear_and_greed"]
         return {
             "score":      round(float(fg["score"]), 1),
-            "rating":     rating,
+            "rating":     fg["rating"].replace("_", " ").title(),
             "prev_close": round(float(fg["previous_close"]), 1),
             "prev_week":  round(float(fg.get("previous_1_week", fg["score"])), 1),
         }
     except Exception as e:
         print(f"[WARN] Fear & Greed: {e}")
         return None
+
 
 
 def fetch_naaim():
@@ -454,48 +460,49 @@ def fetch_naaim():
         print(f"[WARN] NAAIM: {e}")
         return None
 
-
 def fetch_cboe_pcr():
-    """CBOE Total Put/Call Ratio — try CDN CSV endpoint."""
-    urls = [
-        "https://cdn.cboe.com/api/global/us_options_distribution/daily_stats.csv",
-        "https://www.cboe.com/data/us-options-market-statistics-daily-download/",
-    ]
-    for url in urls:
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(req, timeout=10) as resp:
-                content = resp.read().decode("utf-8")
-            df_cboe = pd.read_csv(io.StringIO(content))
-            df_cboe.columns = [c.strip() for c in df_cboe.columns]
-            # Find the Total P/C column (name varies by CBOE version)
-            pcr_col = None
-            for col in df_cboe.columns:
-                cu = col.upper()
-                if ("TOTAL" in cu or "ALL" in cu) and ("P/C" in cu or "PUT" in cu or "RATIO" in cu):
-                    pcr_col = col
-                    break
-            # Fallback: last numeric column
-            if pcr_col is None:
-                for col in reversed(df_cboe.columns):
-                    try:
-                        pd.to_numeric(df_cboe[col].dropna())
-                        pcr_col = col
-                        break
-                    except Exception:
-                        pass
-            if pcr_col:
-                clean = df_cboe.dropna(subset=[pcr_col])
-                if not clean.empty:
-                    latest = clean.iloc[-1]
-                    return {
-                        "value": round(float(latest[pcr_col]), 2),
-                        "date":  str(latest.iloc[0]),
-                    }
-        except Exception as e:
-            print(f"[WARN] CBOE P/C ({url[:50]}…): {e}")
-    return None
-
+    """CBOE Total Put/Call Ratio — scraped from ycharts public page."""
+    try:
+        import requests
+        url = "https://ycharts.com/indicators/total_putcall_ratio"
+        headers = {
+            "User-Agent":      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                               "AppleWebKit/537.36 (KHTML, like Gecko) "
+                               "Chrome/124.0.0.0 Safari/537.36",
+            "Accept":          "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            "Accept-Language": "en-US,en;q=0.9",
+        }
+        resp = requests.get(url, headers=headers, timeout=15)
+        resp.raise_for_status()
+        html = resp.text
+        # ycharts shows the latest value in a clearly labelled element
+        match = re.search(
+            r'(?:Key Stats|last value|indicator-last-value)[^<]*?'
+            r'<[^>]+>\s*([\d]+\.[\d]+)\s*<',
+            html, re.IGNORECASE | re.DOTALL
+        )
+        if not match:
+            # Fallback: find any float near "put" and "call" context
+            match = re.search(r'"indicatorValue"[^>]*?>\s*([\d]+\.[\d]+)', html)
+        if not match:
+            # Last resort: search for the value in the page's JSON-LD or data attrs
+            match = re.search(r'current["\s:]+([01]\.\d{2})\b', html, re.IGNORECASE)
+        if match:
+            val = round(float(match.group(1)), 2)
+            # Sanity check — total P/C ratio is normally between 0.5 and 2.0
+            if 0.3 <= val <= 3.0:
+                # Try to extract the date
+                date_match = re.search(
+                    r'(?:Latest Period|last updated)[^<]*?<[^>]+>\s*([A-Za-z]+\s+\d+,?\s*\d{4})',
+                    html, re.IGNORECASE
+                )
+                date_str = date_match.group(1).strip() if date_match else ""
+                return {"value": val, "date": date_str}
+        print("[WARN] CBOE P/C: could not parse value from ycharts")
+        return None
+    except Exception as e:
+        print(f"[WARN] CBOE P/C: {e}")
+        return None
 
 def fetch_mmtw_mmfi():
     """% Stocks above 20-day (^MMTW) and 50-day (^MMFI) MA via yfinance."""
@@ -514,7 +521,6 @@ def fetch_mmtw_mmfi():
             print(f"[WARN] {sym}: {e}")
             result[key] = None
     return result
-
 
 def fetch_52wk_highs_lows():
     """52-week Highs & Lows — scrape Barchart summary table."""
@@ -551,6 +557,70 @@ def fetch_52wk_highs_lows():
     except Exception as e:
         print(f"[WARN] 52W H/L Barchart: {e}")
         return {"highs": None, "lows": None}
+
+def compute_ma_breadth(raw_uni):
+    """
+    % of SP500_UNIVERSE stocks above 20-day and 50-day SMA.
+    Computed directly from the already-downloaded universe data.
+    """
+    if raw_uni is None:
+        print("[WARN] compute_ma_breadth: raw_uni is None")
+        return None, None
+    is_multi = isinstance(raw_uni.columns, pd.MultiIndex)
+    above_20 = above_50 = total = 0
+    for t in SP500_UNIVERSE:
+        try:
+            closes = raw_uni[t]["Close"].dropna() if is_multi \
+                     else raw_uni["Close"].dropna()
+            if len(closes) < 50:
+                continue
+            total += 1
+            last  = float(closes.iloc[-1])
+            sma20 = float(closes.rolling(20).mean().iloc[-1])
+            sma50 = float(closes.rolling(50).mean().iloc[-1])
+            if pd.notna(sma20) and last > sma20: above_20 += 1
+            if pd.notna(sma50) and last > sma50: above_50 += 1
+        except Exception:
+            pass
+    if total == 0:
+        print("[WARN] compute_ma_breadth: no valid stocks found")
+        return None, None
+    mmtw = round(above_20 / total * 100, 2)
+    mmfi = round(above_50 / total * 100, 2)
+    print(f"[OK]   MMTW={mmtw}%  MMFI={mmfi}%  (computed from {total} S&P 500 stocks)")
+    return mmtw, mmfi
+
+
+def compute_52wk_highs_lows(raw_uni):
+    """
+    Count S&P 500 universe stocks at / near 52-week highs and lows.
+    High  = last close within 1.5% of the 52-week rolling high.
+    Low   = last close within 1.5% of the 52-week rolling low.
+    """
+    if raw_uni is None:
+        return None, None
+    is_multi = isinstance(raw_uni.columns, pd.MultiIndex)
+    highs = lows = total = 0
+    for t in SP500_UNIVERSE:
+        try:
+            if is_multi:
+                df_t = raw_uni[t][["High","Low","Close"]].dropna()
+            else:
+                df_t = raw_uni[["High","Low","Close"]].dropna()
+            if len(df_t) < 20:
+                continue
+            total += 1
+            last_close = float(df_t["Close"].iloc[-1])
+            high_52w   = float(df_t["High"].max())
+            low_52w    = float(df_t["Low"].min())
+            if last_close >= high_52w * 0.985: highs += 1
+            if last_close <= low_52w  * 1.015: lows  += 1
+        except Exception:
+            pass
+    if total == 0:
+        return None, None
+    print(f"[OK]   52W Highs={highs}  Lows={lows}  (S&P 500 universe, {total} stocks)")
+    return highs, lows
 
 
 # ═════════════════════════════════════════════════════════════════════
@@ -732,27 +802,26 @@ print("\n── Thematic ──────────────────�
 thematic_results = process_tickers(THEMATIC, df_spy, universe_scores)
 
 print("\n── Market Breadth ───────────────────────────────────")
-fear_greed  = fetch_fear_greed()
-naaim       = fetch_naaim()
-cboe_pcr    = fetch_cboe_pcr()
-mmtw_mmfi   = fetch_mmtw_mmfi()
-highs_lows  = fetch_52wk_highs_lows()
+fear_greed         = fetch_fear_greed()
+naaim              = fetch_naaim()
+cboe_pcr           = fetch_cboe_pcr()
+mmtw, mmfi         = compute_ma_breadth(raw_uni)
+sp5_highs, sp5_lows = compute_52wk_highs_lows(raw_uni)
 
 breadth = {
     "fear_greed": fear_greed,
     "naaim":      naaim,
     "cboe_pcr":   cboe_pcr,
-    "mmtw":       mmtw_mmfi.get("mmtw"),
-    "mmfi":       mmtw_mmfi.get("mmfi"),
-    "highs":      highs_lows.get("highs"),
-    "lows":       highs_lows.get("lows"),
+    "mmtw":       mmtw,
+    "mmfi":       mmfi,
+    "highs":      sp5_highs,
+    "lows":       sp5_lows,
 }
 print(f"[OK]   Breadth  F&G={fear_greed and fear_greed['score']}  "
       f"NAAIM={naaim and naaim['value']}  "
       f"PCR={cboe_pcr and cboe_pcr['value']}  "
-      f"MMTW={mmtw_mmfi.get('mmtw')}  MMFI={mmtw_mmfi.get('mmfi')}  "
-      f"Highs={highs_lows.get('highs')}  Lows={highs_lows.get('lows')}")
-
+      f"MMTW={mmtw}  MMFI={mmfi}  "
+      f"Highs={sp5_highs}  Lows={sp5_lows}")
 
 print("\n── Commodities & Crypto ─────────────────────────────")
 commodities_results = process_tickers(COMMODITIES_CRYPTO, df_spy, universe_scores)
