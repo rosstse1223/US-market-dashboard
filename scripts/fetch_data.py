@@ -591,36 +591,102 @@ def compute_ma_breadth(raw_uni):
     return mmtw, mmfi
 
 
-def compute_52wk_highs_lows(raw_uni):
+def fetch_full_us_tickers():
     """
-    Count S&P 500 universe stocks at / near 52-week highs and lows.
-    High  = last close within 1.5% of the 52-week rolling high.
-    Low   = last close within 1.5% of the 52-week rolling low.
+    Fetch every regular common stock listed on US exchanges
+    from the Nasdaq Trader daily-updated symbol directory.
+    Returns a de-duped list of Yahoo Finance-compatible tickers.
     """
-    if raw_uni is None:
+    try:
+        files = [
+            # NASDAQ: Symbol|Name|Market|TestIssue|FinStatus|RoundLot|ETF|NextShares
+            ("https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+             {"sym": 0, "etf": 6, "test": 3}),
+            # NYSE / AMEX / ARCA: ACTSymbol|Name|Exchange|CQSSymbol|ETF|RoundLot|TestIssue|NASDAQSymbol
+            ("https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+             {"sym": 0, "etf": 4, "test": 6}),
+        ]
+        tickers = set()
+        for url, idx in files:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=20) as resp:
+                content = resp.read().decode("utf-8", errors="replace")
+            for line in content.splitlines()[1:]:          # skip header row
+                parts = line.split("|")
+                if len(parts) <= max(idx.values()):
+                    continue
+                sym  = parts[idx["sym"]].strip()
+                etf  = parts[idx["etf"]].strip().upper()
+                test = parts[idx["test"]].strip().upper()
+                # Keep only regular common stocks: no ETFs, no test issues,
+                # pure alpha symbols 1–5 chars (excludes warrants, preferreds, etc.)
+                if etf == "N" and test == "N" and re.match(r'^[A-Z]{1,5}$', sym):
+                    tickers.add(sym.replace(".", "-"))   # Yahoo Finance format
+        result = sorted(tickers)
+        print(f"[INFO] Full US ticker list: {len(result)} stocks")
+        return result
+    except Exception as e:
+        print(f"[WARN] fetch_full_us_tickers: {e}")
+        return []
+
+
+def compute_full_52wk_highs_lows():
+    """
+    Download 1y of daily data for all regular US stocks in batches of 300,
+    then count how many closed within 1.5% of their 52-week high/low.
+    Typical result: ~5,000–6,500 stocks processed in ~2–3 minutes.
+    """
+    tickers = fetch_full_us_tickers()
+    if not tickers:
+        print("[WARN] compute_full_52wk_highs_lows: no tickers fetched")
         return None, None
-    is_multi = isinstance(raw_uni.columns, pd.MultiIndex)
-    highs = lows = total = 0
-    for t in SP500_UNIVERSE:
+
+    BATCH   = 300
+    highs   = lows = total = 0
+    batches = (len(tickers) + BATCH - 1) // BATCH
+
+    for i in range(0, len(tickers), BATCH):
+        batch = tickers[i : i + BATCH]
+        batch_num = i // BATCH + 1
         try:
-            if is_multi:
-                df_t = raw_uni[t][["High","Low","Close"]].dropna()
-            else:
-                df_t = raw_uni[["High","Low","Close"]].dropna()
-            if len(df_t) < 20:
+            raw = yf.download(
+                batch, period="1y", interval="1d",
+                progress=False, auto_adjust=True, group_by="ticker"
+            )
+            if raw is None or raw.empty:
                 continue
-            total += 1
-            last_close = float(df_t["Close"].iloc[-1])
-            high_52w   = float(df_t["High"].max())
-            low_52w    = float(df_t["Low"].min())
-            if last_close >= high_52w * 0.985: highs += 1
-            if last_close <= low_52w  * 1.015: lows  += 1
-        except Exception:
-            pass
+            is_multi = isinstance(raw.columns, pd.MultiIndex)
+            for t in batch:
+                try:
+                    if is_multi:
+                        c = raw[t]["Close"].dropna()
+                        h = raw[t]["High"].dropna()
+                        lo = raw[t]["Low"].dropna()
+                    else:
+                        c  = raw["Close"].dropna()
+                        h  = raw["High"].dropna()
+                        lo = raw["Low"].dropna()
+                    if len(c) < 20:
+                        continue
+                    total      += 1
+                    last_close  = float(c.iloc[-1])
+                    high_52w    = float(h.max())
+                    low_52w     = float(lo.min())
+                    if last_close >= high_52w * 0.985: highs += 1
+                    if last_close <= low_52w  * 1.015: lows  += 1
+                except Exception:
+                    pass
+            print(f"[INFO] 52W H/L batch {batch_num}/{batches} done  "
+                  f"(running: highs={highs}, lows={lows}, n={total})")
+        except Exception as e:
+            print(f"[WARN] 52W H/L batch {batch_num}: {e}")
+            continue
+
     if total == 0:
         return None, None
-    print(f"[OK]   52W Highs={highs}  Lows={lows}  (S&P 500 universe, {total} stocks)")
+    print(f"[OK]   Full US 52W Highs={highs}  Lows={lows}  ({total} stocks processed)")
     return highs, lows
+
 
 
 # ═════════════════════════════════════════════════════════════════════
@@ -806,7 +872,9 @@ fear_greed         = fetch_fear_greed()
 naaim              = fetch_naaim()
 cboe_pcr           = fetch_cboe_pcr()
 mmtw, mmfi         = compute_ma_breadth(raw_uni)
-sp5_highs, sp5_lows = compute_52wk_highs_lows(raw_uni)
+print("\n── 52-Week Highs/Lows (full US market) ─────────────")
+full_highs, full_lows = compute_full_52wk_highs_lows()
+
 
 breadth = {
     "fear_greed": fear_greed,
@@ -814,9 +882,10 @@ breadth = {
     "cboe_pcr":   cboe_pcr,
     "mmtw":       mmtw,
     "mmfi":       mmfi,
-    "highs":      sp5_highs,
-    "lows":       sp5_lows,
+    "highs":      full_highs,
+    "lows":       full_lows,
 }
+
 print(f"[OK]   Breadth  F&G={fear_greed and fear_greed['score']}  "
       f"NAAIM={naaim and naaim['value']}  "
       f"PCR={cboe_pcr and cboe_pcr['value']}  "
