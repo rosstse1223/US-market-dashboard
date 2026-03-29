@@ -4,10 +4,6 @@ import json
 import os
 from datetime import datetime
 import pytz
-import urllib.request
-import re
-import io
-
 
 # ── Indices ───────────────────────────────────────────────────────────
 INDICES = [
@@ -23,7 +19,6 @@ INDICES = [
     {"ticker": "DXY",   "yf_ticker": "DX-Y.NYB", "name": "US Dollar Index"},
     {"ticker": "US10Y", "yf_ticker": "^TNX",      "name": "10Y Treasury Yield"},
 ]
-
 
 # ── Cap-weighted Sectors ──────────────────────────────────────────────
 SECTORS = [
@@ -56,8 +51,6 @@ SECTORS_EW = [
 ]
 
 # ── Commodities & Crypto ──────────────────────────────────────────────
-# `ticker`    = display name shown in dashboard
-# `yf_ticker` = symbol used for Yahoo Finance download
 COMMODITIES_CRYPTO = [
     {"ticker": "XAGUSD", "yf_ticker": "SI=F",    "name": "Silver"},
     {"ticker": "XPTUSD", "yf_ticker": "PL=F",    "name": "Platinum"},
@@ -155,20 +148,19 @@ THEMATIC = [
     {"ticker": "PSIL", "name": "Psychedelics"},
 ]
 
-
-# ── ~490 S&P 500 universe for RS Rating percentile ────────────────────
+# ── ~477 S&P 500 universe for RS Rating percentile ────────────────────
 SP500_UNIVERSE = [
-    # Technology (~65)
+    # Technology (~63)
     "AAPL","MSFT","NVDA","AVGO","ORCL","CRM","AMD","QCOM","TXN","AMAT",
     "KLAC","LRCX","ADI","MU","SNPS","CDNS","FTNT","PANW","CRWD","NOW",
     "ADBE","INTU","INTC","HPQ","HPE","CSCO","IBM","DELL","STX","WDC",
-    "FICO","ANSS","MPWR","TER","KEYS","ROP","TRMB","AKAM","NTAP","ZBRA",
+    "FICO","MPWR","TER","KEYS","ROP","TRMB","AKAM","NTAP","ZBRA",
     "VRSN","CTSH","GLW","ON","MCHP","NXPI","ENTG","PAYC","ZS","FSLR",
     "ENPH","ACN","MSCI","IT","GDDY","FISV","FIS","GPN","BR","TYL",
     "NDAQ","PLTR","WDAY","TTD","FFIV",
-    # Communication Services (~24)
+    # Communication Services (~22)
     "META","GOOGL","GOOG","NFLX","DIS","CMCSA","T","VZ","TMUS","CHTR",
-    "EA","TTWO","NWSA","OMC","IPG","LYV","WBD","PARA",
+    "EA","TTWO","NWSA","OMC","LYV","WBD",
     "MTCH","SNAP","FOXA","FOX","IAC","PINS",
     # Consumer Discretionary (~60)
     "AMZN","TSLA","HD","MCD","NKE","SBUX","LOW","TJX","BKNG","CMG",
@@ -177,26 +169,26 @@ SP500_UNIVERSE = [
     "APTV","BWA","GM","F","GPC","KMX","GRMN","POOL","RCL","CCL",
     "NCLH","PVH","RL","LULU","ULTA","EXPE","ABNB","SNA","SWK","GNRC",
     "FND","FIVE","DKNG","PENN","CZR","NVT","BLDR","MTH","TREX","CRI",
-    # Consumer Staples (~35)
+    # Consumer Staples (~33)
     "WMT","COST","PG","KO","PEP","PM","MO","MDLZ","CL","GIS",
-    "KMB","SYY","ADM","MKC","K","HRL","CAG","CPB","CHD","CLX",
-    "EL","STZ","BG","TAP","KVUE","USFD","POST","INGR","WBA","SFM",
+    "KMB","SYY","ADM","MKC","HRL","CAG","CPB","CHD","CLX",
+    "EL","STZ","BG","TAP","KVUE","USFD","POST","INGR","SFM",
     "HSY","EPC","COTY","MNST","CELH",
     # Healthcare (~60)
     "LLY","UNH","JNJ","ABBV","MRK","ABT","TMO","DHR","PFE","AMGN",
     "GILD","ISRG","SYK","BDX","BSX","EW","ZBH","BAX","HOLX","RMD",
-    "IDXX","IQV","CRL","CTLT","VTRS","HUM","CVS","CI","CNC","MOH",
-    "BIIB","REGN","VRTX","MRNA","BMY","ZTS","MCK","ABC","CAH","DXCM",
+    "IDXX","IQV","CRL","VTRS","HUM","CVS","CI","CNC","MOH",
+    "BIIB","REGN","VRTX","MRNA","BMY","ZTS","MCK","COR","CAH","DXCM",
     "PODD","ALGN","STE","DGX","LH","MTD","WAT","A","GEHC","HCA",
-    "THC","UHS","DVA","HSIC","PDCO","INCY","EXAS","VEEV","TECH","SEM",
-    # Financials (~64)
+    "THC","UHS","DVA","HSIC","INCY","EXAS","VEEV","TECH","SEM","SOLV",
+    # Financials (~66)
     "BRK-B","JPM","BAC","WFC","GS","MS","C","AXP","BLK","SCHW",
     "CB","PGR","AIG","MET","PRU","AFL","TRV","ALL","HIG","WRB",
-    "V","MA","PYPL","COF","DFS","SYF","AMP","BEN","IVZ","TROW",
+    "V","MA","PYPL","COF","SYF","AMP","BEN","IVZ","TROW",
     "BX","KKR","APO","ARES","RJF","LNC","GL","PFG","MMC","AON",
     "WTW","CINF","ACGL","BK","STT","NTRS","RF","HBAN","CFG","KEY",
     "USB","PNC","TFC","FITB","MTB","ZION","CMA","ALLY","CBOE","ICE",
-    "CME","SPGI","MCO","FDS",
+    "CME","SPGI","MCO","FDS","OMF","HOOD",
     # Industrials (~60)
     "CAT","DE","HON","UPS","RTX","LMT","GE","MMM","EMR","ETN",
     "PH","ITW","ROK","CMI","PCAR","FDX","CSX","UNP","NSC","DAL",
@@ -204,23 +196,23 @@ SP500_UNIVERSE = [
     "TDG","TT","IR","CARR","OTIS","GEV","LHX","NOC","GD","BA",
     "AXON","LDOS","SAIC","BAH","J","MAS","ALLE","HII","TXT","HUBB",
     "FLR","PWR","ACM","NDSN","CHRW","EXPD","JBHT","ODFL","SAIA","RXO",
-    # Energy (~28)
+    # Energy (~26)
     "XOM","CVX","COP","SLB","EOG","MPC","VLO","PSX","HAL","DVN",
-    "FANG","HES","APA","OXY","BKR","NOV","FTI","MRO","EQT","CTRA",
+    "FANG","APA","OXY","BKR","NOV","FTI","EQT","CTRA",
     "OVV","PR","AR","RRC","SM","CNX","LNG","TRGP",
-    # Materials (~35)
+    # Materials (~34)
     "LIN","APD","SHW","ECL","PPG","NEM","FCX","NUE","STLD","CF",
-    "MOS","ALB","CE","EMN","IFF","FMC","SON","PKG","IP","WRK",
+    "MOS","ALB","CE","EMN","IFF","FMC","SON","PKG","IP",
     "VMC","MLM","CRH","DOW","DD","LYB","RPM","ATI","CMC","RS",
     "OLN","AXTA","SEE","OI","AVNT",
     # Utilities (~30)
     "NEE","DUK","SO","D","AEP","EXC","SRE","XEL","ES","WEC",
     "ETR","FE","PPL","EIX","PCG","AWK","AES","CMS","NI","PNW",
     "ATO","CNP","NRG","EVRG","LNT","OGS","WTRG","SWX","UGI","VST",
-    # Real Estate (~30)
+    # Real Estate (~29)
     "AMT","PLD","CCI","EQIX","PSA","O","WELL","DLR","SPG","AVB",
     "EQR","MAA","UDR","CPT","ESS","EXR","VICI","CBRE","ARE","BXP",
-    "WY","HST","KIM","REG","FRT","NNN","STAG","CUBE","LSI","IRM",
+    "WY","HST","KIM","REG","FRT","NNN","STAG","CUBE","IRM",
 ]
 
 # ─────────────────────────────────────────────────────────────────────
@@ -268,7 +260,7 @@ def build_universe():
         )
     except Exception as e:
         print(f"[WARN] Universe download failed: {e}")
-        return [], None
+        return []
     scores = []
     for t in SP500_UNIVERSE:
         try:
@@ -280,14 +272,13 @@ def build_universe():
         except Exception:
             pass
     print(f"[INFO] Universe built: {len(scores)} valid stocks")
-    return scores, raw_uni
-
+    return scores
 
 def calc_atr_multiple(df, atr_len=14, ma_len=50):
     if len(df) < max(atr_len, ma_len) + 1:
         return None
-    atr   = calc_atr_series(df, atr_len)
-    sma50 = df["Close"].rolling(ma_len).mean()
+    atr    = calc_atr_series(df, atr_len)
+    sma50  = df["Close"].rolling(ma_len).mean()
     last_close = float(df["Close"].iloc[-1])
     last_atr   = float(atr.iloc[-1])
     last_sma50 = float(sma50.iloc[-1])
@@ -320,14 +311,14 @@ def calc_vars_history(df_stock, df_spy, lookback=50, ma_len=20, atr_len=14, n_ba
 
 # ─────────────────────────────────────────────────────────────────────
 # Core processing function
-# `yf_ticker` field overrides `ticker` for the Yahoo Finance download
-# while `ticker` is always used as the display label in the dashboard
+# `yf_ticker` overrides `ticker` for Yahoo Finance download
+# `ticker` is always used as the display label in the dashboard
 # ─────────────────────────────────────────────────────────────────────
 def process_tickers(ticker_list, df_spy, universe_scores):
     results = []
     for item in ticker_list:
         display_ticker = item["ticker"]
-        dl_ticker      = item.get("yf_ticker", display_ticker)  # ← key change
+        dl_ticker      = item.get("yf_ticker", display_ticker)
         try:
             raw = yf.download(dl_ticker, period="1y", interval="1d",
                               progress=False, auto_adjust=True)
@@ -387,7 +378,7 @@ def process_tickers(ticker_list, df_spy, universe_scores):
                 "price":        round(price, 2),
                 "daily_chg":    daily_chg,
                 "intraday_chg": intraday_chg,
-                "chg_5d":       chg_5d,          # ← must be here
+                "chg_5d":       chg_5d,
                 "ema10":  ma_tag(price > float(last["EMA10"]),  float(last["EMA10"])  > float(prev["EMA10"])),
                 "ema20":  ma_tag(price > float(last["EMA20"]),  float(last["EMA20"])  > float(prev["EMA20"])),
                 "sma50":  ma_tag(price > float(last["SMA50"]),  float(last["SMA50"])  > float(prev["SMA50"])),
@@ -396,7 +387,6 @@ def process_tickers(ticker_list, df_spy, universe_scores):
                 "atr_multiple": atr_multiple,
                 "vars_history": vars_history,
             })
-
             print(f"[OK]   {display_ticker}  RS={rs_rating}  ATRx={atr_multiple}  VARS={'ok' if vars_history else 'N/A'}")
 
         except Exception as exc:
@@ -404,287 +394,6 @@ def process_tickers(ticker_list, df_spy, universe_scores):
 
     return results
 
-# ─────────────────────────────────────────────────────────────────────
-# Market Breadth fetch helpers
-# ─────────────────────────────────────────────────────────────────────
-
-def fetch_fear_greed():
-    """CNN Fear & Greed via dataviz API using requests."""
-    try:
-        import requests
-        url = "https://production.dataviz.cnn.io/index/fearandgreed/graphdata"
-        headers = {
-            "User-Agent":      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                               "AppleWebKit/537.36 (KHTML, like Gecko) "
-                               "Chrome/124.0.0.0 Safari/537.36",
-            "Accept":          "application/json, text/plain, */*",
-            "Accept-Language": "en-US,en;q=0.9",
-            "Origin":          "https://edition.cnn.com",
-            "Referer":         "https://edition.cnn.com/markets/fear-and-greed",
-        }
-        resp = requests.get(url, headers=headers, timeout=15)
-        resp.raise_for_status()
-        fg = resp.json()["fear_and_greed"]
-        return {
-            "score":      round(float(fg["score"]), 1),
-            "rating":     fg["rating"].replace("_", " ").title(),
-            "prev_close": round(float(fg["previous_close"]), 1),
-            "prev_week":  round(float(fg.get("previous_1_week", fg["score"])), 1),
-        }
-    except Exception as e:
-        print(f"[WARN] Fear & Greed: {e}")
-        return None
-
-
-
-def fetch_naaim():
-    """NAAIM Exposure Index — scrape the weekly data table."""
-    try:
-        url = "https://naaim.org/programs/naaim-exposure-index/"
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            html = resp.read().decode("utf-8")
-        rows = re.findall(r'<tr[^>]*>(.*?)</tr>', html, re.DOTALL | re.IGNORECASE)
-        for row in rows:
-            cells = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL)
-            cells = [re.sub(r'<[^>]+>', '', c).strip() for c in cells]
-            if len(cells) >= 2:
-                try:
-                    val = float(cells[1].replace(',', ''))
-                    if -50 <= val <= 300:
-                        return {"value": round(val, 2), "date": cells[0]}
-                except (ValueError, IndexError):
-                    pass
-        return None
-    except Exception as e:
-        print(f"[WARN] NAAIM: {e}")
-        return None
-
-def fetch_cboe_pcr():
-    """CBOE Total Put/Call Ratio — scraped from ycharts public page."""
-    try:
-        import requests
-        url = "https://ycharts.com/indicators/total_putcall_ratio"
-        headers = {
-            "User-Agent":      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                               "AppleWebKit/537.36 (KHTML, like Gecko) "
-                               "Chrome/124.0.0.0 Safari/537.36",
-            "Accept":          "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "Accept-Language": "en-US,en;q=0.9",
-        }
-        resp = requests.get(url, headers=headers, timeout=15)
-        resp.raise_for_status()
-        html = resp.text
-        # ycharts shows the latest value in a clearly labelled element
-        match = re.search(
-            r'(?:Key Stats|last value|indicator-last-value)[^<]*?'
-            r'<[^>]+>\s*([\d]+\.[\d]+)\s*<',
-            html, re.IGNORECASE | re.DOTALL
-        )
-        if not match:
-            # Fallback: find any float near "put" and "call" context
-            match = re.search(r'"indicatorValue"[^>]*?>\s*([\d]+\.[\d]+)', html)
-        if not match:
-            # Last resort: search for the value in the page's JSON-LD or data attrs
-            match = re.search(r'current["\s:]+([01]\.\d{2})\b', html, re.IGNORECASE)
-        if match:
-            val = round(float(match.group(1)), 2)
-            # Sanity check — total P/C ratio is normally between 0.5 and 2.0
-            if 0.3 <= val <= 3.0:
-                # Try to extract the date
-                date_match = re.search(
-                    r'(?:Latest Period|last updated)[^<]*?<[^>]+>\s*([A-Za-z]+\s+\d+,?\s*\d{4})',
-                    html, re.IGNORECASE
-                )
-                date_str = date_match.group(1).strip() if date_match else ""
-                return {"value": val, "date": date_str}
-        print("[WARN] CBOE P/C: could not parse value from ycharts")
-        return None
-    except Exception as e:
-        print(f"[WARN] CBOE P/C: {e}")
-        return None
-
-def fetch_mmtw_mmfi():
-    """% Stocks above 20-day (^MMTW) and 50-day (^MMFI) MA via yfinance."""
-    result = {}
-    for sym, key in [("^MMTW", "mmtw"), ("^MMFI", "mmfi")]:
-        try:
-            raw = yf.download(sym, period="5d", interval="1d",
-                              progress=False, auto_adjust=True)
-            if raw.empty:
-                result[key] = None
-                continue
-            if isinstance(raw.columns, pd.MultiIndex):
-                raw.columns = raw.columns.get_level_values(0)
-            result[key] = round(float(raw["Close"].dropna().iloc[-1]), 2)
-        except Exception as e:
-            print(f"[WARN] {sym}: {e}")
-            result[key] = None
-    return result
-
-def fetch_52wk_highs_lows():
-    """52-week Highs & Lows — scrape Barchart summary table."""
-    try:
-        url = "https://www.barchart.com/stocks/highs-lows/summary"
-        req = urllib.request.Request(url, headers={
-            "User-Agent":      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                               "AppleWebKit/537.36 (KHTML, like Gecko) "
-                               "Chrome/124.0.0.0 Safari/537.36",
-            "Accept":          "text/html,application/xhtml+xml",
-            "Accept-Language": "en-US,en;q=0.9",
-        })
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            html = resp.read().decode("utf-8")
-        rows = re.findall(r'<tr[^>]*>(.*?)</tr>', html, re.DOTALL | re.IGNORECASE)
-        highs = lows = None
-        for row in rows:
-            cells = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL)
-            cells = [re.sub(r'<[^>]+>', '', c).strip() for c in cells]
-            row_text = ' '.join(cells).lower()
-            if 'all' in row_text or 'total' in row_text:
-                nums = []
-                for c in cells:
-                    try:
-                        n = int(c.replace(',', ''))
-                        if n >= 0:
-                            nums.append(n)
-                    except ValueError:
-                        pass
-                if len(nums) >= 2:
-                    highs, lows = nums[0], nums[1]
-                    break
-        return {"highs": highs, "lows": lows}
-    except Exception as e:
-        print(f"[WARN] 52W H/L Barchart: {e}")
-        return {"highs": None, "lows": None}
-
-def compute_ma_breadth(raw_uni):
-    """
-    % of SP500_UNIVERSE stocks above 20-day and 50-day SMA.
-    Computed directly from the already-downloaded universe data.
-    """
-    if raw_uni is None:
-        print("[WARN] compute_ma_breadth: raw_uni is None")
-        return None, None
-    is_multi = isinstance(raw_uni.columns, pd.MultiIndex)
-    above_20 = above_50 = total = 0
-    for t in SP500_UNIVERSE:
-        try:
-            closes = raw_uni[t]["Close"].dropna() if is_multi \
-                     else raw_uni["Close"].dropna()
-            if len(closes) < 50:
-                continue
-            total += 1
-            last  = float(closes.iloc[-1])
-            sma20 = float(closes.rolling(20).mean().iloc[-1])
-            sma50 = float(closes.rolling(50).mean().iloc[-1])
-            if pd.notna(sma20) and last > sma20: above_20 += 1
-            if pd.notna(sma50) and last > sma50: above_50 += 1
-        except Exception:
-            pass
-    if total == 0:
-        print("[WARN] compute_ma_breadth: no valid stocks found")
-        return None, None
-    mmtw = round(above_20 / total * 100, 2)
-    mmfi = round(above_50 / total * 100, 2)
-    print(f"[OK]   MMTW={mmtw}%  MMFI={mmfi}%  (computed from {total} S&P 500 stocks)")
-    return mmtw, mmfi
-
-
-def fetch_full_us_tickers():
-    """
-    Fetch every regular common stock listed on US exchanges
-    from the Nasdaq Trader daily-updated symbol directory.
-    Returns a de-duped list of Yahoo Finance-compatible tickers.
-    """
-    try:
-        files = [
-            # NASDAQ: Symbol|Name|Market|TestIssue|FinStatus|RoundLot|ETF|NextShares
-            ("https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
-             {"sym": 0, "etf": 6, "test": 3}),
-            # NYSE / AMEX / ARCA: ACTSymbol|Name|Exchange|CQSSymbol|ETF|RoundLot|TestIssue|NASDAQSymbol
-            ("https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
-             {"sym": 0, "etf": 4, "test": 6}),
-        ]
-        tickers = set()
-        for url, idx in files:
-            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(req, timeout=20) as resp:
-                content = resp.read().decode("utf-8", errors="replace")
-            for line in content.splitlines()[1:]:          # skip header row
-                parts = line.split("|")
-                if len(parts) <= max(idx.values()):
-                    continue
-                sym  = parts[idx["sym"]].strip()
-                etf  = parts[idx["etf"]].strip().upper()
-                test = parts[idx["test"]].strip().upper()
-                # Keep only regular common stocks: no ETFs, no test issues,
-                # pure alpha symbols 1–5 chars (excludes warrants, preferreds, etc.)
-                if etf == "N" and test == "N" and re.match(r'^[A-Z]{1,5}$', sym):
-                    tickers.add(sym.replace(".", "-"))   # Yahoo Finance format
-        result = sorted(tickers)
-        print(f"[INFO] Full US ticker list: {len(result)} stocks")
-        return result
-    except Exception as e:
-        print(f"[WARN] fetch_full_us_tickers: {e}")
-        return []
-
-def compute_full_52wk_highs_lows():
-    """
-    Download 1y of daily data for all regular US stocks in batches of 300,
-    then count how many made a NEW 52-week high/low today.
-    """
-    tickers = fetch_full_us_tickers()
-    if not tickers:
-        print("[WARN] compute_full_52wk_highs_lows: no tickers fetched")
-        return None, None
-
-    BATCH   = 300
-    highs   = lows = total = 0
-    batches = (len(tickers) + BATCH - 1) // BATCH
-
-    for i in range(0, len(tickers), BATCH):
-        batch     = tickers[i : i + BATCH]
-        batch_num = i // BATCH + 1
-        try:
-            raw = yf.download(
-                batch, period="1y", interval="1d",
-                progress=False, auto_adjust=True, group_by="ticker"
-            )
-            if raw is None or raw.empty:
-                continue
-            is_multi = isinstance(raw.columns, pd.MultiIndex)
-            for t in batch:
-                try:
-                    if is_multi:
-                        c  = raw[t]["Close"].dropna()
-                        h  = raw[t]["High"].dropna()
-                        lo = raw[t]["Low"].dropna()
-                    else:
-                        c  = raw["Close"].dropna()
-                        h  = raw["High"].dropna()
-                        lo = raw["Low"].dropna()
-                    if len(c) < 20:
-                        continue
-                    total      += 1
-                    today_high  = float(h.iloc[-1])
-                    today_low   = float(lo.iloc[-1])
-                    high_52w    = float(h.max())
-                    low_52w     = float(lo.min())
-                    if today_high >= high_52w * 0.9999: highs += 1
-                    if today_low  <= low_52w  * 1.0001: lows  += 1
-                except Exception:
-                    pass
-            print(f"[INFO] 52W H/L batch {batch_num}/{batches} done  "
-                  f"(running: highs={highs}, lows={lows}, n={total})")
-        except Exception as e:
-            print(f"[WARN] 52W H/L batch {batch_num}: {e}")
-            continue
-
-    if total == 0:
-        return None, None
-    print(f"[OK]   Full US 52W Highs={highs}  Lows={lows}  ({total} stocks processed)")
-    return highs, lows
 
 # ═════════════════════════════════════════════════════════════════════
 os.makedirs("data", exist_ok=True)
@@ -701,7 +410,7 @@ except Exception as e:
     df_spy = None
     print(f"[WARN] SPY fetch failed: {e}")
 
-universe_scores, raw_uni = build_universe()
+universe_scores = build_universe()
 
 print("\n── Indices ──────────────────────────────────────────")
 indices_results = process_tickers(INDICES, df_spy, universe_scores)
@@ -712,244 +421,28 @@ sectors_results = process_tickers(SECTORS, df_spy, universe_scores)
 print("\n── EW Sectors ───────────────────────────────────────")
 sectors_ew_results = process_tickers(SECTORS_EW, df_spy, universe_scores)
 
-# ─────────────────────────────────────────────────────────────────────
-# Market Breadth fetch helpers
-# ─────────────────────────────────────────────────────────────────────
-
-def fetch_fear_greed():
-    """
-    Fear & Greed via the fear-and-greed PyPI package.
-    Falls back to direct urllib if package unavailable.
-    """
-    # Method 1: PyPI package (most reliable)
-    try:
-        import fear_and_greed
-        data = fear_and_greed.get()
-        return {
-            "score":      round(float(data.value), 1),
-            "rating":     str(data.description).replace("_", " ").title(),
-            "prev_close": round(float(data.value), 1),
-            "prev_week":  round(float(data.value), 1),
-        }
-    except Exception:
-        pass
-
-    # Method 2: Alternative.me stock market F&G (not crypto)
-    try:
-        url = "https://fear-and-greed-index.p.rapidapi.com/v1/fgi"
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            data = json.loads(resp.read())
-        score = float(data["fgi"]["now"]["value"])
-        rating = data["fgi"]["now"]["valueText"]
-        return {
-            "score":      round(score, 1),
-            "rating":     rating,
-            "prev_close": round(float(data["fgi"]["previousClose"]["value"]), 1),
-            "prev_week":  round(float(data["fgi"]["oneWeekAgo"]["value"]), 1),
-        }
-    except Exception as e:
-        print(f"[WARN] Fear & Greed: {e}")
-        return None
-
-
-def fetch_cboe_pcr():
-    """
-    CBOE Total Put/Call Ratio via Yahoo Finance (^PCALL symbol).
-    Falls back to equity P/C (^PCE) if total unavailable.
-    """
-    for sym, label in [("^PCALL", "Total P/C"), ("^PCE", "Equity P/C")]:
-        try:
-            raw = yf.download(sym, period="5d", interval="1d",
-                              progress=False, auto_adjust=True)
-            if raw is None or raw.empty:
-                continue
-            if isinstance(raw.columns, pd.MultiIndex):
-                raw.columns = raw.columns.get_level_values(0)
-            closes = raw["Close"].dropna()
-            if closes.empty:
-                continue
-            val  = round(float(closes.iloc[-1]), 2)
-            date = str(closes.index[-1].date())
-            print(f"[OK]   CBOE {label} = {val}  ({sym})")
-            return {"value": val, "date": date}
-        except Exception as e:
-            print(f"[WARN] CBOE P/C {sym}: {e}")
-    return None
-
-
-def fetch_naaim():
-    """NAAIM Exposure Index — scrape the weekly data table."""
-    try:
-        url = "https://naaim.org/programs/naaim-exposure-index/"
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            html = resp.read().decode("utf-8")
-        rows = re.findall(r'<tr[^>]*>(.*?)</tr>', html, re.DOTALL | re.IGNORECASE)
-        for row in rows:
-            cells = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL)
-            cells = [re.sub(r'<[^>]+>', '', c).strip() for c in cells]
-            if len(cells) >= 2:
-                try:
-                    val = float(cells[1].replace(',', ''))
-                    if -50 <= val <= 300:
-                        return {"value": round(val, 2), "date": cells[0]}
-                except (ValueError, IndexError):
-                    pass
-        return None
-    except Exception as e:
-        print(f"[WARN] NAAIM: {e}")
-        return None
-
-
-def fetch_cboe_pcr():
-    """CBOE Total Put/Call Ratio — try CDN CSV endpoint."""
-    urls = [
-        "https://cdn.cboe.com/api/global/us_options_distribution/daily_stats.csv",
-        "https://www.cboe.com/data/us-options-market-statistics-daily-download/",
-    ]
-    for url in urls:
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(req, timeout=10) as resp:
-                content = resp.read().decode("utf-8")
-            df_cboe = pd.read_csv(io.StringIO(content))
-            df_cboe.columns = [c.strip() for c in df_cboe.columns]
-            # Find the Total P/C column (name varies by CBOE version)
-            pcr_col = None
-            for col in df_cboe.columns:
-                cu = col.upper()
-                if ("TOTAL" in cu or "ALL" in cu) and ("P/C" in cu or "PUT" in cu or "RATIO" in cu):
-                    pcr_col = col
-                    break
-            # Fallback: last numeric column
-            if pcr_col is None:
-                for col in reversed(df_cboe.columns):
-                    try:
-                        pd.to_numeric(df_cboe[col].dropna())
-                        pcr_col = col
-                        break
-                    except Exception:
-                        pass
-            if pcr_col:
-                clean = df_cboe.dropna(subset=[pcr_col])
-                if not clean.empty:
-                    latest = clean.iloc[-1]
-                    return {
-                        "value": round(float(latest[pcr_col]), 2),
-                        "date":  str(latest.iloc[0]),
-                    }
-        except Exception as e:
-            print(f"[WARN] CBOE P/C ({url[:50]}…): {e}")
-    return None
-
-
-def fetch_mmtw_mmfi():
-    """% Stocks above 20-day (^MMTW) and 50-day (^MMFI) MA via yfinance."""
-    result = {}
-    for sym, key in [("^MMTW", "mmtw"), ("^MMFI", "mmfi")]:
-        try:
-            raw = yf.download(sym, period="5d", interval="1d",
-                              progress=False, auto_adjust=True)
-            if raw.empty:
-                result[key] = None
-                continue
-            if isinstance(raw.columns, pd.MultiIndex):
-                raw.columns = raw.columns.get_level_values(0)
-            result[key] = round(float(raw["Close"].dropna().iloc[-1]), 2)
-        except Exception as e:
-            print(f"[WARN] {sym}: {e}")
-            result[key] = None
-    return result
-
-
-def fetch_52wk_highs_lows():
-    """52-week Highs & Lows — scrape Barchart summary table."""
-    try:
-        url = "https://www.barchart.com/stocks/highs-lows/summary"
-        req = urllib.request.Request(url, headers={
-            "User-Agent":      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                               "AppleWebKit/537.36 (KHTML, like Gecko) "
-                               "Chrome/124.0.0.0 Safari/537.36",
-            "Accept":          "text/html,application/xhtml+xml",
-            "Accept-Language": "en-US,en;q=0.9",
-        })
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            html = resp.read().decode("utf-8")
-        rows = re.findall(r'<tr[^>]*>(.*?)</tr>', html, re.DOTALL | re.IGNORECASE)
-        highs = lows = None
-        for row in rows:
-            cells = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL)
-            cells = [re.sub(r'<[^>]+>', '', c).strip() for c in cells]
-            row_text = ' '.join(cells).lower()
-            if 'all' in row_text or 'total' in row_text:
-                nums = []
-                for c in cells:
-                    try:
-                        n = int(c.replace(',', ''))
-                        if n >= 0:
-                            nums.append(n)
-                    except ValueError:
-                        pass
-                if len(nums) >= 2:
-                    highs, lows = nums[0], nums[1]
-                    break
-        return {"highs": highs, "lows": lows}
-    except Exception as e:
-        print(f"[WARN] 52W H/L Barchart: {e}")
-        return {"highs": None, "lows": None}
+print("\n── Commodities & Crypto ─────────────────────────────")
+commodities_results = process_tickers(COMMODITIES_CRYPTO, df_spy, universe_scores)
 
 print("\n── Thematic ─────────────────────────────────────────")
 thematic_results = process_tickers(THEMATIC, df_spy, universe_scores)
-
-print("\n── Market Breadth ───────────────────────────────────")
-fear_greed         = fetch_fear_greed()
-naaim              = fetch_naaim()
-cboe_pcr           = fetch_cboe_pcr()
-mmtw, mmfi         = compute_ma_breadth(raw_uni)
-print("\n── 52-Week Highs/Lows (full US market) ─────────────")
-full_highs, full_lows = compute_full_52wk_highs_lows()
-
-
-breadth = {
-    "fear_greed": fear_greed,
-    "naaim":      naaim,
-    "cboe_pcr":   cboe_pcr,
-    "mmtw":       mmtw,
-    "mmfi":       mmfi,
-    "highs":      full_highs,
-    "lows":       full_lows,
-}
-
-print(f"[OK]   Breadth  F&G={fear_greed and fear_greed['score']}  "
-      f"NAAIM={naaim and naaim['value']}  "
-      f"PCR={cboe_pcr and cboe_pcr['value']}  "
-      f"MMTW={mmtw}  MMFI={mmfi}  "
-f"Highs={full_highs}  Lows={full_lows}")
-
-
-print("\n── Commodities & Crypto ─────────────────────────────")
-commodities_results = process_tickers(COMMODITIES_CRYPTO, df_spy, universe_scores)
 
 hkt     = pytz.timezone("Asia/Hong_Kong")
 updated = datetime.now(hkt).strftime("%d %b %Y, %H:%M HKT")
 
 with open("data/indices.json", "w") as fh:
     json.dump({
-        "updated":      updated,
-        "breadth":      breadth,
-        "indices":      indices_results,
-        "sectors":      sectors_results,
-        "sectors_ew":   sectors_ew_results,
-        "commodities":  commodities_results,
-        "thematic":     thematic_results,
+        "updated":    updated,
+        "indices":    indices_results,
+        "sectors":    sectors_results,
+        "sectors_ew": sectors_ew_results,
+        "commodities": commodities_results,
+        "thematic":   thematic_results,
     }, fh, indent=2)
 
 print(f"\n✅  Saved → data/indices.json  ({updated})")
-print(f"    Breadth         : 7 indicators")
 print(f"    Indices         : {len(indices_results)} tickers")
 print(f"    Sectors         : {len(sectors_results)} tickers")
 print(f"    EW Sectors      : {len(sectors_ew_results)} tickers")
 print(f"    Commodities     : {len(commodities_results)} tickers")
 print(f"    Thematic        : {len(thematic_results)} tickers")
-
