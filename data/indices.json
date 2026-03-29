@@ -1,5 +1,5 @@
 {
-  "updated": "29 Mar 2026, 22:33 HKT",
+  "updated": "29 Mar 2026, 22:42 HKT",
   "indices": [
     {
       "ticker": "^VIX",
@@ -1257,16 +1257,16 @@
       "price": 159.2,
       "daily_chg": -1.28,
       "intraday_chg": -0.87,
-      "chg_5d": -1.53,
+      "chg_5d": -1.25,
       "ema10": "below_down",
       "ema20": "below_down",
       "sma50": "below_down",
       "sma200": "above_up",
       "rs_rating": 60,
-      "atr_multiple": -3.01,
+      "atr_multiple": -2.87,
       "vars_history": [
         {
-          "v": 9.561,
+          "v": 9.5611,
           "m": 8.7359
         },
         {
@@ -1283,7 +1283,7 @@
         },
         {
           "v": 8.4697,
-          "m": 9.2497
+          "m": 9.2498
         },
         {
           "v": 8.6352,
@@ -1326,24 +1326,24 @@
           "m": 8.4459
         },
         {
-          "v": 6.8526,
-          "m": 8.268
+          "v": 6.9888,
+          "m": 8.2749
         },
         {
-          "v": 7.3089,
-          "m": 8.1392
+          "v": 7.4431,
+          "m": 8.1528
         },
         {
-          "v": 6.8489,
-          "m": 8.0808
+          "v": 6.9808,
+          "m": 8.1009
         },
         {
-          "v": 6.2097,
-          "m": 7.9708
+          "v": 6.3488,
+          "m": 7.9979
         },
         {
-          "v": 5.9561,
-          "m": 7.8322
+          "v": 6.0988,
+          "m": 7.8664
         }
       ]
     },
@@ -1449,20 +1449,20 @@
       "price": 81.78,
       "daily_chg": 0.79,
       "intraday_chg": 0.63,
-      "chg_5d": 0.6,
+      "chg_5d": 1.17,
       "ema10": "below_down",
       "ema20": "below_down",
-      "sma50": "below_down",
+      "sma50": "below_up",
       "sma200": "above_up",
-      "rs_rating": 58,
-      "atr_multiple": -2.67,
+      "rs_rating": 59,
+      "atr_multiple": -2.34,
       "vars_history": [
         {
           "v": 9.0976,
           "m": 9.4387
         },
         {
-          "v": 7.5382,
+          "v": 7.5381,
           "m": 9.5878
         },
         {
@@ -1518,24 +1518,24 @@
           "m": 10.0749
         },
         {
-          "v": 8.9231,
-          "m": 9.9241
+          "v": 9.2857,
+          "m": 9.9422
         },
         {
-          "v": 8.8772,
-          "m": 9.7538
+          "v": 9.2399,
+          "m": 9.79
         },
         {
-          "v": 7.8563,
-          "m": 9.6227
+          "v": 8.2182,
+          "m": 9.677
         },
         {
-          "v": 7.4035,
-          "m": 9.5395
+          "v": 7.7661,
+          "m": 9.612
         },
         {
-          "v": 7.1434,
-          "m": 9.3972
+          "v": 7.5049,
+          "m": 9.4878
         }
       ]
     },
@@ -2603,13 +2603,13 @@
       "price": 80.36,
       "daily_chg": 0.49,
       "intraday_chg": 0.32,
-      "chg_5d": 2.48,
+      "chg_5d": 1.79,
       "ema10": "below_down",
       "ema20": "below_down",
       "sma50": "above_up",
       "sma200": "above_up",
       "rs_rating": 69,
-      "atr_multiple": 0.77,
+      "atr_multiple": 0.36,
       "vars_history": [
         {
           "v": 7.5855,
@@ -2672,24 +2672,24 @@
           "m": 8.8229
         },
         {
-          "v": 9.7773,
-          "m": 8.8946
+          "v": 9.3577,
+          "m": 8.8737
         },
         {
-          "v": 10.4538,
-          "m": 8.9602
+          "v": 10.0395,
+          "m": 8.9185
         },
         {
-          "v": 10.2778,
-          "m": 9.0583
+          "v": 9.8657,
+          "m": 8.996
         },
         {
-          "v": 10.9133,
-          "m": 9.2113
+          "v": 10.5044,
+          "m": 9.1286
         },
         {
-          "v": 10.991,
-          "m": 9.3497
+          "v": 10.5863,
+          "m": 9.2467
         }
       ]
     },
@@ -2896,7 +2896,7 @@
       "ema20": "below_down",
       "sma50": "below_up",
       "sma200": "above_up",
-      "rs_rating": 76,
+      "rs_rating": 75,
       "atr_multiple": -0.88,
       "vars_history": [
         {
@@ -3946,16 +3946,16 @@
     {
       "ticker": "SOLUSD",
       "name": "Solana",
-      "price": 81.9,
-      "daily_chg": -0.14,
-      "intraday_chg": -0.15,
-      "chg_5d": -9.82,
+      "price": 81.95,
+      "daily_chg": -0.08,
+      "intraday_chg": -0.09,
+      "chg_5d": -9.77,
       "ema10": "below_down",
       "ema20": "below_down",
       "sma50": "below_down",
       "sma200": "below_down",
       "rs_rating": 3,
-      "atr_multiple": -0.9,
+      "atr_multiple": -0.89,
       "vars_history": [
         {
           "v": -6.4512,
@@ -4042,16 +4042,16 @@
     {
       "ticker": "BTCUSD",
       "name": "Bitcoin",
-      "price": 66483.7,
-      "daily_chg": 0.25,
-      "intraday_chg": 0.23,
-      "chg_5d": -5.72,
+      "price": 66542.51,
+      "daily_chg": 0.34,
+      "intraday_chg": 0.32,
+      "chg_5d": -5.64,
       "ema10": "below_down",
       "ema20": "below_down",
       "sma50": "below_down",
       "sma200": "below_down",
       "rs_rating": 7,
-      "atr_multiple": -0.85,
+      "atr_multiple": -0.82,
       "vars_history": [
         {
           "v": -6.3274,
@@ -4138,16 +4138,16 @@
     {
       "ticker": "ETHUSD",
       "name": "Ethereum",
-      "price": 1990.39,
-      "daily_chg": -0.12,
-      "intraday_chg": -0.15,
-      "chg_5d": -7.67,
+      "price": 1992.51,
+      "daily_chg": -0.01,
+      "intraday_chg": -0.04,
+      "chg_5d": -7.57,
       "ema10": "below_down",
       "ema20": "below_down",
       "sma50": "below_down",
       "sma200": "below_down",
       "rs_rating": 4,
-      "atr_multiple": -0.47,
+      "atr_multiple": -0.45,
       "vars_history": [
         {
           "v": -6.5063,
@@ -7215,13 +7215,13 @@
       "price": 63.37,
       "daily_chg": -1.71,
       "intraday_chg": -1.05,
-      "chg_5d": 0.52,
+      "chg_5d": 1.11,
       "ema10": "below_down",
       "ema20": "below_down",
       "sma50": "below_down",
-      "sma200": "below_up",
-      "rs_rating": 52,
-      "atr_multiple": -2.57,
+      "sma200": "above_up",
+      "rs_rating": 53,
+      "atr_multiple": -2.36,
       "vars_history": [
         {
           "v": 0.2716,
@@ -7249,7 +7249,7 @@
         },
         {
           "v": 1.5279,
-          "m": 2.6439
+          "m": 2.644
         },
         {
           "v": 1.4421,
@@ -7284,24 +7284,24 @@
           "m": 1.5426
         },
         {
-          "v": 2.1659,
-          "m": 1.4774
+          "v": 2.3685,
+          "m": 1.4875
         },
         {
-          "v": 3.9885,
-          "m": 1.5928
+          "v": 4.1884,
+          "m": 1.613
         },
         {
-          "v": 4.5874,
-          "m": 1.7416
+          "v": 4.7862,
+          "m": 1.7717
         },
         {
-          "v": 5.8639,
-          "m": 1.9518
+          "v": 6.0632,
+          "m": 1.9918
         },
         {
-          "v": 5.1103,
-          "m": 2.2148
+          "v": 5.3148,
+          "m": 2.265
         }
       ]
     },
@@ -7983,13 +7983,13 @@
       "price": 250.57,
       "daily_chg": -2.51,
       "intraday_chg": -1.89,
-      "chg_5d": -3.21,
+      "chg_5d": -3.17,
       "ema10": "below_down",
       "ema20": "below_down",
       "sma50": "below_down",
       "sma200": "above_up",
       "rs_rating": 69,
-      "atr_multiple": -2.88,
+      "atr_multiple": -2.87,
       "vars_history": [
         {
           "v": 7.9541,
@@ -8052,24 +8052,24 @@
           "m": 6.5013
         },
         {
-          "v": 3.2542,
-          "m": 6.2702
+          "v": 3.2678,
+          "m": 6.2709
         },
         {
-          "v": 2.9272,
-          "m": 6.0209
+          "v": 2.9409,
+          "m": 6.0222
         },
         {
-          "v": 2.704,
-          "m": 5.855
+          "v": 2.7174,
+          "m": 5.857
         },
         {
-          "v": 2.3898,
-          "m": 5.6528
+          "v": 2.4038,
+          "m": 5.6555
         },
         {
-          "v": 1.4389,
-          "m": 5.3718
+          "v": 1.4532,
+          "m": 5.3753
         }
       ]
     },
@@ -11592,7 +11592,7 @@
           "m": -5.4601
         },
         {
-          "v": -3.5988,
+          "v": -3.5987,
           "m": -5.2352
         },
         {
