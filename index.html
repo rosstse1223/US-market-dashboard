@@ -264,6 +264,63 @@
     .catch(() => setFG(FALLBACK_VALUE, FALLBACK_RATING, false));
 })();
 </script> 
+
+<!-- Put/Call Ratio Card — add inside #market-breadth, after Fear & Greed card -->
+<div class="mb-card" style="margin-top:0.75rem;">
+  <div class="mb-card-header">
+    <span class="mb-label">Total Put/Call Ratio</span>
+    <span class="mb-status" id="pc-status">Loading…</span>
+  </div>
+  <div class="mb-value" id="pc-value">—</div>
+  <div class="mb-subtext" id="pc-date"></div>
+  <a class="mb-source" href="https://www.cboe.com/data/historical-options-data/volume-put-call-ratios/" target="_blank" rel="noopener noreferrer">
+    Source: CBOE ↗
+  </a>
+</div>
+
+<script>
+(function () {
+  const FALLBACK_VALUE = '0.89';
+  const FALLBACK_DATE  = '(cached)';
+
+  function setPC(value, date, isLive) {
+    document.getElementById('pc-value').textContent = value;
+    document.getElementById('pc-date').textContent  = date;
+    const s = document.getElementById('pc-status');
+    s.textContent = isLive ? 'Live' : 'Cached';
+    s.className   = 'mb-status ' + (isLive ? 'live' : 'cached');
+  }
+
+  const csvUrl = 'https://www.cboe.com/publish/scheduledtask/mktdata/datahouse/totalpc.csv';
+  const proxy  = 'https://api.allorigins.win/get?url=' + encodeURIComponent(csvUrl);
+
+  fetch(proxy)
+    .then(r => r.json())
+    .then(data => {
+      const lines = data.contents.trim().split('\n');
+      // Skip header rows — find last non-empty line with a valid number
+      let lastValue = null, lastDate = null;
+      for (let i = lines.length - 1; i >= 0; i--) {
+        const parts = lines[i].replace(/"/g, '').split(',');
+        if (parts.length >= 2) {
+          const dateStr = parts[0].trim();
+          const val     = parseFloat(parts[1].trim());
+          if (!isNaN(val) && val > 0) {
+            lastValue = val.toFixed(2);
+            lastDate  = dateStr;
+            break;
+          }
+        }
+      }
+      if (lastValue) {
+        setPC(lastValue, lastDate, true);
+      } else {
+        setPC(FALLBACK_VALUE, FALLBACK_DATE, false);
+      }
+    })
+    .catch(() => setPC(FALLBACK_VALUE, FALLBACK_DATE, false));
+})();
+</script>
   
 <style>
   #market-breadth {
