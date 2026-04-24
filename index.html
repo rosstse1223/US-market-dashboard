@@ -1,393 +1,517 @@
-import yfinance as yf
-import pandas as pd
-import numpy as np
-import json
-import requests
-from io import StringIO
-from datetime import datetime
-from pathlib import Path
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Market Dashboard</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-OUTPUT_FILE = Path("data/indices.json")
-OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
-
-# ── Ticker definitions ────────────────────────────────────────────────────
-
-INDICES = [
-    {"ticker": "^VIX",     "name": "CBOE Volatility Index"},
-    {"ticker": "IWM",      "name": "Russell 2000 ETF"},
-    {"ticker": "DIA",      "name": "Dow Jones ETF"},
-    {"ticker": "SPY",      "name": "S&P 500 ETF"},
-    {"ticker": "QQQ",      "name": "Nasdaq 100 ETF"},
-    {"ticker": "QQQE",     "name": "Nasdaq 100 Equal Weight ETF"},
-    {"ticker": "EDOW",     "name": "Dow Jones Equal Weight ETF"},
-    {"ticker": "RSP",      "name": "S&P 500 Equal Weight ETF"},
-    {"ticker": "DX-Y.NYB", "name": "US Dollar Index"},
-    {"ticker": "ARKK",     "name": "ARK Innovation ETF"},
-    {"ticker": "^TNX",     "name": "US 10Y Treasury Yield"},
-]
-
-SECTORS = [
-    {"ticker": "XLK",  "name": "Technology"},
-    {"ticker": "XLF",  "name": "Financials"},
-    {"ticker": "XLV",  "name": "Health Care"},
-    {"ticker": "XLE",  "name": "Energy"},
-    {"ticker": "XLI",  "name": "Industrials"},
-    {"ticker": "XLY",  "name": "Consumer Discretionary"},
-    {"ticker": "XLP",  "name": "Consumer Staples"},
-    {"ticker": "XLU",  "name": "Utilities"},
-    {"ticker": "XLB",  "name": "Materials"},
-    {"ticker": "XLRE", "name": "Real Estate"},
-    {"ticker": "XLC",  "name": "Communication Services"},
-]
-
-SECTORS_EW = [
-    {"ticker": "RSPG", "name": "EW Energy"},
-    {"ticker": "RSPT", "name": "EW Technology"},
-    {"ticker": "RSPF", "name": "EW Financials"},
-    {"ticker": "RSPH", "name": "EW Health Care"},
-    {"ticker": "RSPI", "name": "EW Industrials"},
-    {"ticker": "RSPS", "name": "EW Consumer Staples"},
-    {"ticker": "RSPU", "name": "EW Utilities"},
-    {"ticker": "RSPN", "name": "EW Materials"},
-    {"ticker": "RSPD", "name": "EW Consumer Disc"},
-    {"ticker": "RSPR", "name": "EW Real Estate"},
-    {"ticker": "RSPC", "name": "EW Comm Services"},
-]
-
-COMMODITIES = [
-    {"ticker": "SLV",     "name": "Silver (SLV ETF)"},
-    {"ticker": "GLD",     "name": "Gold (GLD ETF)"},
-    {"ticker": "PPLT",    "name": "Platinum (PPLT ETF)"},
-    {"ticker": "PALL",    "name": "Palladium (PALL ETF)"},
-    {"ticker": "USO",     "name": "WTI Crude Oil (USO ETF)"},
-    {"ticker": "JJU",     "name": "Aluminum (JJU ETF)"},
-    {"ticker": "UNG",     "name": "Natural Gas (UNG ETF)"},
-    {"ticker": "CPER",    "name": "Copper (CPER ETF)"},
-    {"ticker": "SOL-USD", "name": "Solana"},
-    {"ticker": "BTC-USD", "name": "Bitcoin"},
-    {"ticker": "ETH-USD", "name": "Ethereum"},
-]
-
-THEMATIC = [
-    {"ticker": "SLV",   "name": "Silver ETF"},
-    {"ticker": "USO",   "name": "Oil ETF"},
-    {"ticker": "XOP",   "name": "Oil & Gas Exploration"},
-    {"ticker": "REMX",  "name": "Rare Earth Metals"},
-    {"ticker": "SILJ",  "name": "Silver Juniors"},
-    {"ticker": "GDXJ",  "name": "Gold Miners Junior"},
-    {"ticker": "DXYZ",  "name": "Destiny Tech100"},
-    {"ticker": "GDX",   "name": "Gold Miners"},
-    {"ticker": "COPX",  "name": "Copper Miners"},
-    {"ticker": "GLD",   "name": "Gold ETF"},
-    {"ticker": "UNG",   "name": "Natural Gas ETF"},
-    {"ticker": "SIL",   "name": "Silver Miners"},
-    {"ticker": "OIH",   "name": "Oil Services"},
-    {"ticker": "ITA",   "name": "Aerospace & Defense"},
-    {"ticker": "ITB",   "name": "Home Construction"},
-    {"ticker": "XBI",   "name": "Biotech (EW)"},
-    {"ticker": "LIT",   "name": "Lithium & Battery Tech"},
-    {"ticker": "AIQ",   "name": "AI & Big Data"},
-    {"ticker": "XME",   "name": "Metals & Mining"},
-    {"ticker": "XRT",   "name": "Retail"},
-    {"ticker": "XHE",   "name": "Health Care Equipment"},
-    {"ticker": "UFO",   "name": "Space"},
-    {"ticker": "IGV",   "name": "Software"},
-    {"ticker": "KWEB",  "name": "China Internet"},
-    {"ticker": "SMH",   "name": "Semiconductors"},
-    {"ticker": "MAGS",  "name": "Magnificent 7"},
-    {"ticker": "ARKK",  "name": "ARK Innovation"},
-    {"ticker": "IBIT",  "name": "iShares Bitcoin Trust"},
-    {"ticker": "MSOS",  "name": "Cannabis"},
-    {"ticker": "JETS",  "name": "Airlines"},
-    {"ticker": "ETHA",  "name": "iShares Ethereum Trust"},
-    {"ticker": "KRE",   "name": "Regional Banks"},
-    {"ticker": "WGMI",  "name": "Bitcoin Miners"},
-    {"ticker": "IEZ",   "name": "Oil Equipment & Services"},
-    {"ticker": "TAN",   "name": "Solar Energy"},
-    {"ticker": "ICLN",  "name": "Clean Energy"},
-    {"ticker": "DRNZ",  "name": "Drone Technology"},
-    {"ticker": "ARKG",  "name": "ARK Genomic Revolution"},
-    {"ticker": "CQQQ",  "name": "China Technology"},
-    {"ticker": "XAR",   "name": "Aerospace & Defense (EW)"},
-    {"ticker": "BOTZ",  "name": "Robotics & AI"},
-    {"ticker": "NUKZ",  "name": "Nuclear Energy"},
-    {"ticker": "ROBO",  "name": "Robotics Global"},
-    {"ticker": "NLR",   "name": "Nuclear & Uranium"},
-    {"ticker": "ARKQ",  "name": "ARK Autonomous Tech"},
-    {"ticker": "URA",   "name": "Uranium"},
-    {"ticker": "QTUM",  "name": "Quantum Computing"},
-    {"ticker": "XHB",   "name": "Homebuilders"},
-    {"ticker": "BLOK",  "name": "Blockchain"},
-    {"ticker": "CIBR",  "name": "Cybersecurity"},
-    {"ticker": "IAI",   "name": "Broker-Dealers"},
-    {"ticker": "ARKX",  "name": "ARK Space Exploration"},
-    {"ticker": "XSW",   "name": "Software & Services"},
-    {"ticker": "IHI",   "name": "Medical Devices"},
-    {"ticker": "IYT",   "name": "Transportation"},
-    {"ticker": "WCLD",  "name": "Cloud Computing"},
-    {"ticker": "ARKW",  "name": "ARK Next Generation Internet"},
-    {"ticker": "SOCL",  "name": "Social Media"},
-    {"ticker": "BAI",   "name": "Big AI"},
-    {"ticker": "CLOU",  "name": "Cloud Computing (Global X)"},
-    {"ticker": "XTL",   "name": "Telecom"},
-    {"ticker": "SLX",   "name": "Steel"},
-    {"ticker": "HACK",  "name": "Cybersecurity (ETFMG)"},
-    {"ticker": "PBW",   "name": "Clean Energy (Invesco)"},
-    {"ticker": "XHS",   "name": "Health Care Services"},
-    {"ticker": "PBJ",   "name": "Food & Beverage"},
-    {"ticker": "DRIV",  "name": "Electric & Autonomous Vehicles"},
-    {"ticker": "PAVE",  "name": "US Infrastructure"},
-    {"ticker": "KBE",   "name": "Bank ETF"},
-    {"ticker": "IDGT",  "name": "Industrials & Infrastructure"},
-    {"ticker": "PPH",   "name": "Pharma"},
-    {"ticker": "DTCR",  "name": "Data Center REIT"},
-    {"ticker": "IBUY",  "name": "E-Commerce"},
-    {"ticker": "KIE",   "name": "Insurance"},
-    {"ticker": "SPPP",  "name": "Platinum & Palladium"},
-    {"ticker": "COPJ",  "name": "Copper Juniors"},
-    {"ticker": "SOLZ",  "name": "Solana Strategy"},
-    {"ticker": "HYDR",  "name": "Hydrogen"},
-    {"ticker": "PSIL",  "name": "Psychedelics"},
-]
-
-
-# ── RS Rating: Fred6724's live universe ───────────────────────────────────
-RS_CSV_URL = "https://raw.githubusercontent.com/Fred6725/rs-log/main/output/rs_stocks.csv"
-
-def fetch_rs_scores_array() -> np.ndarray | None:
-    """
-    Download Fred6724's rs_stocks.csv (auto-updated daily via GitHub Actions)
-    and return a sorted numpy array of all RS scores in the ~5800 stock universe.
-    Used for direct percentile lookup — no approximation needed.
-    """
-    try:
-        resp = requests.get(RS_CSV_URL, timeout=15)
-        resp.raise_for_status()
-        df = pd.read_csv(StringIO(resp.text))
-        scores = df["Relative Strength"].dropna().values
-        scores_sorted = np.sort(scores)
-        print(f"  ✓  RS universe: {len(scores_sorted)} stocks, "
-              f"range [{scores_sorted[0]:.2f} – {scores_sorted[-1]:.2f}]")
-        return scores_sorted
-    except Exception as e:
-        print(f"  ⚠  Could not fetch RS universe ({e}). RS Rating will be None.")
-        return None
-
-
-def compute_rs_score(ticker_close: pd.Series, spx_close: pd.Series) -> float | None:
-    """
-    Fred6724's RS performance score formula:
-      0.4 × P(63d) + 0.2 × P(126d) + 0.2 × P(189d) + 0.2 × P(252d)
-    divided by same for SPX, scaled × 100.
-    Requires at least 253 aligned bars.
-    """
-    combined = pd.concat([ticker_close, spx_close], axis=1).dropna()
-    combined.columns = ["t", "s"]
-    if len(combined) < 253:
-        return None
-    t = combined["t"]
-    s = combined["s"]
-    n63  = min(63,  len(t) - 1)
-    n126 = min(126, len(t) - 1)
-    n189 = min(189, len(t) - 1)
-    n252 = min(252, len(t) - 1)
-    rs_stock = (0.4 * (t.iloc[-1] / t.iloc[-1-n63])
-              + 0.2 * (t.iloc[-1] / t.iloc[-1-n126])
-              + 0.2 * (t.iloc[-1] / t.iloc[-1-n189])
-              + 0.2 * (t.iloc[-1] / t.iloc[-1-n252]))
-    rs_ref   = (0.4 * (s.iloc[-1] / s.iloc[-1-n63])
-              + 0.2 * (s.iloc[-1] / s.iloc[-1-n126])
-              + 0.2 * (s.iloc[-1] / s.iloc[-1-n189])
-              + 0.2 * (s.iloc[-1] / s.iloc[-1-n252]))
-    if rs_ref == 0:
-        return None
-    return float((rs_stock / rs_ref) * 100)
-
-
-def score_to_rating(score: float, scores_array: np.ndarray) -> int | None:
-    """
-    Direct percentile rank of score against the full universe distribution.
-    Uses binary search (np.searchsorted) for O(log n) lookup.
-    Returns integer 1–99.
-    """
-    if score is None or scores_array is None:
-        return None
-    n = len(scores_array)
-    rank_from_bottom = int(np.searchsorted(scores_array, score, side="left"))
-    percentile = (rank_from_bottom / n) * 100
-    return max(1, min(99, round(percentile)))
-
-
-# ── MA status helper ──────────────────────────────────────────────────────
-def ma_status(price: float, ma_val: float, ma_prev: float) -> str:
-    if price >= ma_val:
-        return "above_up" if ma_val >= ma_prev else "above_down"
-    else:
-        return "below_up" if ma_val >= ma_prev else "below_down"
-
-
-def ema(series: pd.Series, period: int) -> pd.Series:
-    return series.ewm(span=period, adjust=False).mean()
-
-
-def vars_histogram(close: pd.Series, window: int = 20, lookback: int = 50) -> list:
-    if len(close) < lookback + window:
-        return []
-    sma_lb = close.rolling(lookback).mean()
-    hist   = close - sma_lb
-    sma20  = hist.rolling(20).mean()
-    result = []
-    for i in range(-window, 0):
-        v = hist.iloc[i]
-        m = sma20.iloc[i]
-        if pd.isna(v) or pd.isna(m):
-            continue
-        result.append({"v": round(float(v), 4), "m": round(float(m), 4)})
-    return result
-
-
-# ── Core per-ticker calculation ───────────────────────────────────────────
-def compute_row(ticker_def: dict, hist: pd.DataFrame,
-                spx_close: pd.Series, rs_scores: np.ndarray) -> dict:
-    ticker = ticker_def["ticker"]
-    name   = ticker_def["name"]
-
-    close = hist["Close"].dropna()
-    open_ = hist["Open"].dropna()
-
-    if len(close) < 30:
-        print(f"  ⚠  {ticker}: not enough data ({len(close)} bars)")
-        return None
-
-    price      = round(float(close.iloc[-1]), 4)
-    prev_close = float(close.iloc[-2])
-    daily_chg  = round((price / prev_close - 1) * 100, 4)
-
-    last_open    = float(open_.iloc[-1]) if len(open_) > 0 else None
-    intraday_chg = round((price / last_open - 1) * 100, 4) if last_open else None
-    chg_5d       = round((price / float(close.iloc[-6]) - 1) * 100, 4) if len(close) >= 6 else None
-
-    ema9_s   = ema(close, 9)
-    ema9_st  = ma_status(price, float(ema9_s.iloc[-1]), float(ema9_s.iloc[-2])) if len(ema9_s) >= 2 else None
-
-    ema21_s  = ema(close, 21)
-    ema21_st = ma_status(price, float(ema21_s.iloc[-1]), float(ema21_s.iloc[-2])) if len(ema21_s) >= 2 else None
-
-    ema50_s   = ema(close, 50)
-    ema50_val = float(ema50_s.iloc[-1]) if len(ema50_s) >= 2 else None
-    ema50_st  = ma_status(price, ema50_val, float(ema50_s.iloc[-2])) if ema50_val and len(ema50_s) >= 2 else None
-
-    sma150_st = None
-    if len(close) >= 151:
-        sma150_s  = close.rolling(150).mean()
-        sma150_st = ma_status(price, float(sma150_s.iloc[-1]), float(sma150_s.iloc[-2]))
-
-    sma200_st = None
-    if len(close) >= 201:
-        sma200_s  = close.rolling(200).mean()
-        sma200_st = ma_status(price, float(sma200_s.iloc[-1]), float(sma200_s.iloc[-2]))
-
-    atr_mult = None
-    if ema50_val and len(close) >= 15:
-        try:
-            high = hist["High"].dropna()
-            low_ = hist["Low"].dropna()
-            tr   = pd.concat([
-                high - low_,
-                (high - close.shift(1)).abs(),
-                (low_ - close.shift(1)).abs()
-            ], axis=1).max(axis=1)
-            atr14    = float(tr.rolling(14).mean().iloc[-1])
-            atr_mult = round((price - ema50_val) / atr14, 4) if atr14 else None
-        except Exception:
-            atr_mult = None
-
-    vars_hist = vars_histogram(close, window=20, lookback=50) if len(close) >= 70 else []
-
-    rs_score  = compute_rs_score(close, spx_close)
-    rs_rating = score_to_rating(rs_score, rs_scores)
-
-    return {
-        "ticker":       ticker,
-        "name":         name,
-        "price":        price,
-        "daily_chg":    daily_chg,
-        "intraday_chg": intraday_chg,
-        "chg_5d":       chg_5d,
-        "ema9":         ema9_st,
-        "ema21":        ema21_st,
-        "ema50":        ema50_st,
-        "sma150":       sma150_st,
-        "sma200":       sma200_st,
-        "atr_multiple": atr_mult,
-        "rs_rating":    rs_rating,
-        "vars_history": vars_hist,
+    body {
+      background: #0d1117;
+      color: #c9d1d9;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 14px;
+      min-height: 100vh;
+      padding: 24px 16px 60px;
     }
 
+    header {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    header h1 { font-size: 1.4rem; font-weight: 700; color: #e6edf3; }
+    #updated-time { font-size: 0.78rem; color: #6e7681; }
 
-# ── Download + process one section ───────────────────────────────────────
-def process_section(ticker_defs: list, spx_close: pd.Series,
-                    rs_scores: np.ndarray) -> list:
-    rows = []
-    for td in ticker_defs:
-        sym = td["ticker"]
-        try:
-            hist = yf.download(sym, period="2y", interval="1d",
-                               auto_adjust=True, progress=False)
-            if hist is None or hist.empty:
-                print(f"  ⚠  {sym}: no data returned")
-                continue
-            if isinstance(hist.columns, pd.MultiIndex):
-                hist.columns = hist.columns.get_level_values(0)
-            row = compute_row(td, hist, spx_close, rs_scores)
-            if row:
-                rows.append(row)
-                rs_str = str(row["rs_rating"]) if row["rs_rating"] is not None else "N/A"
-                print(f"  ✓  {sym}  (RS: {rs_str})")
-        except Exception as e:
-            print(f"  ✗  {sym}: {e}")
-    return rows
-
-
-# ── Main ──────────────────────────────────────────────────────────────────
-def main():
-    print("=" * 55)
-    print("  Market Dashboard — fetch_data.py")
-    print(f"  Run time: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}")
-    print("=" * 55)
-
-    print("\n── Downloading SPX reference ──")
-    spx_hist = yf.download("^GSPC", period="2y", interval="1d",
-                           auto_adjust=True, progress=False)
-    if isinstance(spx_hist.columns, pd.MultiIndex):
-        spx_hist.columns = spx_hist.columns.get_level_values(0)
-    spx_close = spx_hist["Close"].dropna()
-    print(f"  ✓  SPX: {len(spx_close)} bars")
-
-    print("\n── Fetching RS universe (Fred6724) ──")
-    rs_scores = fetch_rs_scores_array()
-
-    sections = {
-        "indices":     INDICES,
-        "sectors":     SECTORS,
-        "sectors_ew":  SECTORS_EW,
-        "commodities": COMMODITIES,
-        "thematic":    THEMATIC,
+    .section-card {
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+    .section-title {
+      padding: 11px 16px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      color: #8b949e;
+      border-bottom: 1px solid #21262d;
+      background: #0d1117;
     }
 
-    output = {"updated": datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")}
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
 
-    for section_name, ticker_defs in sections.items():
-        print(f"\n── {section_name.upper()} ({len(ticker_defs)} tickers) ──")
-        output[section_name] = process_section(ticker_defs, spx_close, rs_scores)
-        print(f"   → {len(output[section_name])} rows written")
+    thead th {
+      padding: 9px 14px;
+      text-align: left;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: .9px;
+      text-transform: uppercase;
+      color: #8b949e;
+      border-bottom: 1px solid #21262d;
+      background: #0d1117;
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+      transition: color .15s, background .15s;
+    }
+    thead th:not(:first-child) { text-align: center; }
+    thead th:hover { color: #c9d1d9; background: #161b22; }
+    thead th.sort-asc,
+    thead th.sort-desc { color: #58a6ff; }
+    thead th::after           { content: ' ⇅'; font-size: .65rem; opacity: .3; transition: opacity .15s; }
+    thead th:hover::after     { opacity: .6; }
+    thead th.sort-asc::after  { content: ' ▲'; opacity: 1; color: #58a6ff; }
+    thead th.sort-desc::after { content: ' ▼'; opacity: 1; color: #58a6ff; }
 
-    with open(OUTPUT_FILE, "w") as f:
-        json.dump(output, f, indent=2)
+    tbody tr { border-bottom: 1px solid #1c2128; transition: background .12s; }
+    tbody tr:hover { background: #1c2128; }
+    tbody tr:last-child { border-bottom: none; }
 
-    total = sum(len(v) for v in output.values() if isinstance(v, list))
-    print(f"\n✅  Done → {OUTPUT_FILE}  ({total} total rows)")
+    td { padding: 10px 14px; white-space: nowrap; }
+    td:not(:first-child) { text-align: center; }
 
+    .ticker-sym  { font-weight: 700; font-size: .84rem; color: #e6edf3; font-family: 'Courier New', monospace; }
+    .ticker-full { font-size: .70rem; color: #8b949e; margin-top: 2px; }
+    .price-val   { font-family: 'Courier New', monospace; font-size: .84rem; color: #e6edf3; }
 
-if __name__ == "__main__":
-    main()
+    .chg {
+      display: inline-block; min-width: 64px; padding: 2px 8px;
+      border-radius: 4px; font-size: .78rem; font-weight: 600;
+      font-family: 'Courier New', monospace;
+    }
+    .chg-pos  { background: rgba(35,134,54,.22);   color: #3fb950; }
+    .chg-neg  { background: rgba(248,81,73,.18);   color: #f85149; }
+    .chg-zero { background: rgba(110,118,129,.12); color: #8b949e; }
+
+    .ma-pill {
+      display: inline-flex; align-items: center; gap: 3px;
+      padding: 3px 10px; border-radius: 20px; font-size: .71rem;
+      font-weight: 600; min-width: 72px; justify-content: center;
+    }
+    .ma-above-up   { background: rgba(35,134,54,.28);  color: #3fb950; border: 1px solid rgba(63,185,80,.28); }
+    .ma-above-down { background: rgba(210,153,34,.22); color: #d9a400; border: 1px solid rgba(210,153,34,.28); }
+    .ma-below-up   { background: rgba(219,109,40,.22); color: #db6d28; border: 1px solid rgba(219,109,40,.28); }
+    .ma-below-down { background: rgba(248,81,73,.20);  color: #f85149; border: 1px solid rgba(248,81,73,.28); }
+
+    .rs-badge {
+      display: inline-block; min-width: 40px; padding: 3px 10px;
+      border-radius: 6px; font-size: .80rem; font-weight: 700;
+      font-family: 'Courier New', monospace; text-align: center;
+    }
+    .rs-90  { background: rgba(35,134,54,.28);  color: #3fb950; border: 1px solid rgba(63,185,80,.35); }
+    .rs-70  { background: rgba(70,180,70,.20);  color: #7ee787; border: 1px solid rgba(70,180,70,.30); }
+    .rs-50  { background: rgba(187,162,0,.22);  color: #e3b341; border: 1px solid rgba(187,162,0,.30); }
+    .rs-30  { background: rgba(219,109,40,.22); color: #db6d28; border: 1px solid rgba(219,109,40,.30); }
+    .rs-low { background: rgba(248,81,73,.20);  color: #f85149; border: 1px solid rgba(248,81,73,.28); }
+
+    .atr-badge {
+      display: inline-block; min-width: 52px; padding: 3px 10px;
+      border-radius: 6px; font-size: .80rem; font-weight: 700;
+      font-family: 'Courier New', monospace; text-align: center;
+    }
+    .atr-ext-high { background: rgba(248,81,73,.22);   color: #f85149; border: 1px solid rgba(248,81,73,.35); }
+    .atr-ext-mod  { background: rgba(219,109,40,.22);  color: #db6d28; border: 1px solid rgba(219,109,40,.30); }
+    .atr-pos-norm { background: rgba(35,134,54,.22);   color: #3fb950; border: 1px solid rgba(63,185,80,.28); }
+    .atr-neg-mild { background: rgba(187,162,0,.22);   color: #e3b341; border: 1px solid rgba(187,162,0,.30); }
+    .atr-neg-deep { background: rgba(248,81,73,.20);   color: #f85149; border: 1px solid rgba(248,81,73,.28); }
+    .atr-na       { background: rgba(110,118,129,.12); color: #6e7681; border: 1px solid rgba(110,118,129,.18); }
+
+    .vars-cell { vertical-align: middle; }
+    .vars-na {
+      display: inline-block; padding: 3px 10px; border-radius: 6px;
+      font-size: .72rem; color: #6e7681;
+      background: rgba(110,118,129,.12); border: 1px solid rgba(110,118,129,.18);
+    }
+
+    .legend {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      padding: 10px 16px; border-top: 1px solid #21262d; background: #0d1117;
+    }
+    .legend-item { display: flex; align-items: center; gap: 7px; font-size: .69rem; color: #6e7681; }
+    .legend-swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; }
+
+    .loading-msg { padding: 28px; text-align: center; color: #6e7681; font-style: italic; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>📊 Market Dashboard</h1>
+  <span id="updated-time">Loading…</span>
+</header>
+
+<!-- ══════════════════════ ECONOMIC CALENDAR ═════════════════════ -->
+<div class="section-card">
+  <div class="section-title">🗓️ Economic Calendar — United States</div>
+  <div class="tradingview-widget-container" style="padding:0">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript"
+      src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+    {
+      "colorTheme": "dark",
+      "isTransparent": true,
+      "width": "100%",
+      "height": "550",
+      "locale": "en",
+      "importanceFilter": "-1,0,1,2",
+      "countryFilter": "us"
+    }
+    </script>
+  </div>
+</div>
+
+<!-- ══════════════════════════ INDICES ════════════════════════════ -->
+<div class="section-card">
+  <div class="section-title">📈 Indices — EOD Snapshot · Prev Close</div>
+  <div class="table-wrap"><table id="indices-table">
+    <thead><tr>
+      <th data-col="ticker"        data-type="string">Ticker</th>
+      <th data-col="price"         data-type="number">Price</th>
+      <th data-col="daily_chg"     data-type="number">Daily Chg</th>
+      <th data-col="intraday_chg"  data-type="number">Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
+      <th data-col="chg_5d"        data-type="number">5D Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(5 Trading Days)</small></th>
+      <th data-col="ema9"          data-type="ma">EMA 9</th>
+      <th data-col="ema21"         data-type="ma">EMA 21</th>
+      <th data-col="ema50"         data-type="ma">EMA 50</th>
+      <th data-col="sma150"        data-type="ma">SMA 150</th>
+      <th data-col="sma200"        data-type="ma">SMA 200</th>
+      <th data-col="atr_multiple"  data-type="number">ATRx 50-MA<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(ATR14 / EMA50)</small></th>
+      <th data-col="rs_rating"     data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
+      <th data-col="vars_latest"   data-type="number">VARS Histogram<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(20d · LB50 · SMA20)</small></th>
+    </tr></thead>
+    <tbody id="indices-body"><tr><td colspan="13" class="loading-msg">⏳ Loading…</td></tr></tbody>
+  </table></div>
+  <div class="legend" id="indices-legend"></div>
+</div>
+
+<!-- ══════════════════════════ SECTORS ═══════════════════════════ -->
+<div class="section-card">
+  <div class="section-title">🏭 Sectors — EOD Snapshot · Prev Close</div>
+  <div class="table-wrap"><table id="sectors-table">
+    <thead><tr>
+      <th data-col="ticker"        data-type="string">Ticker</th>
+      <th data-col="price"         data-type="number">Price</th>
+      <th data-col="daily_chg"     data-type="number">Daily Chg</th>
+      <th data-col="intraday_chg"  data-type="number">Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
+      <th data-col="chg_5d"        data-type="number">5D Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(5 Trading Days)</small></th>
+      <th data-col="ema9"          data-type="ma">EMA 9</th>
+      <th data-col="ema21"         data-type="ma">EMA 21</th>
+      <th data-col="ema50"         data-type="ma">EMA 50</th>
+      <th data-col="sma150"        data-type="ma">SMA 150</th>
+      <th data-col="sma200"        data-type="ma">SMA 200</th>
+      <th data-col="atr_multiple"  data-type="number">ATRx 50-MA<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(ATR14 / EMA50)</small></th>
+      <th data-col="rs_rating"     data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
+      <th data-col="vars_latest"   data-type="number">VARS Histogram<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(20d · LB50 · SMA20)</small></th>
+    </tr></thead>
+    <tbody id="sectors-body"><tr><td colspan="13" class="loading-msg">⏳ Loading…</td></tr></tbody>
+  </table></div>
+  <div class="legend" id="sectors-legend"></div>
+</div>
+
+<!-- ══════════════════════════ EW SECTORS ════════════════════════ -->
+<div class="section-card">
+  <div class="section-title">⚖️ EW Sectors — EOD Snapshot · Prev Close</div>
+  <div class="table-wrap"><table id="sectors-ew-table">
+    <thead><tr>
+      <th data-col="ticker"        data-type="string">Ticker</th>
+      <th data-col="price"         data-type="number">Price</th>
+      <th data-col="daily_chg"     data-type="number">Daily Chg</th>
+      <th data-col="intraday_chg"  data-type="number">Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
+      <th data-col="chg_5d"        data-type="number">5D Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(5 Trading Days)</small></th>
+      <th data-col="ema9"          data-type="ma">EMA 9</th>
+      <th data-col="ema21"         data-type="ma">EMA 21</th>
+      <th data-col="ema50"         data-type="ma">EMA 50</th>
+      <th data-col="sma150"        data-type="ma">SMA 150</th>
+      <th data-col="sma200"        data-type="ma">SMA 200</th>
+      <th data-col="atr_multiple"  data-type="number">ATRx 50-MA<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(ATR14 / EMA50)</small></th>
+      <th data-col="rs_rating"     data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
+      <th data-col="vars_latest"   data-type="number">VARS Histogram<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(20d · LB50 · SMA20)</small></th>
+    </tr></thead>
+    <tbody id="sectors-ew-body"><tr><td colspan="13" class="loading-msg">⏳ Loading…</td></tr></tbody>
+  </table></div>
+  <div class="legend" id="sectors-ew-legend"></div>
+</div>
+
+<!-- ══════════════════════ COMMODITIES & CRYPTO ══════════════════ -->
+<div class="section-card">
+  <div class="section-title">🪙 Commodities &amp; Crypto — EOD Snapshot · Prev Close</div>
+  <div class="table-wrap"><table id="commodities-table">
+    <thead><tr>
+      <th data-col="ticker"        data-type="string">Ticker</th>
+      <th data-col="price"         data-type="number">Price</th>
+      <th data-col="daily_chg"     data-type="number">Daily Chg</th>
+      <th data-col="intraday_chg"  data-type="number">Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
+      <th data-col="chg_5d"        data-type="number">5D Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(5 Trading Days)</small></th>
+      <th data-col="ema9"          data-type="ma">EMA 9</th>
+      <th data-col="ema21"         data-type="ma">EMA 21</th>
+      <th data-col="ema50"         data-type="ma">EMA 50</th>
+      <th data-col="sma150"        data-type="ma">SMA 150</th>
+      <th data-col="sma200"        data-type="ma">SMA 200</th>
+      <th data-col="atr_multiple"  data-type="number">ATRx 50-MA<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(ATR14 / EMA50)</small></th>
+      <th data-col="rs_rating"     data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
+      <th data-col="vars_latest"   data-type="number">VARS Histogram<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(20d · LB50 · SMA20)</small></th>
+    </tr></thead>
+    <tbody id="commodities-body"><tr><td colspan="13" class="loading-msg">⏳ Loading…</td></tr></tbody>
+  </table></div>
+  <div class="legend" id="commodities-legend"></div>
+</div>
+
+<!-- ══════════════════════════ THEMATIC ══════════════════════════ -->
+<div class="section-card">
+  <div class="section-title">🎯 Thematic — EOD Snapshot · Prev Close</div>
+  <div class="table-wrap"><table id="thematic-table">
+    <thead><tr>
+      <th data-col="ticker"        data-type="string">Ticker</th>
+      <th data-col="price"         data-type="number">Price</th>
+      <th data-col="daily_chg"     data-type="number">Daily Chg</th>
+      <th data-col="intraday_chg"  data-type="number">Intraday Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(Open → Close)</small></th>
+      <th data-col="chg_5d"        data-type="number">5D Chg<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(5 Trading Days)</small></th>
+      <th data-col="ema9"          data-type="ma">EMA 9</th>
+      <th data-col="ema21"         data-type="ma">EMA 21</th>
+      <th data-col="ema50"         data-type="ma">EMA 50</th>
+      <th data-col="sma150"        data-type="ma">SMA 150</th>
+      <th data-col="sma200"        data-type="ma">SMA 200</th>
+      <th data-col="atr_multiple"  data-type="number">ATRx 50-MA<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(ATR14 / EMA50)</small></th>
+      <th data-col="rs_rating"     data-type="number">RS Rating<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(vs S&amp;P 500)</small></th>
+      <th data-col="vars_latest"   data-type="number">VARS Histogram<br><small style="font-weight:400;text-transform:none;letter-spacing:0">(20d · LB50 · SMA20)</small></th>
+    </tr></thead>
+    <tbody id="thematic-body"><tr><td colspan="13" class="loading-msg">⏳ Loading…</td></tr></tbody>
+  </table></div>
+  <div class="legend" id="thematic-legend"></div>
+</div>
+
+<script>
+  const MA_RANK = { above_up: 4, above_down: 3, below_up: 2, below_down: 1 };
+
+  const state = {
+    indices:     { data: [], sortCol: null, sortDir: 'asc' },
+    sectors:     { data: [], sortCol: null, sortDir: 'asc' },
+    sectors_ew:  { data: [], sortCol: null, sortDir: 'asc' },
+    commodities: { data: [], sortCol: null, sortDir: 'asc' },
+    thematic:    { data: [], sortCol: null, sortDir: 'asc' },
+  };
+
+  function fmtChg(v) {
+    if (v == null) return '<span class="chg chg-zero">—</span>';
+    const cls  = v > 0 ? 'chg-pos' : v < 0 ? 'chg-neg' : 'chg-zero';
+    const sign = v > 0 ? '+' : '';
+    return `<span class="chg ${cls}">${sign}${v.toFixed(2)}%</span>`;
+  }
+
+  function maPill(val) {
+    const map = {
+      above_up:   ['ma-above-up',   '▲ Above'],
+      above_down: ['ma-above-down', '▼ Above'],
+      below_up:   ['ma-below-up',   '▲ Below'],
+      below_down: ['ma-below-down', '▼ Below'],
+    };
+    const [cls, label] = map[val] || ['ma-below-down', '—'];
+    return `<span class="ma-pill ${cls}">${label}</span>`;
+  }
+
+  function atrBadge(v) {
+    if (v == null) return '<span class="atr-badge atr-na">N/A</span>';
+    let cls;
+    if      (v >  7)  cls = 'atr-ext-high';
+    else if (v >  4)  cls = 'atr-ext-mod';
+    else if (v >= 0)  cls = 'atr-pos-norm';
+    else if (v >= -4) cls = 'atr-neg-mild';
+    else              cls = 'atr-neg-deep';
+    const sign = v > 0 ? '+' : '';
+    return `<span class="atr-badge ${cls}">${sign}${v.toFixed(2)}x</span>`;
+  }
+
+  function rsBadge(v) {
+    if (v == null) return '<span class="rs-badge rs-low">N/A</span>';
+    let cls;
+    if      (v >= 90) cls = 'rs-90';
+    else if (v >= 70) cls = 'rs-70';
+    else if (v >= 50) cls = 'rs-50';
+    else if (v >= 30) cls = 'rs-30';
+    else              cls = 'rs-low';
+    return `<span class="rs-badge ${cls}">${v}</span>`;
+  }
+
+  function varsSvg(data) {
+    if (!data || data.length === 0) return '<span class="vars-na">N/A</span>';
+    const W = 96, H = 40, padX = 2, padY = 3;
+    const vals = data.map(d => d.v);
+    const mas  = data.map(d => d.m);
+    const all  = [...vals, ...mas];
+    const mx   = Math.max(...all);
+    const mn   = Math.min(...all);
+    const rng  = mx - mn || 0.0001;
+    const innerH = H - padY * 2;
+    const barW   = (W - padX * 2) / data.length;
+    const sy     = v => padY + ((mx - v) / rng) * innerH;
+    const zy     = sy(0);
+    const zeroLine = `<line x1="${padX}" y1="${zy.toFixed(1)}" x2="${W-padX}" y2="${zy.toFixed(1)}" stroke="#30363d" stroke-width="0.8"/>`;
+    let bars = '';
+    vals.forEach((v, i) => {
+      const x   = padX + i * barW;
+      const yV  = sy(v);
+      const yZ  = sy(0);
+      const top = Math.min(yV, yZ);
+      const h   = Math.max(Math.abs(yV - yZ), 1);
+      bars += `<rect x="${x.toFixed(1)}" y="${top.toFixed(1)}" width="${(barW - 0.8).toFixed(1)}" height="${h.toFixed(1)}" fill="#58a6ff" opacity="0.75"/>`;
+    });
+    const pts = mas.map((m, i) => {
+      const x = padX + i * barW + barW / 2;
+      return `${x.toFixed(1)},${sy(m).toFixed(1)}`;
+    }).join(' ');
+    const maLine = `<polyline points="${pts}" fill="none" stroke="#e3b341" stroke-width="1.4" stroke-linejoin="round"/>`;
+    return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="display:block;margin:auto">${zeroLine}${bars}${maLine}</svg>`;
+  }
+
+  function renderRow(row) {
+    const fmt = n => n.toLocaleString(undefined,
+      { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><div class="ticker-sym">${row.ticker}</div><div class="ticker-full">${row.name}</div></td>
+      <td><span class="price-val">${fmt(row.price)}</span></td>
+      <td>${fmtChg(row.daily_chg)}</td>
+      <td>${fmtChg(row.intraday_chg)}</td>
+      <td>${fmtChg(row.chg_5d)}</td>
+      <td>${maPill(row.ema9)}</td>
+      <td>${maPill(row.ema21)}</td>
+      <td>${maPill(row.ema50)}</td>
+      <td>${maPill(row.sma150)}</td>
+      <td>${maPill(row.sma200)}</td>
+      <td>${atrBadge(row.atr_multiple)}</td>
+      <td>${rsBadge(row.rs_rating)}</td>
+      <td class="vars-cell">${varsSvg(row.vars_history)}</td>
+    `;
+    return tr;
+  }
+
+  function renderTable(tableId, bodyId, stateKey) {
+    const tbody = document.getElementById(bodyId);
+    tbody.innerHTML = '';
+    const { data, sortCol, sortDir } = state[stateKey];
+    const sorted = [...data].sort((a, b) => {
+      if (!sortCol) return 0;
+      const th   = document.querySelector(`#${tableId} thead th[data-col="${sortCol}"]`);
+      const type = th ? th.dataset.type : 'string';
+      let va, vb;
+      if (type === 'ma') {
+        va = MA_RANK[a[sortCol]] ?? 0;
+        vb = MA_RANK[b[sortCol]] ?? 0;
+      } else if (type === 'number') {
+        va = a[sortCol] ?? -Infinity;
+        vb = b[sortCol] ?? -Infinity;
+      } else {
+        va = (a[sortCol] ?? '').toString().toLowerCase();
+        vb = (b[sortCol] ?? '').toString().toLowerCase();
+      }
+      if (va < vb) return sortDir === 'asc' ? -1 :  1;
+      if (va > vb) return sortDir === 'asc' ?  1 : -1;
+      return 0;
+    });
+    sorted.forEach(row => tbody.appendChild(renderRow(row)));
+  }
+
+  function initSorting(tableId, bodyId, stateKey) {
+    document.querySelectorAll(`#${tableId} thead th`).forEach(th => {
+      th.addEventListener('click', () => {
+        const col = th.dataset.col;
+        if (!col) return;
+        const s = state[stateKey];
+        if (s.sortCol === col) {
+          s.sortDir = s.sortDir === 'asc' ? 'desc' : 'asc';
+        } else {
+          s.sortCol = col;
+          s.sortDir = col === 'ticker' ? 'asc' : 'desc';
+        }
+        document.querySelectorAll(`#${tableId} thead th`).forEach(h =>
+          h.classList.remove('sort-asc', 'sort-desc'));
+        th.classList.add(s.sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
+        renderTable(tableId, bodyId, stateKey);
+      });
+    });
+  }
+
+  function buildLegend(legendId) {
+    document.getElementById(legendId).innerHTML = `
+      <div class="legend-item"><span class="ma-pill ma-above-up">▲ Above</span> Price &gt; MA &amp; MA rising</div>
+      <div class="legend-item"><span class="ma-pill ma-above-down">▼ Above</span> Price &gt; MA &amp; MA falling</div>
+      <div class="legend-item"><span class="ma-pill ma-below-up">▲ Below</span> Price &lt; MA &amp; MA rising</div>
+      <div class="legend-item"><span class="ma-pill ma-below-down">▼ Below</span> Price &lt; MA &amp; MA falling</div>
+      <div class="legend-item" style="margin-left:8px"><span class="atr-badge atr-ext-high">&gt;7x</span> Very extended</div>
+      <div class="legend-item"><span class="atr-badge atr-ext-mod">4–7x</span> Extended</div>
+      <div class="legend-item"><span class="atr-badge atr-pos-norm">0–4x</span> Healthy above</div>
+      <div class="legend-item"><span class="atr-badge atr-neg-mild">-4–0x</span> Mild pullback</div>
+      <div class="legend-item"><span class="atr-badge atr-neg-deep">&lt;-4x</span> Deep below</div>
+      <div class="legend-item" style="margin-left:8px"><span class="rs-badge rs-90">90–99</span> RS Top tier</div>
+      <div class="legend-item"><span class="rs-badge rs-70">70–89</span> RS Strong</div>
+      <div class="legend-item"><span class="rs-badge rs-50">50–69</span> RS Average</div>
+      <div class="legend-item"><span class="rs-badge rs-30">30–49</span> RS Weak</div>
+      <div class="legend-item"><span class="rs-badge rs-low">&lt;30</span> RS Laggard</div>
+      <div class="legend-item" style="margin-left:8px"><span class="legend-swatch" style="background:#58a6ff"></span> VARS bars</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:#e3b341;border-radius:0;height:2px;width:14px"></span> SMA20 line</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:#444c56"></span> Zero line</div>
+      <div class="legend-item" style="color:#8b949e">↕ Click any header to sort</div>
+    `;
+  }
+
+  function withLatest(rows) {
+    return rows.map(r => ({
+      ...r,
+      vars_latest: (r.vars_history && r.vars_history.length > 0)
+        ? r.vars_history[r.vars_history.length - 1].v : null
+    }));
+  }
+
+  async function loadData() {
+    try {
+      const res  = await fetch('data/indices.json?v=' + Date.now());
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const json = await res.json();
+
+      document.getElementById('updated-time').textContent =
+        '🕒 Last updated: ' + (json.updated || 'unknown');
+
+      const sections = [
+        { key: 'indices',     jsonKey: 'indices',     tableId: 'indices-table',     bodyId: 'indices-body',     legendId: 'indices-legend'     },
+        { key: 'sectors',     jsonKey: 'sectors',     tableId: 'sectors-table',     bodyId: 'sectors-body',     legendId: 'sectors-legend'     },
+        { key: 'sectors_ew',  jsonKey: 'sectors_ew',  tableId: 'sectors-ew-table',  bodyId: 'sectors-ew-body',  legendId: 'sectors-ew-legend'  },
+        { key: 'commodities', jsonKey: 'commodities', tableId: 'commodities-table', bodyId: 'commodities-body', legendId: 'commodities-legend' },
+        { key: 'thematic',    jsonKey: 'thematic',    tableId: 'thematic-table',    bodyId: 'thematic-body',    legendId: 'thematic-legend'    },
+      ];
+
+      sections.forEach(({ key, jsonKey, tableId, bodyId, legendId }) => {
+        if (json[jsonKey] && json[jsonKey].length > 0) {
+          state[key].data = withLatest(json[jsonKey]);
+          renderTable(tableId, bodyId, key);
+          buildLegend(legendId);
+        } else {
+          document.getElementById(bodyId).innerHTML =
+            '<tr><td colspan="13" class="loading-msg">No data found.</td></tr>';
+        }
+      });
+
+    } catch (err) {
+      ['indices-body','sectors-body','sectors-ew-body','commodities-body','thematic-body'].forEach(id => {
+        document.getElementById(id).innerHTML =
+          `<tr><td colspan="13" class="loading-msg">❌ Error: ${err.message}</td></tr>`;
+      });
+    }
+  }
+
+  initSorting('indices-table',     'indices-body',     'indices');
+  initSorting('sectors-table',     'sectors-body',     'sectors');
+  initSorting('sectors-ew-table',  'sectors-ew-body',  'sectors_ew');
+  initSorting('commodities-table', 'commodities-body', 'commodities');
+  initSorting('thematic-table',    'thematic-body',    'thematic');
+  loadData();
+</script>
+</body>
+</html>
