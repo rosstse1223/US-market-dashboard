@@ -1,20 +1,20 @@
 {
-  "updated": "2026-04-24 09:29 UTC",
+  "updated": "2026-04-24 09:40 UTC",
   "indices": [
     {
       "ticker": "^VIX",
       "name": "CBOE Volatility Index",
-      "price": 19.21,
-      "daily_chg": -0.5179,
-      "intraday_chg": 1.694,
-      "chg_5d": 9.897,
+      "price": 19.25,
+      "daily_chg": -0.3107,
+      "intraday_chg": 1.9058,
+      "chg_5d": 10.1259,
       "ema9": "below_down",
       "ema21": "below_down",
       "ema50": "below_down",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -0.9907,
-      "rs_rating": null,
+      "atr_multiple": -0.972,
+      "rs_rating": 60,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -94,8 +94,8 @@
           "m": -0.1001
         },
         {
-          "v": -3.3052,
-          "m": -0.5953
+          "v": -3.266,
+          "m": -0.5933
         }
       ]
     },
@@ -112,7 +112,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 3.5467,
-      "rs_rating": null,
+      "rs_rating": 67,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -210,7 +210,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 2.3089,
-      "rs_rating": null,
+      "rs_rating": 59,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -308,7 +308,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 3.6783,
-      "rs_rating": null,
+      "rs_rating": 62,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -406,7 +406,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 3.9269,
-      "rs_rating": null,
+      "rs_rating": 65,
       "rs_1m_new_high": true,
       "vars_history": [
         {
@@ -504,8 +504,8 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 3.834,
-      "rs_rating": null,
-      "rs_1m_new_high": false,
+      "rs_rating": 60,
+      "rs_1m_new_high": true,
       "vars_history": [
         {
           "v": -4.2012,
@@ -602,7 +602,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 1.6892,
-      "rs_rating": null,
+      "rs_rating": 58,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -700,7 +700,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 2.3127,
-      "rs_rating": null,
+      "rs_rating": 59,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -788,17 +788,17 @@
     {
       "ticker": "DX-Y.NYB",
       "name": "US Dollar Index",
-      "price": 98.787,
-      "daily_chg": -0.0132,
-      "intraday_chg": -0.0344,
-      "chg_5d": 0.7003,
+      "price": 98.804,
+      "daily_chg": 0.004,
+      "intraday_chg": -0.0172,
+      "chg_5d": 0.7176,
       "ema9": "above_up",
       "ema21": "above_up",
-      "ema50": "below_down",
+      "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -0.0121,
-      "rs_rating": null,
+      "atr_multiple": 0.0194,
+      "rs_rating": 51,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -878,8 +878,8 @@
           "m": 0.5231
         },
         {
-          "v": -0.0349,
-          "m": 0.4402
+          "v": -0.0183,
+          "m": 0.441
         }
       ]
     },
@@ -896,7 +896,7 @@
       "sma150": "below_down",
       "sma200": "below_up",
       "atr_multiple": 1.2025,
-      "rs_rating": null,
+      "rs_rating": 58,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -994,7 +994,7 @@
       "sma150": "above_up",
       "sma200": "above_down",
       "atr_multiple": 1.231,
-      "rs_rating": null,
+      "rs_rating": 52,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -1094,7 +1094,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 4.5543,
-      "rs_rating": null,
+      "rs_rating": 69,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -1192,7 +1192,7 @@
       "sma150": "below_down",
       "sma200": "below_up",
       "atr_multiple": 0.9001,
-      "rs_rating": null,
+      "rs_rating": 51,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -1290,7 +1290,7 @@
       "sma150": "below_up",
       "sma200": "above_up",
       "atr_multiple": -1.4709,
-      "rs_rating": null,
+      "rs_rating": 51,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -1388,7 +1388,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 0.601,
-      "rs_rating": null,
+      "rs_rating": 73,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -1486,7 +1486,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 1.9454,
-      "rs_rating": null,
+      "rs_rating": 66,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -1584,7 +1584,7 @@
       "sma150": "above_down",
       "sma200": "above_up",
       "atr_multiple": 1.3426,
-      "rs_rating": null,
+      "rs_rating": 54,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -1682,8 +1682,8 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 0.5635,
-      "rs_rating": null,
-      "rs_1m_new_high": false,
+      "rs_rating": 54,
+      "rs_1m_new_high": true,
       "vars_history": [
         {
           "v": -3.6889,
@@ -1780,7 +1780,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 1.8121,
-      "rs_rating": null,
+      "rs_rating": 64,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -1878,7 +1878,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 0.6104,
-      "rs_rating": null,
+      "rs_rating": 61,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -1976,8 +1976,8 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 2.7908,
-      "rs_rating": null,
-      "rs_1m_new_high": false,
+      "rs_rating": 57,
+      "rs_1m_new_high": true,
       "vars_history": [
         {
           "v": -1.6772,
@@ -2074,8 +2074,8 @@
       "sma150": "above_down",
       "sma200": "above_up",
       "atr_multiple": 1.6653,
-      "rs_rating": null,
-      "rs_1m_new_high": false,
+      "rs_rating": 58,
+      "rs_1m_new_high": true,
       "vars_history": [
         {
           "v": -6.7883,
@@ -2174,7 +2174,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 1.1304,
-      "rs_rating": null,
+      "rs_rating": 76,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -2272,7 +2272,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 4.3753,
-      "rs_rating": null,
+      "rs_rating": 71,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -2370,7 +2370,7 @@
       "sma150": "above_down",
       "sma200": "above_up",
       "atr_multiple": 1.7533,
-      "rs_rating": null,
+      "rs_rating": 52,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -2468,7 +2468,7 @@
       "sma150": "below_up",
       "sma200": "above_up",
       "atr_multiple": -0.8329,
-      "rs_rating": null,
+      "rs_rating": 51,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -2566,8 +2566,8 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": -0.706,
-      "rs_rating": null,
-      "rs_1m_new_high": false,
+      "rs_rating": 49,
+      "rs_1m_new_high": true,
       "vars_history": [
         {
           "v": -1.9603,
@@ -2664,7 +2664,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 0.577,
-      "rs_rating": null,
+      "rs_rating": 61,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -2762,7 +2762,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 1.6236,
-      "rs_rating": null,
+      "rs_rating": 61,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -2860,7 +2860,7 @@
       "sma150": "below_down",
       "sma200": "below_up",
       "atr_multiple": 0.3372,
-      "rs_rating": null,
+      "rs_rating": 52,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -2958,8 +2958,8 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 2.6899,
-      "rs_rating": null,
-      "rs_1m_new_high": false,
+      "rs_rating": 53,
+      "rs_1m_new_high": true,
       "vars_history": [
         {
           "v": -1.6089,
@@ -3056,7 +3056,7 @@
       "sma150": "above_down",
       "sma200": "above_up",
       "atr_multiple": 1.4276,
-      "rs_rating": null,
+      "rs_rating": 53,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -3156,7 +3156,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": -0.7327,
-      "rs_rating": null,
+      "rs_rating": 82,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -3254,7 +3254,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": -1.0351,
-      "rs_rating": null,
+      "rs_rating": 66,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -3352,7 +3352,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": -0.8532,
-      "rs_rating": null,
+      "rs_rating": 70,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -3450,7 +3450,7 @@
       "sma150": "below_up",
       "sma200": "below_up",
       "atr_multiple": -2.0807,
-      "rs_rating": null,
+      "rs_rating": 53,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -3548,7 +3548,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 2.7783,
-      "rs_rating": null,
+      "rs_rating": 93,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -3646,7 +3646,7 @@
       "sma150": "below_down",
       "sma200": "below_down",
       "atr_multiple": -3.7799,
-      "rs_rating": null,
+      "rs_rating": 25,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -3744,7 +3744,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 2.189,
-      "rs_rating": null,
+      "rs_rating": 59,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -3832,17 +3832,17 @@
     {
       "ticker": "SOL-USD",
       "name": "Solana",
-      "price": 85.2,
-      "daily_chg": -1.0925,
-      "intraday_chg": -1.0938,
-      "chg_5d": 1.9371,
+      "price": 85.28,
+      "daily_chg": -0.9996,
+      "intraday_chg": -1.0009,
+      "chg_5d": 2.0328,
       "ema9": "below_down",
       "ema21": "below_down",
       "ema50": "below_down",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": -0.5497,
-      "rs_rating": null,
+      "atr_multiple": -0.5265,
+      "rs_rating": 22,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -3922,25 +3922,25 @@
           "m": -0.9996
         },
         {
-          "v": -0.5345,
-          "m": -0.7814
+          "v": -0.4561,
+          "m": -0.7775
         }
       ]
     },
     {
       "ticker": "BTC-USD",
       "name": "Bitcoin",
-      "price": 77519.1094,
-      "daily_chg": -0.958,
-      "intraday_chg": -0.9703,
-      "chg_5d": 4.9593,
+      "price": 77556.0078,
+      "daily_chg": -0.9109,
+      "intraday_chg": -0.9232,
+      "chg_5d": 5.0093,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": 1.9951,
-      "rs_rating": null,
+      "atr_multiple": 2.01,
+      "rs_rating": 41,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -4020,25 +4020,25 @@
           "m": 3965.3155
         },
         {
-          "v": 6365.6895,
-          "m": 4351.0277
+          "v": 6401.85,
+          "m": 4352.8357
         }
       ]
     },
     {
       "ticker": "ETH-USD",
       "name": "Ethereum",
-      "price": 2309.24,
-      "daily_chg": -0.9553,
-      "intraday_chg": -0.9564,
-      "chg_5d": 1.9569,
+      "price": 2310.48,
+      "daily_chg": -0.9022,
+      "intraday_chg": -0.9032,
+      "chg_5d": 2.0117,
       "ema9": "below_down",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": 0.7994,
-      "rs_rating": null,
+      "atr_multiple": 0.8114,
+      "rs_rating": 35,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -4118,8 +4118,8 @@
           "m": 173.4601
         },
         {
-          "v": 143.2841,
-          "m": 179.6724
+          "v": 144.4993,
+          "m": 179.7331
         }
       ]
     }
@@ -4138,7 +4138,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": -0.7327,
-      "rs_rating": null,
+      "rs_rating": 82,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -4236,7 +4236,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 2.7783,
-      "rs_rating": null,
+      "rs_rating": 93,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -4334,7 +4334,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 1.0893,
-      "rs_rating": null,
+      "rs_rating": 78,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -4432,7 +4432,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 1.6281,
-      "rs_rating": null,
+      "rs_rating": 88,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -4530,7 +4530,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": -0.6265,
-      "rs_rating": null,
+      "rs_rating": 85,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -4628,7 +4628,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": -0.8226,
-      "rs_rating": null,
+      "rs_rating": 79,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -4726,7 +4726,7 @@
       "sma150": "above_up",
       "sma200": "above_down",
       "atr_multiple": 0.8207,
-      "rs_rating": null,
+      "rs_rating": 51,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -4824,7 +4824,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": -1.0396,
-      "rs_rating": null,
+      "rs_rating": 76,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -4922,7 +4922,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 0.5038,
-      "rs_rating": null,
+      "rs_rating": 84,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -5020,7 +5020,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": -1.0351,
-      "rs_rating": null,
+      "rs_rating": 66,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -5118,7 +5118,7 @@
       "sma150": "below_down",
       "sma200": "below_down",
       "atr_multiple": -3.7799,
-      "rs_rating": null,
+      "rs_rating": 25,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -5216,7 +5216,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": -0.2655,
-      "rs_rating": null,
+      "rs_rating": 83,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -5314,7 +5314,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 3.45,
-      "rs_rating": null,
+      "rs_rating": 88,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -5412,7 +5412,7 @@
       "sma150": "below_up",
       "sma200": "above_up",
       "atr_multiple": -1.693,
-      "rs_rating": null,
+      "rs_rating": 60,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -5510,7 +5510,7 @@
       "sma150": "below_down",
       "sma200": "below_up",
       "atr_multiple": 1.3027,
-      "rs_rating": null,
+      "rs_rating": 51,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -5608,7 +5608,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 1.9742,
-      "rs_rating": null,
+      "rs_rating": 75,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -5706,7 +5706,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 3.5811,
-      "rs_rating": null,
+      "rs_rating": 87,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -5804,7 +5804,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 2.721,
-      "rs_rating": null,
+      "rs_rating": 66,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -5902,7 +5902,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 1.2248,
-      "rs_rating": null,
+      "rs_rating": 76,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -6000,7 +6000,7 @@
       "sma150": "above_down",
       "sma200": "above_up",
       "atr_multiple": 1.1655,
-      "rs_rating": null,
+      "rs_rating": 56,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -6098,7 +6098,7 @@
       "sma150": "below_up",
       "sma200": "below_up",
       "atr_multiple": -0.0962,
-      "rs_rating": null,
+      "rs_rating": 50,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -6196,7 +6196,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 2.8442,
-      "rs_rating": null,
+      "rs_rating": 88,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -6294,7 +6294,7 @@
       "sma150": "below_down",
       "sma200": "below_down",
       "atr_multiple": -0.33,
-      "rs_rating": null,
+      "rs_rating": 33,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -6392,7 +6392,7 @@
       "sma150": "below_down",
       "sma200": "below_down",
       "atr_multiple": -2.8217,
-      "rs_rating": null,
+      "rs_rating": 32,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -6490,7 +6490,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 5.9408,
-      "rs_rating": null,
+      "rs_rating": 88,
       "rs_1m_new_high": true,
       "vars_history": [
         {
@@ -6588,7 +6588,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 2.3678,
-      "rs_rating": null,
+      "rs_rating": 63,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -6686,7 +6686,7 @@
       "sma150": "below_down",
       "sma200": "below_up",
       "atr_multiple": 1.2025,
-      "rs_rating": null,
+      "rs_rating": 58,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -6784,8 +6784,8 @@
       "sma150": "below_down",
       "sma200": "below_down",
       "atr_multiple": 1.476,
-      "rs_rating": null,
-      "rs_1m_new_high": false,
+      "rs_rating": 29,
+      "rs_1m_new_high": true,
       "vars_history": [
         {
           "v": -3.4035,
@@ -6882,7 +6882,7 @@
       "sma150": "below_down",
       "sma200": "above_up",
       "atr_multiple": 0.558,
-      "rs_rating": null,
+      "rs_rating": 67,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -6980,7 +6980,7 @@
       "sma150": "below_up",
       "sma200": "below_up",
       "atr_multiple": -0.6308,
-      "rs_rating": null,
+      "rs_rating": 55,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -7078,7 +7078,7 @@
       "sma150": "below_down",
       "sma200": "below_down",
       "atr_multiple": 0.3332,
-      "rs_rating": null,
+      "rs_rating": 32,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -7176,7 +7176,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 2.044,
-      "rs_rating": null,
+      "rs_rating": 64,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -7274,7 +7274,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 2.9492,
-      "rs_rating": null,
+      "rs_rating": 91,
       "rs_1m_new_high": true,
       "vars_history": [
         {
@@ -7372,7 +7372,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 3.4847,
-      "rs_rating": null,
+      "rs_rating": 86,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -7470,8 +7470,8 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 2.2071,
-      "rs_rating": null,
-      "rs_1m_new_high": false,
+      "rs_rating": 80,
+      "rs_1m_new_high": true,
       "vars_history": [
         {
           "v": -0.8244,
@@ -7568,8 +7568,8 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 3.2411,
-      "rs_rating": null,
-      "rs_1m_new_high": false,
+      "rs_rating": 77,
+      "rs_1m_new_high": true,
       "vars_history": [
         {
           "v": -0.3528,
@@ -7764,7 +7764,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 1.0464,
-      "rs_rating": null,
+      "rs_rating": 56,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -7862,7 +7862,7 @@
       "sma150": "below_down",
       "sma200": "below_up",
       "atr_multiple": -0.1639,
-      "rs_rating": null,
+      "rs_rating": 48,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -7960,7 +7960,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": -0.8776,
-      "rs_rating": null,
+      "rs_rating": 64,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -8058,7 +8058,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 0.9159,
-      "rs_rating": null,
+      "rs_rating": 57,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -8156,7 +8156,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 2.0525,
-      "rs_rating": null,
+      "rs_rating": 72,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -8254,7 +8254,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 3.0349,
-      "rs_rating": null,
+      "rs_rating": 70,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -8352,7 +8352,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 1.3288,
-      "rs_rating": null,
+      "rs_rating": 71,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -8450,7 +8450,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 2.286,
-      "rs_rating": null,
+      "rs_rating": 73,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -8548,7 +8548,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 2.056,
-      "rs_rating": null,
+      "rs_rating": 81,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -8646,7 +8646,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 5.2155,
-      "rs_rating": null,
+      "rs_rating": 76,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -8744,7 +8744,7 @@
       "sma150": "above_down",
       "sma200": "above_up",
       "atr_multiple": 1.3432,
-      "rs_rating": null,
+      "rs_rating": 55,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -8842,7 +8842,7 @@
       "sma150": "below_down",
       "sma200": "above_up",
       "atr_multiple": 2.3861,
-      "rs_rating": null,
+      "rs_rating": 57,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -8940,7 +8940,7 @@
       "sma150": "below_down",
       "sma200": "below_down",
       "atr_multiple": 0.5401,
-      "rs_rating": null,
+      "rs_rating": 45,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -9038,7 +9038,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 1.3064,
-      "rs_rating": null,
+      "rs_rating": 56,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -9136,7 +9136,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 1.8218,
-      "rs_rating": null,
+      "rs_rating": 70,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -9234,7 +9234,7 @@
       "sma150": "below_down",
       "sma200": "below_down",
       "atr_multiple": -0.9209,
-      "rs_rating": null,
+      "rs_rating": 32,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -9332,7 +9332,7 @@
       "sma150": "below_down",
       "sma200": "below_down",
       "atr_multiple": -2.3468,
-      "rs_rating": null,
+      "rs_rating": 38,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -9430,7 +9430,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 2.366,
-      "rs_rating": null,
+      "rs_rating": 66,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -9528,7 +9528,7 @@
       "sma150": "below_down",
       "sma200": "below_down",
       "atr_multiple": -1.2924,
-      "rs_rating": null,
+      "rs_rating": 29,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -9626,8 +9626,8 @@
       "sma150": "below_down",
       "sma200": "below_down",
       "atr_multiple": 1.4747,
-      "rs_rating": null,
-      "rs_1m_new_high": false,
+      "rs_rating": 50,
+      "rs_1m_new_high": true,
       "vars_history": [
         {
           "v": -10.6349,
@@ -9724,7 +9724,7 @@
       "sma150": "below_down",
       "sma200": "below_down",
       "atr_multiple": -1.3402,
-      "rs_rating": null,
+      "rs_rating": 36,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -9822,7 +9822,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 4.4531,
-      "rs_rating": null,
+      "rs_rating": 79,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -9920,7 +9920,7 @@
       "sma150": "below_down",
       "sma200": "below_down",
       "atr_multiple": -0.3001,
-      "rs_rating": null,
+      "rs_rating": 39,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -10018,7 +10018,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 4.9313,
-      "rs_rating": null,
+      "rs_rating": 91,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -10116,7 +10116,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 3.4538,
-      "rs_rating": null,
+      "rs_rating": 76,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -10214,7 +10214,7 @@
       "sma150": "below_down",
       "sma200": "below_down",
       "atr_multiple": 0.4134,
-      "rs_rating": null,
+      "rs_rating": 48,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -10312,7 +10312,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 3.3907,
-      "rs_rating": null,
+      "rs_rating": 83,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -10410,7 +10410,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 1.7192,
-      "rs_rating": null,
+      "rs_rating": 56,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -10508,7 +10508,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 1.7708,
-      "rs_rating": null,
+      "rs_rating": 57,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -10606,7 +10606,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 4.4769,
-      "rs_rating": null,
+      "rs_rating": 75,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -10704,7 +10704,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 3.223,
-      "rs_rating": null,
+      "rs_rating": 70,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -10802,7 +10802,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 2.252,
-      "rs_rating": null,
+      "rs_rating": 63,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -10900,7 +10900,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 7.6081,
-      "rs_rating": null,
+      "rs_rating": 80,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -10998,7 +10998,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": -1.5976,
-      "rs_rating": null,
+      "rs_rating": 58,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -11096,7 +11096,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 5.8626,
-      "rs_rating": null,
+      "rs_rating": 80,
       "rs_1m_new_high": true,
       "vars_history": [
         {
@@ -11194,7 +11194,7 @@
       "sma150": "below_down",
       "sma200": "below_down",
       "atr_multiple": 1.5216,
-      "rs_rating": null,
+      "rs_rating": 48,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -11292,7 +11292,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 1.7201,
-      "rs_rating": null,
+      "rs_rating": 52,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -11390,7 +11390,7 @@
       "sma150": "below_up",
       "sma200": "above_up",
       "atr_multiple": -1.3324,
-      "rs_rating": null,
+      "rs_rating": 58,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -11488,7 +11488,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 0.389,
-      "rs_rating": null,
+      "rs_rating": 83,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -11586,7 +11586,7 @@
       "sma150": "below_down",
       "sma200": "below_down",
       "atr_multiple": -1.7789,
-      "rs_rating": null,
+      "rs_rating": 10,
       "rs_1m_new_high": false,
       "vars_history": [
         {
@@ -11684,7 +11684,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 4.8271,
-      "rs_rating": null,
+      "rs_rating": 93,
       "rs_1m_new_high": true,
       "vars_history": [
         {
@@ -11782,7 +11782,7 @@
       "sma150": "above_up",
       "sma200": "above_up",
       "atr_multiple": 3.3918,
-      "rs_rating": null,
+      "rs_rating": 75,
       "rs_1m_new_high": false,
       "vars_history": [
         {
