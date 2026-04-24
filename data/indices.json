@@ -1,19 +1,19 @@
 {
-  "updated": "2026-04-24 10:00 UTC",
+  "updated": "2026-04-24 10:04 UTC",
   "indices": [
     {
       "ticker": "^VIX",
       "name": "CBOE Volatility Index",
-      "price": 19.23,
-      "daily_chg": -0.4143,
-      "intraday_chg": 1.7999,
-      "chg_5d": 10.0114,
+      "price": 19.25,
+      "daily_chg": -0.3107,
+      "intraday_chg": 1.9058,
+      "chg_5d": 10.1259,
       "ema9": "below_down",
       "ema21": "below_down",
       "ema50": "below_down",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -1.5425,
+      "atr_multiple": -1.5333,
       "rs_rating": 60,
       "rs_1m_new_high": false,
       "vars_history": [
@@ -94,8 +94,8 @@
           "m": -0.1001
         },
         {
-          "v": -3.2856,
-          "m": -0.5943
+          "v": -3.266,
+          "m": -0.5933
         }
       ]
     },
@@ -231,7 +231,7 @@
         },
         {
           "v": -15.7635,
-          "m": -20.9809
+          "m": -20.981
         },
         {
           "v": -15.7021,
@@ -246,7 +246,7 @@
           "m": -21.1894
         },
         {
-          "v": -0.3715,
+          "v": -0.3716,
           "m": -20.5763
         },
         {
@@ -275,7 +275,7 @@
         },
         {
           "v": 15.5973,
-          "m": -11.0716
+          "m": -11.0717
         },
         {
           "v": 15.5616,
@@ -283,7 +283,7 @@
         },
         {
           "v": 12.7468,
-          "m": -6.9608
+          "m": -6.9609
         },
         {
           "v": 16.2378,
@@ -788,16 +788,16 @@
     {
       "ticker": "DX-Y.NYB",
       "name": "US Dollar Index",
-      "price": 98.804,
-      "daily_chg": 0.004,
-      "intraday_chg": -0.0172,
-      "chg_5d": 0.7176,
+      "price": 98.793,
+      "daily_chg": -0.0071,
+      "intraday_chg": -0.0283,
+      "chg_5d": 0.7064,
       "ema9": "above_up",
       "ema21": "above_up",
-      "ema50": "above_up",
+      "ema50": "below_down",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -0.0352,
+      "atr_multiple": -0.056,
       "rs_rating": 51,
       "rs_1m_new_high": false,
       "vars_history": [
@@ -878,8 +878,8 @@
           "m": 0.5231
         },
         {
-          "v": -0.0183,
-          "m": 0.441
+          "v": -0.0291,
+          "m": 0.4405
         }
       ]
     },
@@ -3832,16 +3832,16 @@
     {
       "ticker": "SOL-USD",
       "name": "Solana",
-      "price": 85.24,
-      "daily_chg": -1.046,
-      "intraday_chg": -1.0473,
-      "chg_5d": 1.985,
+      "price": 85.41,
+      "daily_chg": -0.8487,
+      "intraday_chg": -0.85,
+      "chg_5d": 2.1884,
       "ema9": "below_down",
-      "ema21": "below_down",
+      "ema21": "above_up",
       "ema50": "below_down",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": -0.1498,
+      "atr_multiple": -0.0994,
       "rs_rating": 22,
       "rs_1m_new_high": false,
       "vars_history": [
@@ -3922,24 +3922,24 @@
           "m": -0.9996
         },
         {
-          "v": -0.4953,
-          "m": -0.7795
+          "v": -0.3287,
+          "m": -0.7711
         }
       ]
     },
     {
       "ticker": "BTC-USD",
       "name": "Bitcoin",
-      "price": 77488.8828,
-      "daily_chg": -0.9967,
-      "intraday_chg": -1.0089,
-      "chg_5d": 4.9184,
+      "price": 77529.1562,
+      "daily_chg": -0.9452,
+      "intraday_chg": -0.9575,
+      "chg_5d": 4.9729,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": 2.6637,
+      "atr_multiple": 2.6803,
       "rs_rating": 41,
       "rs_1m_new_high": false,
       "vars_history": [
@@ -4020,24 +4020,24 @@
           "m": 3965.3155
         },
         {
-          "v": 6336.0675,
-          "m": 4349.5466
+          "v": 6375.5355,
+          "m": 4351.52
         }
       ]
     },
     {
       "ticker": "ETH-USD",
       "name": "Ethereum",
-      "price": 2308.6799,
-      "daily_chg": -0.9794,
-      "intraday_chg": -0.9804,
-      "chg_5d": 1.9322,
+      "price": 2310.54,
+      "daily_chg": -0.8996,
+      "intraday_chg": -0.9006,
+      "chg_5d": 2.0143,
       "ema9": "below_down",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": 1.4305,
+      "atr_multiple": 1.4488,
       "rs_rating": 35,
       "rs_1m_new_high": false,
       "vars_history": [
@@ -4118,8 +4118,8 @@
           "m": 173.4601
         },
         {
-          "v": 142.7352,
-          "m": 179.6449
+          "v": 144.5581,
+          "m": 179.7361
         }
       ]
     }
