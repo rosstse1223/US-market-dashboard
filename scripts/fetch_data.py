@@ -34,8 +34,8 @@ SECTORS = [
     {"ticker": "XLI",  "name": "Industrials"},
     {"ticker": "XLY",  "name": "Consumer Discretionary"},
     {"ticker": "XLP",  "name": "Consumer Staples"},
-    {"ticker": "XLU",  "name": "Utilities"},
     {"ticker": "XLB",  "name": "Materials"},
+    {"ticker": "XLU",  "name": "Utilities"},
     {"ticker": "XLRE", "name": "Real Estate"},
     {"ticker": "XLC",  "name": "Communication Services"},
 ]
@@ -151,36 +151,26 @@ THEMATIC = [
 ]
 
 
-# ── RS Rating: Fred6724's live universe ───────────────────────────────────
-RS_CSV_URL = "https://raw.githubusercontent.com/Fred6725/rs-log/main/output/rs_stocks.csv"
+# ── RS universe: Fred6724's live CSV ─────────────────────────────────────
+RS_CSV_URL = "https://raw.githubusercontent.com/Fred6724/rs-log/main/output/rs_stocks.csv"
 
-def fetch_rs_scores_array() -> np.ndarray | None:
-    """
-    Download Fred6724's rs_stocks.csv (auto-updated daily via GitHub Actions)
-    and return a sorted numpy array of all RS scores in the ~5800 stock universe.
-    Used for direct percentile lookup — no approximation needed.
-    """
+
+def fetch_rs_scores_array():
     try:
         resp = requests.get(RS_CSV_URL, timeout=15)
         resp.raise_for_status()
         df = pd.read_csv(StringIO(resp.text))
-        scores = df["Relative Strength"].dropna().values
-        scores_sorted = np.sort(scores)
-        print(f"  ✓  RS universe: {len(scores_sorted)} stocks, "
-              f"range [{scores_sorted[0]:.2f} – {scores_sorted[-1]:.2f}]")
-        return scores_sorted
+        scores = np.sort(df["Relative Strength"].dropna().values)
+        print(f"  RS universe: {len(scores)} stocks  [{scores[0]:.2f} – {scores[-1]:.2f}]")
+        return scores
     except Exception as e:
-        print(f"  ⚠  Could not fetch RS universe ({e}). RS Rating will be None.")
+        print(f"  Could not fetch RS universe ({e}). RS Rating will be None.")
         return None
 
 
-def compute_rs_score(ticker_close: pd.Series, spx_close: pd.Series) -> float | None:
-    """
-    Fred6724's RS performance score formula:
-      0.4 × P(63d) + 0.2 × P(126d) + 0.2 × P(189d) + 0.2 × P(252d)
-    divided by same for SPX, scaled × 100.
-    Requires at least 253 aligned bars.
-    """
+# ── RS Score helpers ──────────────────────────────────────────────────────
+
+def compute_rs_score(ticker_close, spx_close):
     combined = pd.concat([ticker_close, spx_close], axis=1).dropna()
     combined.columns = ["t", "s"]
     if len(combined) < 253:
@@ -199,38 +189,58 @@ def compute_rs_score(ticker_close: pd.Series, spx_close: pd.Series) -> float | N
               + 0.2 * (s.iloc[-1] / s.iloc[-1-n126])
               + 0.2 * (s.iloc[-1] / s.iloc[-1-n189])
               + 0.2 * (s.iloc[-1] / s.iloc[-1-n252]))
-    if rs_ref == 0:
+    return float((rs_stock / rs_ref) * 100) if rs_ref != 0 else None
+
+
+def compute_1m_rs_score(ticker_close, spx_close, bars_back=0):
+    combined = pd.concat([ticker_close, spx_close], axis=1).dropna()
+    combined.columns = ["t", "s"]
+    if bars_back > 0:
+        combined = combined.iloc[:-bars_back]
+    if len(combined) < 22:
         return None
-    return float((rs_stock / rs_ref) * 100)
+    t   = combined["t"]
+    s   = combined["s"]
+    n21 = min(21, len(t) - 1)
+    pt21 = t.iloc[-1] / t.iloc[-1 - n21]
+    ps21 = s.iloc[-1] / s.iloc[-1 - n21]
+    return float((pt21 / ps21) * 100) if ps21 != 0 else None
 
 
-def score_to_rating(score: float, scores_array: np.ndarray) -> int | None:
-    """
-    Direct percentile rank of score against the full universe distribution.
-    Uses binary search (np.searchsorted) for O(log n) lookup.
-    Returns integer 1–99.
-    """
+def score_to_rating(score, scores_array):
     if score is None or scores_array is None:
         return None
-    n = len(scores_array)
-    rank_from_bottom = int(np.searchsorted(scores_array, score, side="left"))
-    percentile = (rank_from_bottom / n) * 100
-    return max(1, min(99, round(percentile)))
+    n    = len(scores_array)
+    rank = int(np.searchsorted(scores_array, score, side="left"))
+    return max(1, min(99, round((rank / n) * 100)))
 
 
-# ── MA status helper ──────────────────────────────────────────────────────
-def ma_status(price: float, ma_val: float, ma_prev: float) -> str:
+def compute_1m_rs_new_high(ticker_close, spx_close):
+    window = []
+    for i in range(21, -1, -1):
+        sc = compute_1m_rs_score(ticker_close, spx_close, bars_back=i)
+        window.append(sc)
+    today = window[-1]
+    past  = [r for r in window[:-1] if r is not None]
+    if today is None or not past:
+        return None
+    return bool(today > max(past))
+
+
+# ── MA status helpers ─────────────────────────────────────────────────────
+
+def ma_status(price, ma_val, ma_prev):
     if price >= ma_val:
         return "above_up" if ma_val >= ma_prev else "above_down"
     else:
         return "below_up" if ma_val >= ma_prev else "below_down"
 
 
-def ema(series: pd.Series, period: int) -> pd.Series:
+def ema(series, period):
     return series.ewm(span=period, adjust=False).mean()
 
 
-def vars_histogram(close: pd.Series, window: int = 20, lookback: int = 50) -> list:
+def vars_histogram(close, window=20, lookback=50):
     if len(close) < lookback + window:
         return []
     sma_lb = close.rolling(lookback).mean()
@@ -247,8 +257,8 @@ def vars_histogram(close: pd.Series, window: int = 20, lookback: int = 50) -> li
 
 
 # ── Core per-ticker calculation ───────────────────────────────────────────
-def compute_row(ticker_def: dict, hist: pd.DataFrame,
-                spx_close: pd.Series, rs_scores: np.ndarray) -> dict:
+
+def compute_row(ticker_def, hist, spx_close, rs_scores):
     ticker = ticker_def["ticker"]
     name   = ticker_def["name"]
 
@@ -256,23 +266,20 @@ def compute_row(ticker_def: dict, hist: pd.DataFrame,
     open_ = hist["Open"].dropna()
 
     if len(close) < 30:
-        print(f"  ⚠  {ticker}: not enough data ({len(close)} bars)")
+        print(f"  {ticker}: not enough data ({len(close)} bars)")
         return None
 
-    price      = round(float(close.iloc[-1]), 4)
-    prev_close = float(close.iloc[-2])
-    daily_chg  = round((price / prev_close - 1) * 100, 4)
-
+    price        = round(float(close.iloc[-1]), 4)
+    prev_close   = float(close.iloc[-2])
+    daily_chg    = round((price / prev_close - 1) * 100, 4)
     last_open    = float(open_.iloc[-1]) if len(open_) > 0 else None
     intraday_chg = round((price / last_open - 1) * 100, 4) if last_open else None
     chg_5d       = round((price / float(close.iloc[-6]) - 1) * 100, 4) if len(close) >= 6 else None
 
     ema9_s   = ema(close, 9)
-    ema9_st  = ma_status(price, float(ema9_s.iloc[-1]), float(ema9_s.iloc[-2])) if len(ema9_s) >= 2 else None
-
+    ema9_st  = ma_status(price, float(ema9_s.iloc[-1]),  float(ema9_s.iloc[-2]))  if len(ema9_s)  >= 2 else None
     ema21_s  = ema(close, 21)
     ema21_st = ma_status(price, float(ema21_s.iloc[-1]), float(ema21_s.iloc[-2])) if len(ema21_s) >= 2 else None
-
     ema50_s   = ema(close, 50)
     ema50_val = float(ema50_s.iloc[-1]) if len(ema50_s) >= 2 else None
     ema50_st  = ma_status(price, ema50_val, float(ema50_s.iloc[-2])) if ema50_val and len(ema50_s) >= 2 else None
@@ -304,30 +311,32 @@ def compute_row(ticker_def: dict, hist: pd.DataFrame,
 
     vars_hist = vars_histogram(close, window=20, lookback=50) if len(close) >= 70 else []
 
-    rs_score  = compute_rs_score(close, spx_close)
-    rs_rating = score_to_rating(rs_score, rs_scores)
+    rs_score       = compute_rs_score(close, spx_close)
+    rs_rating      = score_to_rating(rs_score, rs_scores)
+    rs_1m_new_high = compute_1m_rs_new_high(close, spx_close)
 
     return {
-        "ticker":       ticker,
-        "name":         name,
-        "price":        price,
-        "daily_chg":    daily_chg,
-        "intraday_chg": intraday_chg,
-        "chg_5d":       chg_5d,
-        "ema9":         ema9_st,
-        "ema21":        ema21_st,
-        "ema50":        ema50_st,
-        "sma150":       sma150_st,
-        "sma200":       sma200_st,
-        "atr_multiple": atr_mult,
-        "rs_rating":    rs_rating,
-        "vars_history": vars_hist,
+        "ticker":          ticker,
+        "name":            name,
+        "price":           price,
+        "daily_chg":       daily_chg,
+        "intraday_chg":    intraday_chg,
+        "chg_5d":          chg_5d,
+        "ema9":            ema9_st,
+        "ema21":           ema21_st,
+        "ema50":           ema50_st,
+        "sma150":          sma150_st,
+        "sma200":          sma200_st,
+        "atr_multiple":    atr_mult,
+        "rs_rating":       rs_rating,
+        "rs_1m_new_high":  rs_1m_new_high,
+        "vars_history":    vars_hist,
     }
 
 
 # ── Download + process one section ───────────────────────────────────────
-def process_section(ticker_defs: list, spx_close: pd.Series,
-                    rs_scores: np.ndarray) -> list:
+
+def process_section(ticker_defs, spx_close, rs_scores):
     rows = []
     for td in ticker_defs:
         sym = td["ticker"]
@@ -335,7 +344,7 @@ def process_section(ticker_defs: list, spx_close: pd.Series,
             hist = yf.download(sym, period="2y", interval="1d",
                                auto_adjust=True, progress=False)
             if hist is None or hist.empty:
-                print(f"  ⚠  {sym}: no data returned")
+                print(f"  {sym}: no data returned")
                 continue
             if isinstance(hist.columns, pd.MultiIndex):
                 hist.columns = hist.columns.get_level_values(0)
@@ -343,28 +352,30 @@ def process_section(ticker_defs: list, spx_close: pd.Series,
             if row:
                 rows.append(row)
                 rs_str = str(row["rs_rating"]) if row["rs_rating"] is not None else "N/A"
-                print(f"  ✓  {sym}  (RS: {rs_str})")
+                nh_str = "NEW HIGH" if row["rs_1m_new_high"] else ("—" if row["rs_1m_new_high"] is False else "N/A")
+                print(f"  {sym}  RS:{rs_str}  1M:{nh_str}")
         except Exception as e:
-            print(f"  ✗  {sym}: {e}")
+            print(f"  {sym}: {e}")
     return rows
 
 
 # ── Main ──────────────────────────────────────────────────────────────────
+
 def main():
     print("=" * 55)
     print("  Market Dashboard — fetch_data.py")
-    print(f"  Run time: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}")
+    print(f"  Run: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}")
     print("=" * 55)
 
-    print("\n── Downloading SPX reference ──")
+    print("\n── SPX reference ──")
     spx_hist = yf.download("^GSPC", period="2y", interval="1d",
                            auto_adjust=True, progress=False)
     if isinstance(spx_hist.columns, pd.MultiIndex):
         spx_hist.columns = spx_hist.columns.get_level_values(0)
     spx_close = spx_hist["Close"].dropna()
-    print(f"  ✓  SPX: {len(spx_close)} bars")
+    print(f"  SPX: {len(spx_close)} bars")
 
-    print("\n── Fetching RS universe (Fred6724) ──")
+    print("\n── RS universe (Fred6724) ──")
     rs_scores = fetch_rs_scores_array()
 
     sections = {
@@ -380,13 +391,13 @@ def main():
     for section_name, ticker_defs in sections.items():
         print(f"\n── {section_name.upper()} ({len(ticker_defs)} tickers) ──")
         output[section_name] = process_section(ticker_defs, spx_close, rs_scores)
-        print(f"   → {len(output[section_name])} rows written")
+        print(f"   {len(output[section_name])} rows written")
 
     with open(OUTPUT_FILE, "w") as f:
         json.dump(output, f, indent=2)
 
     total = sum(len(v) for v in output.values() if isinstance(v, list))
-    print(f"\n✅  Done → {OUTPUT_FILE}  ({total} total rows)")
+    print(f"\nDone  {OUTPUT_FILE}  ({total} total rows)")
 
 
 if __name__ == "__main__":
