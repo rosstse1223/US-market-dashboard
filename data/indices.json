@@ -1,26 +1,22 @@
 {
-  "updated": "2026-05-05 23:44 UTC",
+  "updated": "2026-05-06 23:45 UTC",
   "indices": [
     {
       "ticker": "^VIX",
       "name": "CBOE Volatility Index",
-      "price": 17.38,
-      "daily_chg": -4.9754,
-      "intraday_chg": -3.1755,
-      "chg_5d": -2.5238,
+      "price": 17.39,
+      "daily_chg": 0.0575,
+      "intraday_chg": 1.3994,
+      "chg_5d": -7.5492,
       "ema9": "below_down",
       "ema21": "below_down",
       "ema50": "below_down",
       "sma150": "below_up",
       "sma200": "below_up",
-      "atr_multiple": -3.0284,
-      "rs_rating": 42,
+      "atr_multiple": -3.0015,
+      "rs_rating": 35,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -1.262,
-          "m": 5.1271
-        },
         {
           "v": -2.8748,
           "m": 4.6959
@@ -96,29 +92,29 @@
         {
           "v": -4.7762,
           "m": -3.8842
+        },
+        {
+          "v": -4.723,
+          "m": -4.0573
         }
       ]
     },
     {
       "ticker": "IWM",
       "name": "Russell 2000 ETF",
-      "price": 282.56,
-      "daily_chg": 1.6842,
-      "intraday_chg": 0.8675,
-      "chg_5d": 3.158,
+      "price": 286.8,
+      "daily_chg": 1.5006,
+      "intraday_chg": 0.5046,
+      "chg_5d": 5.4102,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 5.0358,
-      "rs_rating": 69,
+      "atr_multiple": 5.686,
+      "rs_rating": 71,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 4.3075,
-          "m": -9.9123
-        },
         {
           "v": 5.8435,
           "m": -9.2392
@@ -194,29 +190,29 @@
         {
           "v": 22.2421,
           "m": 14.9359
+        },
+        {
+          "v": 26.0034,
+          "m": 16.0207
         }
       ]
     },
     {
       "ticker": "DIA",
       "name": "Dow Jones ETF",
-      "price": 492.96,
-      "daily_chg": 0.6945,
-      "intraday_chg": 0.2175,
-      "chg_5d": 0.3134,
+      "price": 499.05,
+      "daily_chg": 1.2354,
+      "intraday_chg": 0.4165,
+      "chg_5d": 2.1241,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 2.7795,
-      "rs_rating": 58,
+      "atr_multiple": 3.7083,
+      "rs_rating": 60,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -0.3715,
-          "m": -20.5763
-        },
         {
           "v": 2.4972,
           "m": -19.687
@@ -251,7 +247,7 @@
         },
         {
           "v": 12.7468,
-          "m": -6.9609
+          "m": -6.9608
         },
         {
           "v": 16.2378,
@@ -290,31 +286,31 @@
           "m": 9.1734
         },
         {
-          "v": 14.7849,
-          "m": 10.6081
+          "v": 14.785,
+          "m": 10.6082
+        },
+        {
+          "v": 20.7044,
+          "m": 11.6619
         }
       ]
     },
     {
       "ticker": "SPY",
       "name": "S&P 500 ETF",
-      "price": 723.77,
-      "daily_chg": 0.8022,
-      "intraday_chg": 0.2771,
-      "chg_5d": 1.6974,
+      "price": 733.83,
+      "daily_chg": 1.3899,
+      "intraday_chg": 0.7787,
+      "chg_5d": 3.1268,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 6.3853,
-      "rs_rating": 62,
+      "atr_multiple": 7.2357,
+      "rs_rating": 65,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 2.4672,
-          "m": -23.0835
-        },
         {
           "v": 6.6409,
           "m": -22.2038
@@ -390,29 +386,29 @@
         {
           "v": 42.8182,
           "m": 28.996
+        },
+        {
+          "v": 51.9112,
+          "m": 31.4682
         }
       ]
     },
     {
       "ticker": "QQQ",
       "name": "Nasdaq 100 ETF",
-      "price": 681.61,
-      "daily_chg": 1.2974,
-      "intraday_chg": 0.5399,
-      "chg_5d": 3.659,
+      "price": 695.77,
+      "daily_chg": 2.0774,
+      "intraday_chg": 1.1573,
+      "chg_5d": 5.1695,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 7.5618,
-      "rs_rating": 68,
+      "atr_multiple": 8.4639,
+      "rs_rating": 70,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 5.1694,
-          "m": -20.1474
-        },
         {
           "v": 9.6723,
           "m": -19.3328
@@ -488,29 +484,29 @@
         {
           "v": 66.3514,
           "m": 41.9262
+        },
+        {
+          "v": 78.7381,
+          "m": 45.6046
         }
       ]
     },
     {
       "ticker": "QQQE",
       "name": "Nasdaq 100 Equal Weight ETF",
-      "price": 111.22,
-      "daily_chg": 0.9714,
-      "intraday_chg": 0.2885,
-      "chg_5d": 3.8372,
+      "price": 112.6,
+      "daily_chg": 1.2408,
+      "intraday_chg": 0.3833,
+      "chg_5d": 4.2689,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 6.7549,
-      "rs_rating": 63,
-      "rs_1m_new_high": false,
+      "atr_multiple": 7.6037,
+      "rs_rating": 65,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": 0.4785,
-          "m": -3.0568
-        },
         {
           "v": 0.1991,
           "m": -2.9711
@@ -586,29 +582,29 @@
         {
           "v": 8.1686,
           "m": 4.566
+        },
+        {
+          "v": 9.3498,
+          "m": 5.0095
         }
       ]
     },
     {
       "ticker": "EDOW",
       "name": "Dow Jones Equal Weight ETF",
-      "price": 42.3194,
-      "daily_chg": 0.3662,
-      "intraday_chg": 0.0932,
-      "chg_5d": -0.0274,
+      "price": 42.755,
+      "daily_chg": 1.0303,
+      "intraday_chg": 0.1523,
+      "chg_5d": 1.3608,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 1.8586,
-      "rs_rating": 57,
+      "atr_multiple": 2.9272,
+      "rs_rating": 59,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -0.4929,
-          "m": -1.4729
-        },
         {
           "v": -0.2152,
           "m": -1.4478
@@ -682,31 +678,31 @@
           "m": 0.2621
         },
         {
-          "v": 0.6688,
+          "v": 0.6684,
           "m": 0.3676
+        },
+        {
+          "v": 1.109,
+          "m": 0.4476
         }
       ]
     },
     {
       "ticker": "RSP",
       "name": "S&P 500 Equal Weight ETF",
-      "price": 203.24,
-      "daily_chg": 0.7935,
-      "intraday_chg": 0.4746,
-      "chg_5d": 1.2353,
+      "price": 204.85,
+      "daily_chg": 0.7922,
+      "intraday_chg": 0.132,
+      "chg_5d": 2.2155,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 2.6081,
-      "rs_rating": 59,
+      "atr_multiple": 3.2488,
+      "rs_rating": 61,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 0.6042,
-          "m": -5.5945
-        },
         {
           "v": 0.7242,
           "m": -5.412
@@ -782,29 +778,29 @@
         {
           "v": 5.4827,
           "m": 3.4977
+        },
+        {
+          "v": 7.0475,
+          "m": 3.8199
         }
       ]
     },
     {
       "ticker": "DX-Y.NYB",
       "name": "US Dollar Index",
-      "price": 98.486,
-      "daily_chg": 0.0162,
-      "intraday_chg": 0.0203,
-      "chg_5d": -0.1359,
-      "ema9": "above_up",
+      "price": 98.015,
+      "daily_chg": -0.4722,
+      "intraday_chg": -0.298,
+      "chg_5d": -0.9149,
+      "ema9": "below_down",
       "ema21": "below_down",
       "ema50": "below_down",
       "sma150": "below_up",
       "sma200": "below_up",
-      "atr_multiple": -0.8516,
-      "rs_rating": 50,
+      "atr_multiple": -1.6203,
+      "rs_rating": 49,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 0.6374,
-          "m": 1.4619
-        },
         {
           "v": 0.2754,
           "m": 1.4163
@@ -878,31 +874,31 @@
           "m": -0.2162
         },
         {
-          "v": -0.4737,
-          "m": -0.2994
+          "v": -0.4796,
+          "m": -0.2997
+        },
+        {
+          "v": -0.9473,
+          "m": -0.3789
         }
       ]
     },
     {
       "ticker": "ARKK",
       "name": "ARK Innovation ETF",
-      "price": 76.58,
-      "daily_chg": -2.1092,
-      "intraday_chg": -2.3214,
-      "chg_5d": 1.4977,
+      "price": 79.58,
+      "daily_chg": 3.9175,
+      "intraday_chg": 2.9096,
+      "chg_5d": 8.2279,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
-      "sma150": "below_down",
-      "sma200": "below_down",
-      "atr_multiple": 1.6354,
-      "rs_rating": 62,
+      "sma150": "above_down",
+      "sma200": "above_up",
+      "atr_multiple": 2.8178,
+      "rs_rating": 69,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -1.0816,
-          "m": -4.3857
-        },
         {
           "v": -2.3046,
           "m": -4.366
@@ -978,29 +974,29 @@
         {
           "v": 3.8244,
           "m": 3.8488
+        },
+        {
+          "v": 6.6742,
+          "m": 4.2366
         }
       ]
     },
     {
       "ticker": "^TNX",
       "name": "US 10Y Treasury Yield",
-      "price": 4.416,
-      "daily_chg": -0.6748,
-      "intraday_chg": -0.2259,
-      "chg_5d": 1.424,
-      "ema9": "above_up",
+      "price": 4.356,
+      "daily_chg": -1.3587,
+      "intraday_chg": -0.229,
+      "chg_5d": -1.4034,
+      "ema9": "below_down",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_down",
-      "atr_multiple": 2.7506,
+      "atr_multiple": 1.501,
       "rs_rating": 54,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 0.0858,
-          "m": 0.1331
-        },
         {
           "v": 0.0864,
           "m": 0.1347
@@ -1076,6 +1072,10 @@
         {
           "v": 0.1503,
           "m": 0.102
+        },
+        {
+          "v": 0.0838,
+          "m": 0.1019
         }
       ]
     }
@@ -1084,23 +1084,19 @@
     {
       "ticker": "XLK",
       "name": "Technology",
-      "price": 165.63,
-      "daily_chg": 2.2092,
-      "intraday_chg": 1.074,
-      "chg_5d": 4.9287,
+      "price": 170.03,
+      "daily_chg": 2.6565,
+      "intraday_chg": 1.2807,
+      "chg_5d": 6.8632,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 7.4224,
-      "rs_rating": 72,
+      "atr_multiple": 8.3179,
+      "rs_rating": 75,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 2.6344,
-          "m": -4.6678
-        },
         {
           "v": 3.1304,
           "m": -4.3991
@@ -1176,29 +1172,29 @@
         {
           "v": 21.5674,
           "m": 13.6554
+        },
+        {
+          "v": 25.3697,
+          "m": 14.7922
         }
       ]
     },
     {
       "ticker": "XLF",
       "name": "Financials",
-      "price": 51.59,
-      "daily_chg": 0.0194,
-      "intraday_chg": 0.0388,
-      "chg_5d": -0.5014,
-      "ema9": "below_down",
+      "price": 51.84,
+      "daily_chg": 0.4846,
+      "intraday_chg": -0.1541,
+      "chg_5d": -0.1541,
+      "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "below_down",
-      "sma200": "below_down",
-      "atr_multiple": 1.4764,
-      "rs_rating": 50,
+      "sma200": "below_up",
+      "atr_multiple": 1.7809,
+      "rs_rating": 51,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 0.3121,
-          "m": -2.5805
-        },
         {
           "v": 0.4701,
           "m": -2.3821
@@ -1274,29 +1270,29 @@
         {
           "v": 1.0082,
           "m": 1.1619
+        },
+        {
+          "v": 1.2358,
+          "m": 1.2081
         }
       ]
     },
     {
       "ticker": "XLV",
       "name": "Health Care",
-      "price": 145.3,
-      "daily_chg": 0.3938,
-      "intraday_chg": 0.0138,
-      "chg_5d": 1.015,
+      "price": 145.4,
+      "daily_chg": 0.0688,
+      "intraday_chg": 0.0275,
+      "chg_5d": 1.7922,
       "ema9": "above_up",
       "ema21": "below_down",
       "ema50": "below_down",
       "sma150": "below_up",
       "sma200": "below_up",
-      "atr_multiple": -1.7276,
-      "rs_rating": 51,
+      "atr_multiple": -1.5904,
+      "rs_rating": 53,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -2.4567,
-          "m": -7.0701
-        },
         {
           "v": -2.687,
           "m": -7.027
@@ -1372,29 +1368,29 @@
         {
           "v": -3.3127,
           "m": -4.2459
+        },
+        {
+          "v": -2.9763,
+          "m": -4.2718
         }
       ]
     },
     {
       "ticker": "XLE",
       "name": "Energy",
-      "price": 59.45,
-      "daily_chg": 0.101,
-      "intraday_chg": 0.3714,
-      "chg_5d": 3.0151,
-      "ema9": "above_up",
-      "ema21": "above_up",
+      "price": 57.0,
+      "daily_chg": -4.1211,
+      "intraday_chg": -0.5062,
+      "chg_5d": -3.4389,
+      "ema9": "below_down",
+      "ema21": "below_down",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 1.3516,
-      "rs_rating": 75,
+      "atr_multiple": -0.5399,
+      "rs_rating": 73,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 2.0935,
-          "m": 5.7883
-        },
         {
           "v": 1.2139,
           "m": 5.5712
@@ -1470,29 +1466,29 @@
         {
           "v": 1.7368,
           "m": 0.3347
+        },
+        {
+          "v": -0.7584,
+          "m": 0.1921
         }
       ]
     },
     {
       "ticker": "XLI",
       "name": "Industrials",
-      "price": 172.41,
-      "daily_chg": 0.8364,
-      "intraday_chg": 0.151,
-      "chg_5d": 0.8364,
+      "price": 176.87,
+      "daily_chg": 2.5869,
+      "intraday_chg": 0.9071,
+      "chg_5d": 4.084,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 1.0551,
-      "rs_rating": 62,
+      "atr_multiple": 2.4168,
+      "rs_rating": 65,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 1.6676,
-          "m": -4.8155
-        },
         {
           "v": 3.2657,
           "m": -4.7041
@@ -1568,29 +1564,29 @@
         {
           "v": 3.1295,
           "m": 2.6944
+        },
+        {
+          "v": 7.5818,
+          "m": 2.9901
         }
       ]
     },
     {
       "ticker": "XLY",
       "name": "Consumer Discretionary",
-      "price": 118.07,
-      "daily_chg": 0.2973,
-      "intraday_chg": -0.4385,
-      "chg_5d": 0.9059,
+      "price": 119.87,
+      "daily_chg": 1.5245,
+      "intraday_chg": 0.7565,
+      "chg_5d": 2.5933,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
-      "sma150": "above_down",
+      "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 2.3005,
-      "rs_rating": 55,
-      "rs_1m_new_high": false,
+      "atr_multiple": 3.1336,
+      "rs_rating": 57,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": -3.4463,
-          "m": -7.0628
-        },
         {
           "v": -1.3322,
           "m": -6.8826
@@ -1666,29 +1662,29 @@
         {
           "v": 4.1574,
           "m": 3.3285
+        },
+        {
+          "v": 5.8901,
+          "m": 3.7953
         }
       ]
     },
     {
       "ticker": "XLP",
       "name": "Consumer Staples",
-      "price": 84.06,
-      "daily_chg": 0.6225,
-      "intraday_chg": 0.6948,
-      "chg_5d": 1.1796,
+      "price": 84.24,
+      "daily_chg": 0.2141,
+      "intraday_chg": -0.1126,
+      "chg_5d": 1.5919,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 0.4904,
+      "atr_multiple": 0.7571,
       "rs_rating": 54,
-      "rs_1m_new_high": false,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": -2.0471,
-          "m": -2.303
-        },
         {
           "v": -1.3922,
           "m": -2.3858
@@ -1764,29 +1760,29 @@
         {
           "v": 0.5396,
           "m": -1.6062
+        },
+        {
+          "v": 0.8196,
+          "m": -1.4629
         }
       ]
     },
     {
       "ticker": "XLB",
       "name": "Materials",
-      "price": 51.53,
-      "daily_chg": 1.7374,
-      "intraday_chg": 0.96,
-      "chg_5d": 0.2529,
+      "price": 52.41,
+      "daily_chg": 1.7077,
+      "intraday_chg": 0.172,
+      "chg_5d": 2.8454,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 1.1173,
-      "rs_rating": 63,
+      "atr_multiple": 2.1812,
+      "rs_rating": 66,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 1.1323,
-          "m": -1.1726
-        },
         {
           "v": 1.0141,
           "m": -1.1008
@@ -1862,29 +1858,29 @@
         {
           "v": 0.8499,
           "m": 0.8616
+        },
+        {
+          "v": 1.7442,
+          "m": 0.8922
         }
       ]
     },
     {
       "ticker": "XLU",
       "name": "Utilities",
-      "price": 46.37,
-      "daily_chg": 0.0,
-      "intraday_chg": -0.3439,
-      "chg_5d": 0.2595,
-      "ema9": "above_up",
-      "ema21": "above_up",
-      "ema50": "above_up",
+      "price": 45.71,
+      "daily_chg": -1.4233,
+      "intraday_chg": -1.2316,
+      "chg_5d": 0.0657,
+      "ema9": "below_down",
+      "ema21": "below_down",
+      "ema50": "below_down",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 0.1982,
-      "rs_rating": 60,
+      "atr_multiple": -0.6434,
+      "rs_rating": 59,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 1.3498,
-          "m": 1.1576
-        },
         {
           "v": 1.6394,
           "m": 1.1533
@@ -1960,29 +1956,29 @@
         {
           "v": 0.1478,
           "m": 0.2563
+        },
+        {
+          "v": -0.4889,
+          "m": 0.1644
         }
       ]
     },
     {
       "ticker": "XLRE",
       "name": "Real Estate",
-      "price": 44.17,
-      "daily_chg": 0.2042,
-      "intraday_chg": 0.1133,
-      "chg_5d": 0.5921,
+      "price": 44.74,
+      "daily_chg": 1.2905,
+      "intraday_chg": 0.6751,
+      "chg_5d": 2.5206,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 2.616,
-      "rs_rating": 58,
+      "atr_multiple": 3.4099,
+      "rs_rating": 60,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 0.4751,
-          "m": -0.6423
-        },
         {
           "v": 0.7299,
           "m": -0.6246
@@ -2058,29 +2054,29 @@
         {
           "v": 1.5356,
           "m": 1.326
+        },
+        {
+          "v": 2.0796,
+          "m": 1.4062
         }
       ]
     },
     {
       "ticker": "XLC",
       "name": "Communication Services",
-      "price": 115.63,
-      "daily_chg": -0.4048,
-      "intraday_chg": -0.5846,
-      "chg_5d": -0.1037,
-      "ema9": "below_down",
-      "ema21": "below_down",
+      "price": 117.35,
+      "daily_chg": 1.4875,
+      "intraday_chg": 0.9723,
+      "chg_5d": 1.7868,
+      "ema9": "above_up",
+      "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_down",
       "sma200": "above_up",
-      "atr_multiple": 0.5573,
-      "rs_rating": 56,
+      "atr_multiple": 1.8376,
+      "rs_rating": 58,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -1.029,
-          "m": -3.5476
-        },
         {
           "v": -0.5239,
           "m": -3.5776
@@ -2156,6 +2152,10 @@
         {
           "v": 0.7098,
           "m": 1.6067
+        },
+        {
+          "v": 2.3986,
+          "m": 1.7781
         }
       ]
     }
@@ -2164,23 +2164,19 @@
     {
       "ticker": "RSPG",
       "name": "EW Energy",
-      "price": 108.91,
-      "daily_chg": -0.3112,
-      "intraday_chg": 0.0367,
-      "chg_5d": 3.2322,
-      "ema9": "above_up",
-      "ema21": "above_up",
+      "price": 103.88,
+      "daily_chg": -4.6185,
+      "intraday_chg": -1.3673,
+      "chg_5d": -3.8148,
+      "ema9": "below_down",
+      "ema21": "below_down",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 2.1363,
-      "rs_rating": 78,
+      "atr_multiple": -0.1146,
+      "rs_rating": 75,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 4.7882,
-          "m": 11.367
-        },
         {
           "v": 2.9218,
           "m": 10.9492
@@ -2256,29 +2252,29 @@
         {
           "v": 4.8608,
           "m": 1.9287
+        },
+        {
+          "v": -0.2882,
+          "m": 1.6749
         }
       ]
     },
     {
       "ticker": "RSPT",
       "name": "EW Technology",
-      "price": 55.76,
-      "daily_chg": 2.2932,
-      "intraday_chg": 1.4556,
-      "chg_5d": 7.8739,
+      "price": 56.54,
+      "daily_chg": 1.3989,
+      "intraday_chg": 0.5156,
+      "chg_5d": 7.6132,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 7.5619,
-      "rs_rating": 75,
-      "rs_1m_new_high": false,
+      "atr_multiple": 8.1372,
+      "rs_rating": 77,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": 1.8185,
-          "m": -0.6424
-        },
         {
           "v": 1.4487,
           "m": -0.5509
@@ -2354,29 +2350,29 @@
         {
           "v": 7.4161,
           "m": 4.3316
+        },
+        {
+          "v": 7.9977,
+          "m": 4.6405
         }
       ]
     },
     {
       "ticker": "RSPF",
       "name": "EW Financials",
-      "price": 75.62,
-      "daily_chg": 0.2253,
-      "intraday_chg": 0.5051,
-      "chg_5d": -0.3952,
-      "ema9": "below_down",
+      "price": 75.7922,
+      "daily_chg": 0.2277,
+      "intraday_chg": -0.1552,
+      "chg_5d": 0.4269,
+      "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_down",
-      "sma200": "below_down",
-      "atr_multiple": 2.4916,
+      "sma200": "above_up",
+      "atr_multiple": 2.5803,
       "rs_rating": 52,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 0.1843,
-          "m": -3.9681
-        },
         {
           "v": 0.17,
           "m": -3.7109
@@ -2452,29 +2448,29 @@
         {
           "v": 2.1143,
           "m": 2.0952
+        },
+        {
+          "v": 2.2467,
+          "m": 2.1983
         }
       ]
     },
     {
       "ticker": "RSPH",
       "name": "EW Health Care",
-      "price": 30.42,
-      "daily_chg": 0.7952,
-      "intraday_chg": 0.6285,
-      "chg_5d": 0.2306,
-      "ema9": "below_down",
-      "ema21": "below_down",
+      "price": 30.6,
+      "daily_chg": 0.5917,
+      "intraday_chg": 0.1637,
+      "chg_5d": 1.7964,
+      "ema9": "above_up",
+      "ema21": "above_up",
       "ema50": "below_down",
       "sma150": "below_up",
       "sma200": "below_up",
-      "atr_multiple": -1.3305,
-      "rs_rating": 51,
+      "atr_multiple": -0.7361,
+      "rs_rating": 52,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -0.5593,
-          "m": -1.7239
-        },
         {
           "v": -0.6468,
           "m": -1.6948
@@ -2550,29 +2546,29 @@
         {
           "v": -0.518,
           "m": -0.5785
+        },
+        {
+          "v": -0.2942,
+          "m": -0.5652
         }
       ]
     },
     {
       "ticker": "RSPS",
       "name": "EW Consumer Staples",
-      "price": 29.73,
-      "daily_chg": 0.9851,
-      "intraday_chg": 0.8823,
-      "chg_5d": 0.5411,
+      "price": 29.885,
+      "daily_chg": 0.5214,
+      "intraday_chg": 0.1508,
+      "chg_5d": 1.8923,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "below_down",
-      "sma150": "below_up",
-      "sma200": "below_up",
-      "atr_multiple": -1.0319,
+      "sma150": "above_up",
+      "sma200": "above_up",
+      "atr_multiple": -0.472,
       "rs_rating": 49,
-      "rs_1m_new_high": false,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": -1.4506,
-          "m": -1.4822
-        },
         {
           "v": -1.123,
           "m": -1.5181
@@ -2648,29 +2644,29 @@
         {
           "v": -0.3957,
           "m": -1.1285
+        },
+        {
+          "v": -0.1783,
+          "m": -1.0649
         }
       ]
     },
     {
       "ticker": "RSPU",
       "name": "EW Utilities",
-      "price": 81.16,
-      "daily_chg": -0.2336,
-      "intraday_chg": -0.5148,
-      "chg_5d": -0.2336,
+      "price": 79.98,
+      "daily_chg": -1.4539,
+      "intraday_chg": -1.1861,
+      "chg_5d": -0.683,
       "ema9": "below_down",
       "ema21": "below_down",
-      "ema50": "above_up",
+      "ema50": "below_down",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -0.4149,
-      "rs_rating": 60,
+      "atr_multiple": -1.4086,
+      "rs_rating": 58,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 2.5292,
-          "m": 2.0262
-        },
         {
           "v": 3.2206,
           "m": 2.0332
@@ -2746,29 +2742,29 @@
         {
           "v": -0.4543,
           "m": 0.3692
+        },
+        {
+          "v": -1.5776,
+          "m": 0.1638
         }
       ]
     },
     {
       "ticker": "RSPN",
       "name": "EW Materials",
-      "price": 60.48,
-      "daily_chg": 0.7832,
-      "intraday_chg": 0.0827,
-      "chg_5d": 0.0496,
-      "ema9": "below_down",
+      "price": 61.66,
+      "daily_chg": 1.9511,
+      "intraday_chg": 0.5217,
+      "chg_5d": 2.2554,
+      "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 0.5027,
-      "rs_rating": 58,
+      "atr_multiple": 1.7686,
+      "rs_rating": 61,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -0.473,
-          "m": -2.6661
-        },
         {
           "v": -0.0891,
           "m": -2.6259
@@ -2844,29 +2840,29 @@
         {
           "v": 0.4415,
           "m": 0.2732
+        },
+        {
+          "v": 1.6524,
+          "m": 0.3795
         }
       ]
     },
     {
       "ticker": "RSPD",
       "name": "EW Consumer Disc",
-      "price": 53.83,
-      "daily_chg": 0.2794,
-      "intraday_chg": 0.1954,
-      "chg_5d": -2.5349,
+      "price": 54.93,
+      "daily_chg": 2.0435,
+      "intraday_chg": 0.4388,
+      "chg_5d": 0.5123,
       "ema9": "below_down",
       "ema21": "below_down",
       "ema50": "below_down",
       "sma150": "below_down",
-      "sma200": "below_down",
-      "atr_multiple": -1.811,
-      "rs_rating": 47,
+      "sma200": "below_up",
+      "atr_multiple": -0.4665,
+      "rs_rating": 50,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -1.2968,
-          "m": -3.6986
-        },
         {
           "v": -0.9863,
           "m": -3.6031
@@ -2942,29 +2938,29 @@
         {
           "v": -1.604,
           "m": -0.1788
+        },
+        {
+          "v": -0.4301,
+          "m": -0.1355
         }
       ]
     },
     {
       "ticker": "RSPR",
       "name": "EW Real Estate",
-      "price": 35.7477,
-      "daily_chg": 0.6751,
-      "intraday_chg": 0.4431,
-      "chg_5d": 0.7006,
+      "price": 36.3267,
+      "daily_chg": 1.6188,
+      "intraday_chg": 0.9075,
+      "chg_5d": 2.9814,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 3.0255,
-      "rs_rating": 55,
+      "atr_multiple": 4.0179,
+      "rs_rating": 58,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 0.2717,
-          "m": -0.9122
-        },
         {
           "v": 0.2021,
           "m": -0.89
@@ -3038,31 +3034,31 @@
           "m": 0.7806
         },
         {
-          "v": 1.2195,
+          "v": 1.2198,
           "m": 0.8625
+        },
+        {
+          "v": 1.7782,
+          "m": 0.9378
         }
       ]
     },
     {
       "ticker": "RSPC",
       "name": "EW Comm Services",
-      "price": 37.9599,
-      "daily_chg": -0.3677,
-      "intraday_chg": -1.249,
-      "chg_5d": 0.3169,
-      "ema9": "below_down",
-      "ema21": "below_down",
-      "ema50": "below_down",
+      "price": 38.4638,
+      "daily_chg": 1.3272,
+      "intraday_chg": 0.6906,
+      "chg_5d": 2.026,
+      "ema9": "above_up",
+      "ema21": "above_up",
+      "ema50": "above_up",
       "sma150": "below_down",
       "sma200": "below_up",
-      "atr_multiple": -0.487,
-      "rs_rating": 52,
+      "atr_multiple": 0.7814,
+      "rs_rating": 54,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -0.0616,
-          "m": -0.9076
-        },
         {
           "v": -0.0788,
           "m": -0.8929
@@ -3136,8 +3132,12 @@
           "m": 0.2679
         },
         {
-          "v": -0.183,
+          "v": -0.1829,
           "m": 0.276
+        },
+        {
+          "v": 0.3137,
+          "m": 0.2948
         }
       ]
     }
@@ -3146,23 +3146,19 @@
     {
       "ticker": "SLV",
       "name": "Silver (SLV ETF)",
-      "price": 65.91,
-      "daily_chg": -0.0455,
-      "intraday_chg": -1.288,
-      "chg_5d": -0.4381,
-      "ema9": "below_down",
-      "ema21": "below_down",
-      "ema50": "below_down",
+      "price": 70.13,
+      "daily_chg": 6.4027,
+      "intraday_chg": 0.8267,
+      "chg_5d": 8.1586,
+      "ema9": "above_up",
+      "ema21": "above_up",
+      "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -1.9309,
-      "rs_rating": 83,
+      "atr_multiple": -0.0463,
+      "rs_rating": 89,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -6.4156,
-          "m": -9.6737
-        },
         {
           "v": -4.8316,
           "m": -9.913
@@ -3238,29 +3234,29 @@
         {
           "v": -4.517,
           "m": -2.7321
+        },
+        {
+          "v": -0.118,
+          "m": -2.4172
         }
       ]
     },
     {
       "ticker": "GLD",
       "name": "Gold (GLD ETF)",
-      "price": 418.27,
-      "daily_chg": 0.8584,
-      "intraday_chg": -0.4475,
-      "chg_5d": -0.8627,
-      "ema9": "below_down",
-      "ema21": "below_down",
+      "price": 430.96,
+      "daily_chg": 3.0339,
+      "intraday_chg": 0.1883,
+      "chg_5d": 3.2462,
+      "ema9": "above_up",
+      "ema21": "above_up",
       "ema50": "below_down",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -3.0621,
-      "rs_rating": 63,
+      "atr_multiple": -1.1787,
+      "rs_rating": 67,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -18.5612,
-          "m": -21.7092
-        },
         {
           "v": -14.4174,
           "m": -23.7464
@@ -3336,29 +3332,29 @@
         {
           "v": -23.4402,
           "m": -16.2405
+        },
+        {
+          "v": -9.8772,
+          "m": -15.8063
         }
       ]
     },
     {
       "ticker": "PPLT",
       "name": "Platinum (PPLT ETF)",
-      "price": 176.65,
-      "daily_chg": 0.2326,
-      "intraday_chg": -1.3624,
-      "chg_5d": 0.4207,
-      "ema9": "below_down",
-      "ema21": "below_down",
-      "ema50": "below_down",
-      "sma150": "below_up",
+      "price": 186.7,
+      "daily_chg": 5.6892,
+      "intraday_chg": 2.3294,
+      "chg_5d": 9.4373,
+      "ema9": "above_up",
+      "ema21": "above_up",
+      "ema50": "above_up",
+      "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -1.7932,
-      "rs_rating": 74,
+      "atr_multiple": 0.144,
+      "rs_rating": 80,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -6.8436,
-          "m": -20.5781
-        },
         {
           "v": 0.5306,
           "m": -20.1591
@@ -3434,29 +3430,29 @@
         {
           "v": -9.45,
           "m": -4.1477
+        },
+        {
+          "v": 0.8186,
+          "m": -3.7646
         }
       ]
     },
     {
       "ticker": "PALL",
       "name": "Palladium (PALL ETF)",
-      "price": 135.27,
-      "daily_chg": 0.6249,
-      "intraday_chg": -1.0606,
-      "chg_5d": 2.0367,
-      "ema9": "below_down",
-      "ema21": "below_down",
+      "price": 139.81,
+      "daily_chg": 3.3562,
+      "intraday_chg": 0.6696,
+      "chg_5d": 5.9167,
+      "ema9": "above_up",
+      "ema21": "above_up",
       "ema50": "below_down",
       "sma150": "below_up",
       "sma200": "above_up",
-      "atr_multiple": -1.3795,
-      "rs_rating": 61,
+      "atr_multiple": -0.1511,
+      "rs_rating": 67,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -6.496,
-          "m": -20.6181
-        },
         {
           "v": -6.6092,
           "m": -20.4008
@@ -3532,29 +3528,29 @@
         {
           "v": -5.6452,
           "m": -6.0086
+        },
+        {
+          "v": -0.6474,
+          "m": -5.7161
         }
       ]
     },
     {
       "ticker": "USO",
       "name": "WTI Crude Oil (USO ETF)",
-      "price": 144.17,
-      "daily_chg": -2.3305,
-      "intraday_chg": 0.1807,
-      "chg_5d": 3.2736,
-      "ema9": "above_up",
-      "ema21": "above_up",
+      "price": 133.95,
+      "daily_chg": -7.0889,
+      "intraday_chg": -1.0197,
+      "chg_5d": -11.0735,
+      "ema9": "below_down",
+      "ema21": "below_down",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 3.4025,
-      "rs_rating": 95,
+      "atr_multiple": 1.7521,
+      "rs_rating": 93,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 26.0072,
-          "m": 33.7608
-        },
         {
           "v": 27.3612,
           "m": 33.672
@@ -3630,29 +3626,29 @@
         {
           "v": 24.7898,
           "m": 24.0808
+        },
+        {
+          "v": 13.506,
+          "m": 23.4557
         }
       ]
     },
     {
       "ticker": "UNG",
       "name": "Natural Gas (UNG ETF)",
-      "price": 10.64,
-      "daily_chg": -2.831,
-      "intraday_chg": -2.2957,
-      "chg_5d": 3.001,
+      "price": 10.45,
+      "daily_chg": -1.7857,
+      "intraday_chg": -0.0956,
+      "chg_5d": 2.9557,
       "ema9": "below_down",
       "ema21": "below_down",
       "ema50": "below_down",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": -2.6521,
-      "rs_rating": 25,
+      "atr_multiple": -3.1301,
+      "rs_rating": 23,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -1.3108,
-          "m": -0.4742
-        },
         {
           "v": -1.4344,
           "m": -0.5693
@@ -3728,29 +3724,29 @@
         {
           "v": -0.843,
           "m": -1.1501
+        },
+        {
+          "v": -1.0128,
+          "m": -1.1352
         }
       ]
     },
     {
       "ticker": "CPER",
       "name": "Copper (CPER ETF)",
-      "price": 36.33,
-      "daily_chg": 2.1079,
-      "intraday_chg": -0.2745,
-      "chg_5d": 0.2483,
+      "price": 37.54,
+      "daily_chg": 3.3306,
+      "intraday_chg": 0.2136,
+      "chg_5d": 4.3647,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 1.2824,
-      "rs_rating": 64,
+      "atr_multiple": 2.9444,
+      "rs_rating": 68,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -0.1758,
-          "m": -1.5936
-        },
         {
           "v": -0.1884,
           "m": -1.6013
@@ -3826,29 +3822,29 @@
         {
           "v": 0.7644,
           "m": 1.083
+        },
+        {
+          "v": 1.9496,
+          "m": 1.1892
         }
       ]
     },
     {
       "ticker": "SOL-USD",
       "name": "Solana",
-      "price": 86.37,
-      "daily_chg": 2.7116,
-      "intraday_chg": 2.7119,
-      "chg_5d": 4.0305,
+      "price": 89.13,
+      "daily_chg": 3.2563,
+      "intraday_chg": 3.2642,
+      "chg_5d": 6.4576,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": 0.5328,
-      "rs_rating": 19,
+      "atr_multiple": 1.804,
+      "rs_rating": 22,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 3.2455,
-          "m": -2.6681
-        },
         {
           "v": 3.0662,
           "m": -2.3123
@@ -3922,31 +3918,31 @@
           "m": -0.4246
         },
         {
-          "v": 1.1749,
-          "m": -0.3254
+          "v": 1.1251,
+          "m": -0.3279
+        },
+        {
+          "v": 4.0474,
+          "m": -0.2878
         }
       ]
     },
     {
       "ticker": "BTC-USD",
       "name": "Bitcoin",
-      "price": 80936.0,
-      "daily_chg": 1.3881,
-      "intraday_chg": 1.3928,
-      "chg_5d": 6.07,
+      "price": 81376.4766,
+      "daily_chg": 0.5553,
+      "intraday_chg": 0.588,
+      "chg_5d": 4.0899,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_down",
       "sma200": "below_down",
-      "atr_multiple": 4.1677,
-      "rs_rating": 42,
+      "atr_multiple": 4.5352,
+      "rs_rating": 44,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 5323.4162,
-          "m": 1289.7281
-        },
         {
           "v": 7104.6964,
           "m": 1771.3964
@@ -4020,31 +4016,31 @@
           "m": 5720.1947
         },
         {
-          "v": 8024.5505,
-          "m": 5865.4122
+          "v": 8015.7841,
+          "m": 5864.9739
+        },
+        {
+          "v": 8316.1259,
+          "m": 6014.6093
         }
       ]
     },
     {
       "ticker": "ETH-USD",
       "name": "Ethereum",
-      "price": 2360.01,
-      "daily_chg": 0.5802,
-      "intraday_chg": 0.5683,
-      "chg_5d": 4.5987,
+      "price": 2349.48,
+      "daily_chg": -0.4956,
+      "intraday_chg": -0.4734,
+      "chg_5d": 2.3697,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": 1.9705,
-      "rs_rating": 33,
+      "atr_multiple": 1.8567,
+      "rs_rating": 34,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 235.235,
-          "m": 106.9323
-        },
         {
           "v": 299.7762,
           "m": 124.4154
@@ -4118,8 +4114,12 @@
           "m": 155.3105
         },
         {
-          "v": 140.4812,
-          "m": 149.7392
+          "v": 141.6304,
+          "m": 149.7967
+        },
+        {
+          "v": 129.2992,
+          "m": 144.4999
         }
       ]
     }
@@ -4128,23 +4128,19 @@
     {
       "ticker": "SLV",
       "name": "Silver ETF",
-      "price": 65.91,
-      "daily_chg": -0.0455,
-      "intraday_chg": -1.288,
-      "chg_5d": -0.4381,
-      "ema9": "below_down",
-      "ema21": "below_down",
-      "ema50": "below_down",
+      "price": 70.13,
+      "daily_chg": 6.4027,
+      "intraday_chg": 0.8267,
+      "chg_5d": 8.1586,
+      "ema9": "above_up",
+      "ema21": "above_up",
+      "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -1.9309,
-      "rs_rating": 83,
+      "atr_multiple": -0.0463,
+      "rs_rating": 89,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -6.4156,
-          "m": -9.6737
-        },
         {
           "v": -4.8316,
           "m": -9.913
@@ -4220,29 +4216,29 @@
         {
           "v": -4.517,
           "m": -2.7321
+        },
+        {
+          "v": -0.118,
+          "m": -2.4172
         }
       ]
     },
     {
       "ticker": "USO",
       "name": "Oil ETF",
-      "price": 144.17,
-      "daily_chg": -2.3305,
-      "intraday_chg": 0.1807,
-      "chg_5d": 3.2736,
-      "ema9": "above_up",
-      "ema21": "above_up",
+      "price": 133.95,
+      "daily_chg": -7.0889,
+      "intraday_chg": -1.0197,
+      "chg_5d": -11.0735,
+      "ema9": "below_down",
+      "ema21": "below_down",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 3.4025,
-      "rs_rating": 95,
+      "atr_multiple": 1.7521,
+      "rs_rating": 93,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 26.0072,
-          "m": 33.7608
-        },
         {
           "v": 27.3612,
           "m": 33.672
@@ -4318,29 +4314,29 @@
         {
           "v": 24.7898,
           "m": 24.0808
+        },
+        {
+          "v": 13.506,
+          "m": 23.4557
         }
       ]
     },
     {
       "ticker": "XOP",
       "name": "Oil & Gas Exploration",
-      "price": 180.59,
-      "daily_chg": -0.232,
-      "intraday_chg": 0.5456,
-      "chg_5d": 5.2083,
-      "ema9": "above_up",
-      "ema21": "above_up",
+      "price": 169.33,
+      "daily_chg": -6.2351,
+      "intraday_chg": -1.5065,
+      "chg_5d": -4.7209,
+      "ema9": "below_down",
+      "ema21": "below_down",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 2.3805,
-      "rs_rating": 81,
+      "atr_multiple": -0.0832,
+      "rs_rating": 76,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 12.321,
-          "m": 25.6679
-        },
         {
           "v": 7.7329,
           "m": 24.9184
@@ -4416,29 +4412,29 @@
         {
           "v": 11.2291,
           "m": 5.6069
+        },
+        {
+          "v": -0.4382,
+          "m": 4.9689
         }
       ]
     },
     {
       "ticker": "REMX",
       "name": "Rare Earth Metals",
-      "price": 103.83,
-      "daily_chg": 1.6745,
-      "intraday_chg": 0.2704,
-      "chg_5d": 6.0464,
+      "price": 109.04,
+      "daily_chg": 5.0178,
+      "intraday_chg": 1.7734,
+      "chg_5d": 7.9177,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 2.3723,
-      "rs_rating": 92,
+      "atr_multiple": 3.6503,
+      "rs_rating": 94,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 3.1092,
-          "m": -3.0012
-        },
         {
           "v": 2.7974,
           "m": -3.2081
@@ -4514,29 +4510,29 @@
         {
           "v": 9.1802,
           "m": 7.9021
+        },
+        {
+          "v": 14.1032,
+          "m": 8.4518
         }
       ]
     },
     {
       "ticker": "SILJ",
       "name": "Silver Juniors",
-      "price": 28.5,
-      "daily_chg": -0.904,
-      "intraday_chg": -2.7967,
-      "chg_5d": -2.3638,
-      "ema9": "below_down",
-      "ema21": "below_down",
-      "ema50": "below_down",
-      "sma150": "below_up",
+      "price": 31.04,
+      "daily_chg": 8.9123,
+      "intraday_chg": 2.4084,
+      "chg_5d": 9.4885,
+      "ema9": "above_up",
+      "ema21": "above_up",
+      "ema50": "above_up",
+      "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -2.6094,
-      "rs_rating": 83,
+      "atr_multiple": -0.3879,
+      "rs_rating": 89,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -1.6914,
-          "m": -4.1729
-        },
         {
           "v": -1.5172,
           "m": -4.2657
@@ -4612,29 +4608,29 @@
         {
           "v": -3.2068,
           "m": -1.6783
+        },
+        {
+          "v": -0.5348,
+          "m": -1.6205
         }
       ]
     },
     {
       "ticker": "GDXJ",
       "name": "Gold Miners Junior",
-      "price": 113.16,
-      "daily_chg": 0.0619,
-      "intraday_chg": -2.4062,
-      "chg_5d": -3.0583,
-      "ema9": "below_down",
-      "ema21": "below_down",
+      "price": 122.75,
+      "daily_chg": 8.4747,
+      "intraday_chg": 2.7197,
+      "chg_5d": 8.1307,
+      "ema9": "above_up",
+      "ema21": "above_up",
       "ema50": "below_down",
-      "sma150": "below_up",
+      "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -2.9578,
-      "rs_rating": 75,
+      "atr_multiple": -0.5871,
+      "rs_rating": 82,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -3.428,
-          "m": -14.7062
-        },
         {
           "v": -2.417,
           "m": -14.902
@@ -4710,29 +4706,29 @@
         {
           "v": -13.0182,
           "m": -5.4635
+        },
+        {
+          "v": -2.9416,
+          "m": -5.4392
         }
       ]
     },
     {
       "ticker": "DXYZ",
       "name": "Destiny Tech100",
-      "price": 38.35,
-      "daily_chg": -0.4672,
-      "intraday_chg": -3.4734,
-      "chg_5d": 31.3806,
+      "price": 40.81,
+      "daily_chg": 6.4146,
+      "intraday_chg": 5.3705,
+      "chg_5d": 24.3828,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 5.0112,
-      "rs_rating": 69,
+      "atr_multiple": 5.4358,
+      "rs_rating": 79,
       "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": -0.1998,
-          "m": -1.9986
-        },
         {
           "v": -0.5068,
           "m": -1.8609
@@ -4808,29 +4804,29 @@
         {
           "v": 9.779,
           "m": 2.6789
+        },
+        {
+          "v": 11.9666,
+          "m": 3.2872
         }
       ]
     },
     {
       "ticker": "GDX",
       "name": "Gold Miners",
-      "price": 85.81,
-      "daily_chg": 0.1868,
-      "intraday_chg": -1.6842,
-      "chg_5d": -3.0834,
-      "ema9": "below_down",
-      "ema21": "below_down",
+      "price": 92.44,
+      "daily_chg": 7.7264,
+      "intraday_chg": 2.1324,
+      "chg_5d": 7.2141,
+      "ema9": "above_up",
+      "ema21": "above_up",
       "ema50": "below_down",
-      "sma150": "below_up",
+      "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -3.165,
-      "rs_rating": 71,
+      "atr_multiple": -0.79,
+      "rs_rating": 78,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -0.6044,
-          "m": -9.8857
-        },
         {
           "v": -0.2156,
           "m": -9.9267
@@ -4906,29 +4902,29 @@
         {
           "v": -9.7368,
           "m": -3.8151
+        },
+        {
+          "v": -2.7416,
+          "m": -3.9219
         }
       ]
     },
     {
       "ticker": "COPX",
       "name": "Copper Miners",
-      "price": 78.21,
-      "daily_chg": 2.0352,
-      "intraday_chg": -0.6352,
-      "chg_5d": -0.61,
-      "ema9": "below_down",
-      "ema21": "below_down",
-      "ema50": "below_down",
+      "price": 83.57,
+      "daily_chg": 6.8533,
+      "intraday_chg": 1.1009,
+      "chg_5d": 7.5132,
+      "ema9": "above_up",
+      "ema21": "above_up",
+      "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -1.1578,
-      "rs_rating": 80,
+      "atr_multiple": 0.9656,
+      "rs_rating": 86,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -1.141,
-          "m": -8.6107
-        },
         {
           "v": -1.4338,
           "m": -8.5696
@@ -5004,29 +5000,29 @@
         {
           "v": -2.8606,
           "m": 0.0219
+        },
+        {
+          "v": 2.6954,
+          "m": 0.2137
         }
       ]
     },
     {
       "ticker": "GLD",
       "name": "Gold ETF",
-      "price": 418.27,
-      "daily_chg": 0.8584,
-      "intraday_chg": -0.4475,
-      "chg_5d": -0.8627,
-      "ema9": "below_down",
-      "ema21": "below_down",
+      "price": 430.96,
+      "daily_chg": 3.0339,
+      "intraday_chg": 0.1883,
+      "chg_5d": 3.2462,
+      "ema9": "above_up",
+      "ema21": "above_up",
       "ema50": "below_down",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -3.0621,
-      "rs_rating": 63,
+      "atr_multiple": -1.1787,
+      "rs_rating": 67,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -18.5612,
-          "m": -21.7092
-        },
         {
           "v": -14.4174,
           "m": -23.7464
@@ -5102,29 +5098,29 @@
         {
           "v": -23.4402,
           "m": -16.2405
+        },
+        {
+          "v": -9.8772,
+          "m": -15.8063
         }
       ]
     },
     {
       "ticker": "UNG",
       "name": "Natural Gas ETF",
-      "price": 10.64,
-      "daily_chg": -2.831,
-      "intraday_chg": -2.2957,
-      "chg_5d": 3.001,
+      "price": 10.45,
+      "daily_chg": -1.7857,
+      "intraday_chg": -0.0956,
+      "chg_5d": 2.9557,
       "ema9": "below_down",
       "ema21": "below_down",
       "ema50": "below_down",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": -2.6521,
-      "rs_rating": 25,
+      "atr_multiple": -3.1301,
+      "rs_rating": 23,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -1.3108,
-          "m": -0.4742
-        },
         {
           "v": -1.4344,
           "m": -0.5693
@@ -5200,29 +5196,29 @@
         {
           "v": -0.843,
           "m": -1.1501
+        },
+        {
+          "v": -1.0128,
+          "m": -1.1352
         }
       ]
     },
     {
       "ticker": "SIL",
       "name": "Silver Miners",
-      "price": 86.38,
-      "daily_chg": -0.5984,
-      "intraday_chg": -2.2961,
-      "chg_5d": -3.1831,
-      "ema9": "below_down",
-      "ema21": "below_down",
-      "ema50": "below_down",
-      "sma150": "below_up",
+      "price": 94.68,
+      "daily_chg": 9.6087,
+      "intraday_chg": 2.8683,
+      "chg_5d": 9.5326,
+      "ema9": "above_up",
+      "ema21": "above_up",
+      "ema50": "above_up",
+      "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -2.5746,
-      "rs_rating": 80,
+      "atr_multiple": -0.1426,
+      "rs_rating": 87,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -2.8486,
-          "m": -11.0324
-        },
         {
           "v": -2.7372,
           "m": -11.26
@@ -5298,29 +5294,29 @@
         {
           "v": -9.2152,
           "m": -3.4987
+        },
+        {
+          "v": -0.5748,
+          "m": -3.385
         }
       ]
     },
     {
       "ticker": "OIH",
       "name": "Oil Services",
-      "price": 440.7,
-      "daily_chg": -0.6336,
-      "intraday_chg": -0.0794,
-      "chg_5d": -0.2038,
-      "ema9": "above_up",
+      "price": 432.59,
+      "daily_chg": -1.8403,
+      "intraday_chg": 0.8909,
+      "chg_5d": -2.9589,
+      "ema9": "below_down",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 3.4994,
+      "atr_multiple": 2.5423,
       "rs_rating": 88,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 26.8918,
-          "m": 26.5113
-        },
         {
           "v": 26.3372,
           "m": 26.2396
@@ -5396,29 +5392,29 @@
         {
           "v": 36.273,
           "m": 28.5877
+        },
+        {
+          "v": 27.5292,
+          "m": 28.6196
         }
       ]
     },
     {
       "ticker": "ITA",
       "name": "Aerospace & Defense",
-      "price": 215.37,
-      "daily_chg": 0.4852,
-      "intraday_chg": -0.3332,
-      "chg_5d": -0.3885,
-      "ema9": "below_down",
-      "ema21": "below_down",
+      "price": 223.42,
+      "daily_chg": 3.7378,
+      "intraday_chg": 1.5407,
+      "chg_5d": 4.8231,
+      "ema9": "above_up",
+      "ema21": "above_up",
       "ema50": "below_down",
-      "sma150": "below_up",
-      "sma200": "below_up",
-      "atr_multiple": -2.5454,
-      "rs_rating": 57,
+      "sma150": "above_up",
+      "sma200": "above_up",
+      "atr_multiple": -0.8883,
+      "rs_rating": 61,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -0.7367,
-          "m": -9.6453
-        },
         {
           "v": -1.0446,
           "m": -9.8583
@@ -5494,29 +5490,29 @@
         {
           "v": -13.2068,
           "m": -7.9823
+        },
+        {
+          "v": -4.7661,
+          "m": -8.1838
         }
       ]
     },
     {
       "ticker": "ITB",
       "name": "Home Construction",
-      "price": 92.81,
-      "daily_chg": 1.6762,
-      "intraday_chg": 0.9243,
-      "chg_5d": -5.2185,
-      "ema9": "below_down",
+      "price": 95.32,
+      "daily_chg": 2.7045,
+      "intraday_chg": 0.6547,
+      "chg_5d": 0.2208,
+      "ema9": "above_up",
       "ema21": "below_down",
       "ema50": "below_down",
       "sma150": "below_down",
-      "sma200": "below_down",
-      "atr_multiple": -1.2073,
-      "rs_rating": 41,
+      "sma200": "below_up",
+      "atr_multiple": -0.1021,
+      "rs_rating": 44,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -6.8806,
-          "m": -11.7859
-        },
         {
           "v": -5.5417,
           "m": -11.576
@@ -5592,29 +5588,29 @@
         {
           "v": -3.0753,
           "m": -2.1337
+        },
+        {
+          "v": -0.2729,
+          "m": -1.8033
         }
       ]
     },
     {
       "ticker": "XBI",
       "name": "Biotech (EW)",
-      "price": 133.79,
-      "daily_chg": 0.2172,
-      "intraday_chg": -1.0063,
-      "chg_5d": 2.0052,
+      "price": 137.68,
+      "daily_chg": 2.9075,
+      "intraday_chg": 2.0532,
+      "chg_5d": 6.8115,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 1.7684,
-      "rs_rating": 74,
+      "atr_multiple": 2.8244,
+      "rs_rating": 79,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 5.4822,
-          "m": -1.0936
-        },
         {
           "v": 6.5864,
           "m": -0.8127
@@ -5690,29 +5686,29 @@
         {
           "v": 5.4688,
           "m": 6.8178
+        },
+        {
+          "v": 9.1884,
+          "m": 7.0031
         }
       ]
     },
     {
       "ticker": "LIT",
       "name": "Lithium & Battery Tech",
-      "price": 88.45,
-      "daily_chg": 1.5266,
-      "intraday_chg": 0.5228,
-      "chg_5d": 5.5867,
+      "price": 91.52,
+      "daily_chg": 3.4709,
+      "intraday_chg": 1.6437,
+      "chg_5d": 7.582,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 6.0402,
-      "rs_rating": 90,
-      "rs_1m_new_high": false,
+      "atr_multiple": 7.3247,
+      "rs_rating": 92,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": 4.4444,
-          "m": -0.0998
-        },
         {
           "v": 4.4436,
           "m": 0.0434
@@ -5788,29 +5784,29 @@
         {
           "v": 12.0026,
           "m": 8.9462
+        },
+        {
+          "v": 14.754,
+          "m": 9.4617
         }
       ]
     },
     {
       "ticker": "AIQ",
       "name": "AI & Big Data",
-      "price": 58.43,
-      "daily_chg": 2.3113,
-      "intraday_chg": 0.9502,
-      "chg_5d": 7.211,
+      "price": 60.3,
+      "daily_chg": 3.2004,
+      "intraday_chg": 1.0643,
+      "chg_5d": 9.5567,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 6.8628,
-      "rs_rating": 72,
-      "rs_1m_new_high": false,
+      "atr_multiple": 7.8706,
+      "rs_rating": 75,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": 0.2786,
-          "m": -2.3182
-        },
         {
           "v": 0.1038,
           "m": -2.2609
@@ -5886,29 +5882,29 @@
         {
           "v": 7.7966,
           "m": 4.157
+        },
+        {
+          "v": 9.4504,
+          "m": 4.6156
         }
       ]
     },
     {
       "ticker": "XME",
       "name": "Metals & Mining",
-      "price": 118.88,
-      "daily_chg": 1.6416,
-      "intraday_chg": 0.5753,
-      "chg_5d": 1.5461,
+      "price": 124.14,
+      "daily_chg": 4.4246,
+      "intraday_chg": 2.1644,
+      "chg_5d": 8.3152,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 1.5811,
-      "rs_rating": 78,
+      "atr_multiple": 2.8764,
+      "rs_rating": 83,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -1.5726,
-          "m": -9.3226
-        },
         {
           "v": -1.9016,
           "m": -9.221
@@ -5984,29 +5980,29 @@
         {
           "v": 5.3779,
           "m": 3.1195
+        },
+        {
+          "v": 10.541,
+          "m": 3.7252
         }
       ]
     },
     {
       "ticker": "XRT",
       "name": "Retail",
-      "price": 84.39,
-      "daily_chg": 0.9329,
-      "intraday_chg": 0.5002,
-      "chg_5d": -0.1302,
-      "ema9": "below_down",
-      "ema21": "below_down",
+      "price": 85.14,
+      "daily_chg": 0.8887,
+      "intraday_chg": -0.2227,
+      "chg_5d": 1.5869,
+      "ema9": "above_up",
+      "ema21": "above_up",
       "ema50": "above_up",
-      "sma150": "below_down",
+      "sma150": "above_down",
       "sma200": "above_up",
-      "atr_multiple": 0.7379,
-      "rs_rating": 54,
+      "atr_multiple": 1.1723,
+      "rs_rating": 56,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -0.9641,
-          "m": -5.6097
-        },
         {
           "v": -0.1077,
           "m": -5.3278
@@ -6082,29 +6078,29 @@
         {
           "v": 1.29,
           "m": 1.3883
+        },
+        {
+          "v": 2.0801,
+          "m": 1.5405
         }
       ]
     },
     {
       "ticker": "XHE",
       "name": "Health Care Equipment",
-      "price": 80.26,
-      "daily_chg": -0.3229,
-      "intraday_chg": -0.3971,
-      "chg_5d": -1.1941,
+      "price": 79.72,
+      "daily_chg": -0.6728,
+      "intraday_chg": -0.2502,
+      "chg_5d": 1.6837,
       "ema9": "below_down",
       "ema21": "below_down",
       "ema50": "below_down",
       "sma150": "below_up",
       "sma200": "below_up",
-      "atr_multiple": -0.7484,
-      "rs_rating": 48,
+      "atr_multiple": -0.9664,
+      "rs_rating": 49,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -3.236,
-          "m": -6.1381
-        },
         {
           "v": -3.1038,
           "m": -6.0306
@@ -6180,29 +6176,29 @@
         {
           "v": -1.3846,
           "m": -0.6824
+        },
+        {
+          "v": -1.7774,
+          "m": -0.6094
         }
       ]
     },
     {
       "ticker": "UFO",
       "name": "Space",
-      "price": 50.76,
-      "daily_chg": -1.0719,
-      "intraday_chg": -2.9631,
-      "chg_5d": 1.4997,
-      "ema9": "below_down",
-      "ema21": "below_down",
+      "price": 52.7,
+      "daily_chg": 3.8219,
+      "intraday_chg": 2.4993,
+      "chg_5d": 6.2286,
+      "ema9": "above_up",
+      "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 1.4696,
-      "rs_rating": 86,
+      "atr_multiple": 2.5635,
+      "rs_rating": 88,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 5.5067,
-          "m": 1.2424
-        },
         {
           "v": 4.6338,
           "m": 1.4256
@@ -6278,29 +6274,29 @@
         {
           "v": 2.5403,
           "m": 5.1111
+        },
+        {
+          "v": 4.3231,
+          "m": 5.0519
         }
       ]
     },
     {
       "ticker": "IGV",
       "name": "Software",
-      "price": 88.27,
-      "daily_chg": -0.1922,
-      "intraday_chg": -0.3612,
-      "chg_5d": 3.8471,
+      "price": 87.82,
+      "daily_chg": -0.5098,
+      "intraday_chg": -0.5098,
+      "chg_5d": 3.929,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": 2.0371,
-      "rs_rating": 41,
+      "atr_multiple": 1.7965,
+      "rs_rating": 43,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -3.8714,
-          "m": -5.459
-        },
         {
           "v": -6.559,
           "m": -5.5055
@@ -6376,29 +6372,29 @@
         {
           "v": 5.1204,
           "m": 1.1266
+        },
+        {
+          "v": 4.4822,
+          "m": 1.5443
         }
       ]
     },
     {
       "ticker": "KWEB",
       "name": "China Internet",
-      "price": 28.53,
-      "daily_chg": -0.2099,
-      "intraday_chg": -0.5577,
-      "chg_5d": 1.4941,
-      "ema9": "below_down",
-      "ema21": "below_down",
+      "price": 29.76,
+      "daily_chg": 4.3112,
+      "intraday_chg": 2.869,
+      "chg_5d": 6.2478,
+      "ema9": "above_up",
+      "ema21": "above_up",
       "ema50": "below_down",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": -1.4916,
-      "rs_rating": 34,
-      "rs_1m_new_high": false,
+      "atr_multiple": 0.7768,
+      "rs_rating": 38,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": -2.1486,
-          "m": -3.7516
-        },
         {
           "v": -2.3164,
           "m": -3.6971
@@ -6474,29 +6470,29 @@
         {
           "v": -0.8224,
           "m": -1.2046
+        },
+        {
+          "v": 0.4574,
+          "m": -1.0743
         }
       ]
     },
     {
       "ticker": "SMH",
       "name": "Semiconductors",
-      "price": 522.69,
-      "daily_chg": 3.1374,
-      "intraday_chg": 1.3999,
-      "chg_5d": 6.4087,
+      "price": 549.76,
+      "daily_chg": 5.179,
+      "intraday_chg": 2.2641,
+      "chg_5d": 10.0444,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 7.3377,
-      "rs_rating": 90,
+      "atr_multiple": 8.3875,
+      "rs_rating": 92,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 23.5,
-          "m": -8.0711
-        },
         {
           "v": 30.4288,
           "m": -6.718
@@ -6572,29 +6568,29 @@
         {
           "v": 96.1128,
           "m": 64.2819
+        },
+        {
+          "v": 120.5708,
+          "m": 69.1355
         }
       ]
     },
     {
       "ticker": "MAGS",
       "name": "Magnificent 7",
-      "price": 67.11,
-      "daily_chg": 0.209,
-      "intraday_chg": -0.3711,
-      "chg_5d": 0.3739,
+      "price": 68.46,
+      "daily_chg": 2.0116,
+      "intraday_chg": 1.875,
+      "chg_5d": 2.8237,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 4.2972,
-      "rs_rating": 64,
+      "atr_multiple": 5.167,
+      "rs_rating": 66,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -1.5681,
-          "m": -3.7408
-        },
         {
           "v": -0.5515,
           "m": -3.6793
@@ -6670,29 +6666,29 @@
         {
           "v": 5.0768,
           "m": 3.7033
+        },
+        {
+          "v": 6.3038,
+          "m": 4.0969
         }
       ]
     },
     {
       "ticker": "ARKK",
       "name": "ARK Innovation",
-      "price": 76.58,
-      "daily_chg": -2.1092,
-      "intraday_chg": -2.3214,
-      "chg_5d": 1.4977,
+      "price": 79.58,
+      "daily_chg": 3.9175,
+      "intraday_chg": 2.9096,
+      "chg_5d": 8.2279,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
-      "sma150": "below_down",
-      "sma200": "below_down",
-      "atr_multiple": 1.6354,
-      "rs_rating": 62,
+      "sma150": "above_down",
+      "sma200": "above_up",
+      "atr_multiple": 2.8178,
+      "rs_rating": 69,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -1.0816,
-          "m": -4.3857
-        },
         {
           "v": -2.3046,
           "m": -4.366
@@ -6768,29 +6764,29 @@
         {
           "v": 3.8244,
           "m": 3.8488
+        },
+        {
+          "v": 6.6742,
+          "m": 4.2366
         }
       ]
     },
     {
       "ticker": "IBIT",
       "name": "iShares Bitcoin Trust",
-      "price": 46.28,
-      "daily_chg": 1.9383,
-      "intraday_chg": 0.2274,
-      "chg_5d": 6.9563,
+      "price": 46.19,
+      "daily_chg": -0.1945,
+      "intraday_chg": -0.4848,
+      "chg_5d": 8.0468,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": 4.4073,
-      "rs_rating": 41,
+      "atr_multiple": 4.3569,
+      "rs_rating": 49,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 0.3449,
-          "m": -2.8832
-        },
         {
           "v": 1.0293,
           "m": -2.6014
@@ -6866,29 +6862,29 @@
         {
           "v": 5.4131,
           "m": 3.2201
+        },
+        {
+          "v": 5.1299,
+          "m": 3.4594
         }
       ]
     },
     {
       "ticker": "MSOS",
       "name": "Cannabis",
-      "price": 5.04,
-      "daily_chg": 4.1322,
-      "intraday_chg": 3.2787,
-      "chg_5d": 1.4085,
+      "price": 5.27,
+      "daily_chg": 4.5635,
+      "intraday_chg": 3.1311,
+      "chg_5d": 8.8843,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
-      "sma150": "above_down",
+      "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 2.1524,
-      "rs_rating": 75,
+      "atr_multiple": 2.536,
+      "rs_rating": 83,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 0.0056,
-          "m": -0.3445
-        },
         {
           "v": -0.0042,
           "m": -0.3247
@@ -6964,29 +6960,29 @@
         {
           "v": 0.999,
           "m": 0.5552
+        },
+        {
+          "v": 1.2032,
+          "m": 0.615
         }
       ]
     },
     {
       "ticker": "JETS",
       "name": "Airlines",
-      "price": 26.06,
-      "daily_chg": 2.5177,
-      "intraday_chg": 1.9562,
-      "chg_5d": 3.0854,
+      "price": 27.24,
+      "daily_chg": 4.528,
+      "intraday_chg": 0.0,
+      "chg_5d": 9.2659,
       "ema9": "above_up",
       "ema21": "above_up",
-      "ema50": "below_down",
-      "sma150": "below_up",
-      "sma200": "below_up",
-      "atr_multiple": 0.2428,
-      "rs_rating": 53,
+      "ema50": "above_up",
+      "sma150": "above_up",
+      "sma200": "above_up",
+      "atr_multiple": 1.5964,
+      "rs_rating": 59,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -0.9016,
-          "m": -3.0747
-        },
         {
           "v": -0.9466,
           "m": -2.9528
@@ -7062,29 +7058,29 @@
         {
           "v": 0.2082,
           "m": -0.4159
+        },
+        {
+          "v": 1.4198,
+          "m": -0.2998
         }
       ]
     },
     {
       "ticker": "ETHA",
       "name": "iShares Ethereum Trust",
-      "price": 17.9,
-      "daily_chg": 0.7316,
-      "intraday_chg": -0.8859,
-      "chg_5d": 3.0512,
+      "price": 17.72,
+      "daily_chg": -1.0056,
+      "intraday_chg": -1.4735,
+      "chg_5d": 5.1632,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": 2.4326,
-      "rs_rating": 46,
+      "atr_multiple": 2.0923,
+      "rs_rating": 54,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 0.592,
-          "m": -1.4217
-        },
         {
           "v": 0.7632,
           "m": -1.2234
@@ -7160,29 +7156,29 @@
         {
           "v": 1.4618,
           "m": 1.4187
+        },
+        {
+          "v": 1.208,
+          "m": 1.4495
         }
       ]
     },
     {
       "ticker": "KRE",
       "name": "Regional Banks",
-      "price": 69.92,
-      "daily_chg": 1.348,
-      "intraday_chg": 1.1574,
-      "chg_5d": -0.6395,
+      "price": 70.71,
+      "daily_chg": 1.1299,
+      "intraday_chg": 0.526,
+      "chg_5d": 2.4337,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 2.2828,
-      "rs_rating": 62,
+      "atr_multiple": 2.7428,
+      "rs_rating": 63,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 1.4569,
-          "m": -3.3087
-        },
         {
           "v": 2.5772,
           "m": -2.953
@@ -7258,29 +7254,29 @@
         {
           "v": 3.0418,
           "m": 2.436
+        },
+        {
+          "v": 3.7831,
+          "m": 2.5523
         }
       ]
     },
     {
       "ticker": "WGMI",
       "name": "Bitcoin Miners",
-      "price": 55.14,
-      "daily_chg": 9.1881,
-      "intraday_chg": 6.9952,
-      "chg_5d": 18.377,
+      "price": 60.76,
+      "daily_chg": 10.1922,
+      "intraday_chg": 5.7763,
+      "chg_5d": 33.8916,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 4.5891,
-      "rs_rating": 94,
+      "atr_multiple": 5.9937,
+      "rs_rating": 96,
       "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": 0.465,
-          "m": -4.1925
-        },
         {
           "v": 1.5058,
           "m": -3.9121
@@ -7356,29 +7352,29 @@
         {
           "v": 13.1375,
           "m": 6.9498
+        },
+        {
+          "v": 18.3965,
+          "m": 7.8464
         }
       ]
     },
     {
       "ticker": "IEZ",
       "name": "Oil Equipment & Services",
-      "price": 31.74,
-      "daily_chg": -0.5327,
-      "intraday_chg": -0.0944,
-      "chg_5d": 0.221,
-      "ema9": "above_up",
+      "price": 31.2,
+      "daily_chg": -1.7013,
+      "intraday_chg": 0.7752,
+      "chg_5d": -2.439,
+      "ema9": "below_down",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 3.9581,
+      "atr_multiple": 2.9508,
       "rs_rating": 87,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 1.7355,
-          "m": 1.5286
-        },
         {
           "v": 1.748,
           "m": 1.5167
@@ -7454,29 +7450,29 @@
         {
           "v": 2.6463,
           "m": 1.9269
+        },
+        {
+          "v": 2.0645,
+          "m": 1.9434
         }
       ]
     },
     {
       "ticker": "TAN",
       "name": "Solar Energy",
-      "price": 60.71,
-      "daily_chg": 3.9911,
-      "intraday_chg": 1.3523,
-      "chg_5d": 5.3627,
+      "price": 60.47,
+      "daily_chg": -0.3953,
+      "intraday_chg": -0.0165,
+      "chg_5d": 7.7512,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 2.6751,
-      "rs_rating": 81,
+      "atr_multiple": 2.5688,
+      "rs_rating": 82,
       "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": -0.8526,
-          "m": -0.3673
-        },
         {
           "v": -1.5858,
           "m": -0.4878
@@ -7552,29 +7548,29 @@
         {
           "v": 4.6718,
           "m": 0.5172
+        },
+        {
+          "v": 4.433,
+          "m": 0.7814
         }
       ]
     },
     {
       "ticker": "ICLN",
       "name": "Clean Energy",
-      "price": 21.29,
-      "daily_chg": 2.553,
-      "intraday_chg": 1.2845,
-      "chg_5d": 7.3085,
+      "price": 21.32,
+      "daily_chg": 0.1409,
+      "intraday_chg": -0.5365,
+      "chg_5d": 4.8697,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 4.923,
-      "rs_rating": 79,
+      "atr_multiple": 4.9441,
+      "rs_rating": 80,
       "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": 0.1014,
-          "m": -0.0531
-        },
         {
           "v": 0.2202,
           "m": -0.0636
@@ -7650,29 +7646,29 @@
         {
           "v": 2.4158,
           "m": 1.2203
+        },
+        {
+          "v": 2.4032,
+          "m": 1.3354
         }
       ]
     },
     {
       "ticker": "DRNZ",
       "name": "Drone Technology",
-      "price": 25.495,
-      "daily_chg": -1.6586,
-      "intraday_chg": -2.5048,
-      "chg_5d": -0.7204,
+      "price": 25.71,
+      "daily_chg": 0.8433,
+      "intraday_chg": 0.9423,
+      "chg_5d": 3.336,
       "ema9": "below_down",
       "ema21": "below_down",
-      "ema50": "below_down",
+      "ema50": "above_up",
       "sma150": null,
       "sma200": null,
-      "atr_multiple": -0.5254,
+      "atr_multiple": -0.2738,
       "rs_rating": null,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -0.2956,
-          "m": -0.1816
-        },
         {
           "v": -0.9216,
           "m": -0.3
@@ -7748,29 +7744,29 @@
         {
           "v": -0.4236,
           "m": 0.0487
+        },
+        {
+          "v": -0.2207,
+          "m": 0.0524
         }
       ]
     },
     {
       "ticker": "ARKG",
       "name": "ARK Genomic Revolution",
-      "price": 29.78,
-      "daily_chg": -2.6161,
-      "intraday_chg": -2.4246,
-      "chg_5d": 0.6761,
-      "ema9": "below_down",
+      "price": 31.06,
+      "daily_chg": 4.2982,
+      "intraday_chg": 3.7062,
+      "chg_5d": 8.8679,
+      "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 1.2491,
-      "rs_rating": 62,
+      "atr_multiple": 2.2669,
+      "rs_rating": 70,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -0.4953,
-          "m": -2.6809
-        },
         {
           "v": -1.1283,
           "m": -2.6156
@@ -7846,29 +7842,29 @@
         {
           "v": 1.4547,
           "m": 1.335
+        },
+        {
+          "v": 2.7037,
+          "m": 1.4949
         }
       ]
     },
     {
       "ticker": "CQQQ",
       "name": "China Technology",
-      "price": 51.02,
-      "daily_chg": -0.0,
-      "intraday_chg": -0.137,
-      "chg_5d": 3.3421,
+      "price": 53.54,
+      "daily_chg": 4.9392,
+      "intraday_chg": 2.1561,
+      "chg_5d": 9.0872,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
-      "sma150": "below_down",
-      "sma200": "below_up",
-      "atr_multiple": 2.2174,
-      "rs_rating": 54,
-      "rs_1m_new_high": false,
+      "sma150": "above_down",
+      "sma200": "above_up",
+      "atr_multiple": 4.2827,
+      "rs_rating": 59,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": -2.794,
-          "m": -5.5739
-        },
         {
           "v": -2.9872,
           "m": -5.5342
@@ -7944,29 +7940,29 @@
         {
           "v": 2.1604,
           "m": 0.0503
+        },
+        {
+          "v": 4.6712,
+          "m": 0.4236
         }
       ]
     },
     {
       "ticker": "XAR",
       "name": "Aerospace & Defense (EW)",
-      "price": 255.22,
-      "daily_chg": 0.1845,
-      "intraday_chg": -0.9201,
-      "chg_5d": 0.1216,
-      "ema9": "below_down",
-      "ema21": "below_down",
-      "ema50": "below_down",
-      "sma150": "below_up",
+      "price": 267.26,
+      "daily_chg": 4.7175,
+      "intraday_chg": 2.737,
+      "chg_5d": 7.011,
+      "ema9": "above_up",
+      "ema21": "above_up",
+      "ema50": "above_up",
+      "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -1.7961,
-      "rs_rating": 61,
+      "atr_multiple": -0.0486,
+      "rs_rating": 67,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 0.0444,
-          "m": -12.0925
-        },
         {
           "v": -2.1884,
           "m": -12.3113
@@ -8042,29 +8038,29 @@
         {
           "v": -12.7123,
           "m": -5.7122
+        },
+        {
+          "v": -0.3617,
+          "m": -5.7325
         }
       ]
     },
     {
       "ticker": "BOTZ",
       "name": "Robotics & AI",
-      "price": 38.75,
-      "daily_chg": 0.964,
-      "intraday_chg": 0.3366,
-      "chg_5d": 2.8943,
+      "price": 39.88,
+      "daily_chg": 2.9161,
+      "intraday_chg": 1.5792,
+      "chg_5d": 6.831,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 3.5018,
-      "rs_rating": 62,
-      "rs_1m_new_high": false,
+      "atr_multiple": 4.669,
+      "rs_rating": 66,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": -1.227,
-          "m": -2.9453
-        },
         {
           "v": -1.3602,
           "m": -2.9431
@@ -8140,29 +8136,29 @@
         {
           "v": 2.6476,
           "m": 0.9348
+        },
+        {
+          "v": 3.7602,
+          "m": 1.1841
         }
       ]
     },
     {
       "ticker": "NUKZ",
       "name": "Nuclear Energy",
-      "price": 72.96,
-      "daily_chg": 0.4959,
-      "intraday_chg": -0.5995,
-      "chg_5d": 0.9967,
+      "price": 76.23,
+      "daily_chg": 4.4819,
+      "intraday_chg": 2.7359,
+      "chg_5d": 8.3428,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 1.5047,
-      "rs_rating": 69,
-      "rs_1m_new_high": false,
+      "atr_multiple": 2.9879,
+      "rs_rating": 73,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": 0.2964,
-          "m": -2.7068
-        },
         {
           "v": -0.0454,
           "m": -2.7006
@@ -8238,29 +8234,29 @@
         {
           "v": 2.8398,
           "m": 2.2054
+        },
+        {
+          "v": 6.0466,
+          "m": 2.4929
         }
       ]
     },
     {
       "ticker": "ROBO",
       "name": "Robotics Global",
-      "price": 82.36,
-      "daily_chg": 1.5787,
-      "intraday_chg": 0.6477,
-      "chg_5d": 3.7933,
+      "price": 84.62,
+      "daily_chg": 2.744,
+      "intraday_chg": 0.8461,
+      "chg_5d": 7.5769,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 4.8095,
-      "rs_rating": 72,
-      "rs_1m_new_high": false,
+      "atr_multiple": 5.7672,
+      "rs_rating": 75,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": 0.1962,
-          "m": -3.9862
-        },
         {
           "v": 0.0256,
           "m": -3.8946
@@ -8336,29 +8332,29 @@
         {
           "v": 7.826,
           "m": 4.5221
+        },
+        {
+          "v": 9.9694,
+          "m": 5.0108
         }
       ]
     },
     {
       "ticker": "NLR",
       "name": "Nuclear & Uranium",
-      "price": 141.37,
-      "daily_chg": -1.4569,
-      "intraday_chg": -2.5841,
-      "chg_5d": 0.1985,
-      "ema9": "below_down",
-      "ema21": "below_down",
+      "price": 149.25,
+      "daily_chg": 5.574,
+      "intraday_chg": 3.9128,
+      "chg_5d": 8.4981,
+      "ema9": "above_up",
+      "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 0.2557,
-      "rs_rating": 68,
-      "rs_1m_new_high": false,
+      "atr_multiple": 1.6414,
+      "rs_rating": 73,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": -4.255,
-          "m": -9.7963
-        },
         {
           "v": -4.7918,
           "m": -9.8736
@@ -8434,29 +8430,29 @@
         {
           "v": 1.3448,
           "m": 2.1778
+        },
+        {
+          "v": 9.2504,
+          "m": 2.853
         }
       ]
     },
     {
       "ticker": "ARKQ",
       "name": "ARK Autonomous Tech",
-      "price": 127.4,
-      "daily_chg": -0.5852,
-      "intraday_chg": -1.3092,
-      "chg_5d": 0.3782,
-      "ema9": "below_down",
+      "price": 133.97,
+      "daily_chg": 5.157,
+      "intraday_chg": 3.1014,
+      "chg_5d": 8.6889,
+      "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 1.757,
-      "rs_rating": 71,
-      "rs_1m_new_high": false,
+      "atr_multiple": 3.4185,
+      "rs_rating": 77,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": -0.8382,
-          "m": -6.875
-        },
         {
           "v": -2.1802,
           "m": -6.8277
@@ -8532,29 +8528,29 @@
         {
           "v": 5.7783,
           "m": 5.574
+        },
+        {
+          "v": 12.1641,
+          "m": 6.2241
         }
       ]
     },
     {
       "ticker": "URA",
       "name": "Uranium",
-      "price": 54.2,
-      "daily_chg": -1.0407,
-      "intraday_chg": -2.4478,
-      "chg_5d": -0.0553,
-      "ema9": "below_down",
+      "price": 58.26,
+      "daily_chg": 7.4908,
+      "intraday_chg": 5.2765,
+      "chg_5d": 10.1531,
+      "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 0.9489,
-      "rs_rating": 77,
-      "rs_1m_new_high": false,
+      "atr_multiple": 2.3895,
+      "rs_rating": 84,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": -0.3182,
-          "m": -3.8896
-        },
         {
           "v": -0.6498,
           "m": -3.863
@@ -8630,29 +8626,29 @@
         {
           "v": 2.317,
           "m": 2.8955
+        },
+        {
+          "v": 6.3108,
+          "m": 3.227
         }
       ]
     },
     {
       "ticker": "QTUM",
       "name": "Quantum Computing",
-      "price": 139.17,
-      "daily_chg": 2.5647,
-      "intraday_chg": 1.0565,
-      "chg_5d": 7.9005,
+      "price": 143.66,
+      "daily_chg": 3.2263,
+      "intraday_chg": 1.1904,
+      "chg_5d": 10.5587,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 7.7514,
-      "rs_rating": 80,
-      "rs_1m_new_high": false,
+      "atr_multiple": 8.6435,
+      "rs_rating": 84,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": 2.6306,
-          "m": -4.9143
-        },
         {
           "v": 3.0125,
           "m": -4.5999
@@ -8728,29 +8724,29 @@
         {
           "v": 21.5039,
           "m": 12.7639
+        },
+        {
+          "v": 25.4453,
+          "m": 13.9047
         }
       ]
     },
     {
       "ticker": "XHB",
       "name": "Homebuilders",
-      "price": 102.81,
-      "daily_chg": 1.3905,
-      "intraday_chg": 0.5477,
-      "chg_5d": -3.844,
-      "ema9": "below_down",
-      "ema21": "below_down",
-      "ema50": "below_down",
+      "price": 105.75,
+      "daily_chg": 2.8596,
+      "intraday_chg": 0.5706,
+      "chg_5d": 1.6436,
+      "ema9": "above_up",
+      "ema21": "above_up",
+      "ema50": "above_up",
       "sma150": "below_down",
       "sma200": "below_up",
-      "atr_multiple": -0.5481,
-      "rs_rating": 46,
+      "atr_multiple": 0.6187,
+      "rs_rating": 50,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -5.4856,
-          "m": -11.0994
-        },
         {
           "v": -3.5742,
           "m": -10.8216
@@ -8826,29 +8822,29 @@
         {
           "v": -1.4443,
           "m": -0.7489
+        },
+        {
+          "v": 1.718,
+          "m": -0.3887
         }
       ]
     },
     {
       "ticker": "BLOK",
       "name": "Blockchain",
-      "price": 62.86,
-      "daily_chg": 2.4279,
-      "intraday_chg": 1.3871,
-      "chg_5d": 6.9957,
+      "price": 65.92,
+      "daily_chg": 4.868,
+      "intraday_chg": 2.1857,
+      "chg_5d": 14.2857,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_down",
       "sma200": "above_up",
-      "atr_multiple": 4.6939,
-      "rs_rating": 66,
+      "atr_multiple": 5.9433,
+      "rs_rating": 73,
       "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": -0.2218,
-          "m": -4.3469
-        },
         {
           "v": 0.2146,
           "m": -4.1335
@@ -8924,29 +8920,29 @@
         {
           "v": 7.9142,
           "m": 4.8793
+        },
+        {
+          "v": 10.734,
+          "m": 5.4271
         }
       ]
     },
     {
       "ticker": "CIBR",
       "name": "Cybersecurity",
-      "price": 70.87,
-      "daily_chg": 1.6057,
-      "intraday_chg": 0.5248,
-      "chg_5d": 5.5398,
+      "price": 70.17,
+      "daily_chg": -0.9877,
+      "intraday_chg": -0.3123,
+      "chg_5d": 3.3888,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_down",
       "sma200": "below_down",
-      "atr_multiple": 3.8506,
+      "atr_multiple": 3.2562,
       "rs_rating": 52,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 0.4588,
-          "m": -2.6845
-        },
         {
           "v": -1.9447,
           "m": -2.656
@@ -9022,29 +9018,29 @@
         {
           "v": 5.8798,
           "m": 1.838
+        },
+        {
+          "v": 5.0059,
+          "m": 2.0653
         }
       ]
     },
     {
       "ticker": "IAI",
       "name": "Broker-Dealers",
-      "price": 176.99,
-      "daily_chg": 0.5854,
-      "intraday_chg": 0.0452,
-      "chg_5d": -0.1354,
+      "price": 178.48,
+      "daily_chg": 0.8419,
+      "intraday_chg": 0.0392,
+      "chg_5d": 2.2047,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 2.5439,
-      "rs_rating": 56,
+      "atr_multiple": 3.0573,
+      "rs_rating": 58,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 2.7057,
-          "m": -9.7566
-        },
         {
           "v": 1.8126,
           "m": -9.0131
@@ -9120,29 +9116,29 @@
         {
           "v": 6.8739,
           "m": 6.8926
+        },
+        {
+          "v": 8.1717,
+          "m": 7.1659
         }
       ]
     },
     {
       "ticker": "ARKX",
       "name": "ARK Space Exploration",
-      "price": 32.26,
-      "daily_chg": -0.769,
-      "intraday_chg": -1.8856,
-      "chg_5d": -1.3154,
-      "ema9": "below_down",
-      "ema21": "below_down",
+      "price": 33.82,
+      "daily_chg": 4.8357,
+      "intraday_chg": 2.6404,
+      "chg_5d": 6.5868,
+      "ema9": "above_up",
+      "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 0.7044,
-      "rs_rating": 68,
+      "atr_multiple": 2.3959,
+      "rs_rating": 73,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 0.26,
-          "m": -1.5099
-        },
         {
           "v": -0.1666,
           "m": -1.487
@@ -9218,29 +9214,29 @@
         {
           "v": 0.5793,
           "m": 1.17
+        },
+        {
+          "v": 2.1111,
+          "m": 1.2626
         }
       ]
     },
     {
       "ticker": "XSW",
       "name": "Software & Services",
-      "price": 160.9,
-      "daily_chg": 0.4244,
-      "intraday_chg": 0.1681,
-      "chg_5d": 6.7047,
+      "price": 159.71,
+      "daily_chg": -0.7396,
+      "intraday_chg": -0.4053,
+      "chg_5d": 5.8523,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": 2.6928,
-      "rs_rating": 44,
+      "atr_multiple": 2.3475,
+      "rs_rating": 46,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -7.6032,
-          "m": -13.1035
-        },
         {
           "v": -11.2446,
           "m": -12.9685
@@ -9316,29 +9312,29 @@
         {
           "v": 11.4442,
           "m": 1.1661
+        },
+        {
+          "v": 9.9732,
+          "m": 2.0449
         }
       ]
     },
     {
       "ticker": "IHI",
       "name": "Medical Devices",
-      "price": 49.79,
-      "daily_chg": -0.2804,
-      "intraday_chg": -0.4598,
-      "chg_5d": -4.2868,
+      "price": 49.71,
+      "daily_chg": -0.1607,
+      "intraday_chg": -0.4007,
+      "chg_5d": -1.2319,
       "ema9": "below_down",
       "ema21": "below_down",
       "ema50": "below_down",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": -4.2919,
+      "atr_multiple": -4.322,
       "rs_rating": 34,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -2.6345,
-          "m": -4.2625
-        },
         {
           "v": -3.0526,
           "m": -4.2217
@@ -9414,29 +9410,29 @@
         {
           "v": -4.7932,
           "m": -3.2418
+        },
+        {
+          "v": -4.6801,
+          "m": -3.3441
         }
       ]
     },
     {
       "ticker": "IYT",
       "name": "Transportation",
-      "price": 78.81,
-      "daily_chg": 1.5462,
-      "intraday_chg": 1.0255,
-      "chg_5d": -2.5714,
-      "ema9": "below_down",
-      "ema21": "below_down",
+      "price": 81.61,
+      "daily_chg": 3.5529,
+      "intraday_chg": 1.4923,
+      "chg_5d": 2.0253,
+      "ema9": "above_up",
+      "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 0.6585,
-      "rs_rating": 59,
+      "atr_multiple": 2.137,
+      "rs_rating": 64,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 0.2625,
-          "m": -3.6088
-        },
         {
           "v": 0.3688,
           "m": -3.4461
@@ -9512,29 +9508,29 @@
         {
           "v": 1.1317,
           "m": 2.2885
+        },
+        {
+          "v": 3.9092,
+          "m": 2.4708
         }
       ]
     },
     {
       "ticker": "WCLD",
       "name": "Cloud Computing",
-      "price": 29.79,
-      "daily_chg": 0.9488,
-      "intraday_chg": 0.4044,
-      "chg_5d": 9.3612,
+      "price": 28.8553,
+      "daily_chg": -3.1376,
+      "intraday_chg": -1.8193,
+      "chg_5d": 5.5424,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": 2.1702,
-      "rs_rating": 44,
-      "rs_1m_new_high": true,
+      "atr_multiple": 1.1616,
+      "rs_rating": 43,
+      "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -1.2713,
-          "m": -1.4929
-        },
         {
           "v": -2.6493,
           "m": -1.5441
@@ -9610,29 +9606,29 @@
         {
           "v": 2.1892,
           "m": -0.5086
+        },
+        {
+          "v": 1.2,
+          "m": -0.385
         }
       ]
     },
     {
       "ticker": "ARKW",
       "name": "ARK Next Generation Internet",
-      "price": 141.65,
-      "daily_chg": -0.9094,
-      "intraday_chg": -1.3201,
-      "chg_5d": 3.8566,
+      "price": 145.94,
+      "daily_chg": 3.0286,
+      "intraday_chg": 1.0945,
+      "chg_5d": 7.7286,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
-      "sma150": "below_down",
+      "sma150": "above_down",
       "sma200": "below_down",
-      "atr_multiple": 3.5341,
-      "rs_rating": 58,
-      "rs_1m_new_high": false,
+      "atr_multiple": 4.5181,
+      "rs_rating": 65,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": -1.6487,
-          "m": -7.2492
-        },
         {
           "v": -3.6157,
           "m": -7.1541
@@ -9708,29 +9704,29 @@
         {
           "v": 12.2748,
           "m": 8.5359
+        },
+        {
+          "v": 16.0894,
+          "m": 9.4228
         }
       ]
     },
     {
       "ticker": "SOCL",
       "name": "Social Media",
-      "price": 46.7887,
-      "daily_chg": 0.3403,
-      "intraday_chg": -1.2063,
-      "chg_5d": 2.0251,
+      "price": 47.4049,
+      "daily_chg": 1.3142,
+      "intraday_chg": 0.498,
+      "chg_5d": 4.0722,
       "ema9": "above_up",
       "ema21": "above_up",
-      "ema50": "below_down",
+      "ema50": "above_up",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": 0.8307,
-      "rs_rating": 40,
+      "atr_multiple": 1.611,
+      "rs_rating": 42,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -3.5262,
-          "m": -6.3659
-        },
         {
           "v": -3.674,
           "m": -6.2745
@@ -9804,31 +9800,31 @@
           "m": -0.8802
         },
         {
-          "v": 0.7173,
+          "v": 0.7186,
           "m": -0.5762
+        },
+        {
+          "v": 1.3682,
+          "m": -0.3314
         }
       ]
     },
     {
       "ticker": "BAI",
       "name": "Big AI",
-      "price": 44.78,
-      "daily_chg": 2.3075,
-      "intraday_chg": 0.9923,
-      "chg_5d": 9.4598,
+      "price": 46.14,
+      "daily_chg": 3.0371,
+      "intraday_chg": 0.4572,
+      "chg_5d": 11.1539,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 6.5796,
-      "rs_rating": 83,
+      "atr_multiple": 7.2515,
+      "rs_rating": 86,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 2.8718,
-          "m": -0.3646
-        },
         {
           "v": 2.9434,
           "m": -0.2165
@@ -9904,29 +9900,29 @@
         {
           "v": 7.966,
           "m": 5.4943
+        },
+        {
+          "v": 9.1084,
+          "m": 5.8061
         }
       ]
     },
     {
       "ticker": "CLOU",
       "name": "Cloud Computing (Global X)",
-      "price": 22.47,
-      "daily_chg": 4.5603,
-      "intraday_chg": 2.7905,
-      "chg_5d": 13.5996,
+      "price": 22.33,
+      "daily_chg": -0.623,
+      "intraday_chg": 0.0448,
+      "chg_5d": 12.0421,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_down",
       "sma200": "above_down",
-      "atr_multiple": 4.6484,
-      "rs_rating": 55,
+      "atr_multiple": 4.2857,
+      "rs_rating": 57,
       "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": -0.0682,
-          "m": -0.4008
-        },
         {
           "v": -0.804,
           "m": -0.4057
@@ -10002,29 +9998,29 @@
         {
           "v": 2.878,
           "m": 0.3551
+        },
+        {
+          "v": 2.6626,
+          "m": 0.4916
         }
       ]
     },
     {
       "ticker": "XTL",
       "name": "Telecom",
-      "price": 227.52,
-      "daily_chg": 0.8734,
-      "intraday_chg": 0.0176,
-      "chg_5d": 8.0855,
+      "price": 227.21,
+      "daily_chg": -0.1363,
+      "intraday_chg": -0.1714,
+      "chg_5d": 6.0243,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 5.1433,
+      "atr_multiple": 5.2463,
       "rs_rating": 91,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 24.8121,
-          "m": 15.4601
-        },
         {
           "v": 24.0502,
           "m": 15.6063
@@ -10100,29 +10096,29 @@
         {
           "v": 27.6801,
           "m": 25.8903
+        },
+        {
+          "v": 26.4238,
+          "m": 25.9709
         }
       ]
     },
     {
       "ticker": "SLX",
       "name": "Steel",
-      "price": 104.72,
-      "daily_chg": 2.3156,
-      "intraday_chg": 1.2374,
-      "chg_5d": 2.4056,
+      "price": 108.55,
+      "daily_chg": 3.6574,
+      "intraday_chg": 0.6491,
+      "chg_5d": 7.4008,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 5.1126,
-      "rs_rating": 77,
+      "atr_multiple": 6.4186,
+      "rs_rating": 81,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 3.2112,
-          "m": -4.3146
-        },
         {
           "v": 3.3826,
           "m": -4.0728
@@ -10198,29 +10194,29 @@
         {
           "v": 8.801,
           "m": 5.8278
+        },
+        {
+          "v": 12.4566,
+          "m": 6.2901
         }
       ]
     },
     {
       "ticker": "HACK",
       "name": "Cybersecurity (ETFMG)",
-      "price": 83.77,
-      "daily_chg": 2.0714,
-      "intraday_chg": 0.9764,
-      "chg_5d": 5.7569,
+      "price": 83.12,
+      "daily_chg": -0.7759,
+      "intraday_chg": -0.3835,
+      "chg_5d": 3.2418,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_down",
       "sma200": "above_down",
-      "atr_multiple": 3.5298,
-      "rs_rating": 56,
+      "atr_multiple": 3.0581,
+      "rs_rating": 57,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 2.5152,
-          "m": -0.0901
-        },
         {
           "v": -1.3716,
           "m": -0.2044
@@ -10296,29 +10292,29 @@
         {
           "v": 6.74,
           "m": 2.0934
+        },
+        {
+          "v": 5.8524,
+          "m": 2.2602
         }
       ]
     },
     {
       "ticker": "PBW",
       "name": "Clean Energy (Invesco)",
-      "price": 39.61,
-      "daily_chg": 3.2048,
-      "intraday_chg": 1.93,
-      "chg_5d": 9.2388,
+      "price": 40.08,
+      "daily_chg": 1.1866,
+      "intraday_chg": 0.8302,
+      "chg_5d": 9.718,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 4.7643,
-      "rs_rating": 87,
+      "atr_multiple": 5.034,
+      "rs_rating": 89,
       "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": -0.3282,
-          "m": -1.5296
-        },
         {
           "v": -0.2045,
           "m": -1.5098
@@ -10394,29 +10390,29 @@
         {
           "v": 5.9078,
           "m": 3.0523
+        },
+        {
+          "v": 6.2601,
+          "m": 3.3817
         }
       ]
     },
     {
       "ticker": "XHS",
       "name": "Health Care Services",
-      "price": 108.248,
-      "daily_chg": -2.038,
-      "intraday_chg": -1.3865,
-      "chg_5d": -1.7535,
-      "ema9": "below_down",
+      "price": 109.625,
+      "daily_chg": 1.2702,
+      "intraday_chg": 1.1114,
+      "chg_5d": -0.4133,
+      "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 2.2558,
-      "rs_rating": 59,
+      "atr_multiple": 3.1886,
+      "rs_rating": 60,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 0.0727,
-          "m": -4.7706
-        },
         {
           "v": -0.145,
           "m": -4.6133
@@ -10490,31 +10486,31 @@
           "m": 2.2645
         },
         {
-          "v": 2.8568,
-          "m": 2.488
+          "v": 2.8587,
+          "m": 2.4881
+        },
+        {
+          "v": 4.1748,
+          "m": 2.6932
         }
       ]
     },
     {
       "ticker": "PBJ",
       "name": "Food & Beverage",
-      "price": 50.0537,
-      "daily_chg": 0.8537,
-      "intraday_chg": 0.5902,
-      "chg_5d": 0.8334,
-      "ema9": "above_up",
-      "ema21": "above_up",
+      "price": 49.4774,
+      "daily_chg": -1.1441,
+      "intraday_chg": -0.8668,
+      "chg_5d": 0.015,
+      "ema9": "below_down",
+      "ema21": "below_down",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 1.467,
-      "rs_rating": 57,
+      "atr_multiple": 0.4031,
+      "rs_rating": 55,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 1.2744,
-          "m": 0.2401
-        },
         {
           "v": 1.4741,
           "m": 0.2816
@@ -10588,31 +10584,31 @@
           "m": 0.4532
         },
         {
-          "v": 0.7618,
-          "m": 0.4491
+          "v": 0.7582,
+          "m": 0.4489
+        },
+        {
+          "v": 0.2113,
+          "m": 0.3958
         }
       ]
     },
     {
       "ticker": "DRIV",
       "name": "Electric & Autonomous Vehicles",
-      "price": 38.3178,
-      "daily_chg": 2.2763,
-      "intraday_chg": 1.2627,
-      "chg_5d": 7.4562,
+      "price": 39.4977,
+      "daily_chg": 3.0787,
+      "intraday_chg": 1.3281,
+      "chg_5d": 8.5997,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 7.1486,
-      "rs_rating": 81,
-      "rs_1m_new_high": false,
+      "atr_multiple": 8.1841,
+      "rs_rating": 84,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": 0.9107,
-          "m": -1.4122
-        },
         {
           "v": 1.0379,
           "m": -1.3162
@@ -10686,31 +10682,31 @@
           "m": 3.1164
         },
         {
-          "v": 5.58,
+          "v": 5.5802,
           "m": 3.4249
+        },
+        {
+          "v": 6.6349,
+          "m": 3.7111
         }
       ]
     },
     {
       "ticker": "PAVE",
       "name": "US Infrastructure",
-      "price": 57.37,
-      "daily_chg": 2.1,
-      "intraday_chg": 0.9058,
-      "chg_5d": 2.9428,
+      "price": 58.35,
+      "daily_chg": 1.7082,
+      "intraday_chg": 0.5341,
+      "chg_5d": 5.8407,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 3.8034,
-      "rs_rating": 69,
-      "rs_1m_new_high": false,
+      "atr_multiple": 4.5836,
+      "rs_rating": 71,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": 1.3105,
-          "m": -1.7316
-        },
         {
           "v": 1.9372,
           "m": -1.6161
@@ -10786,29 +10782,29 @@
         {
           "v": 4.0832,
           "m": 2.4107
+        },
+        {
+          "v": 5.0092,
+          "m": 2.5957
         }
       ]
     },
     {
       "ticker": "KBE",
       "name": "Bank ETF",
-      "price": 64.08,
-      "daily_chg": 1.2322,
-      "intraday_chg": 1.0885,
-      "chg_5d": -0.8203,
+      "price": 64.72,
+      "daily_chg": 0.9987,
+      "intraday_chg": 0.0928,
+      "chg_5d": 1.745,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 2.4719,
-      "rs_rating": 60,
+      "atr_multiple": 2.9001,
+      "rs_rating": 61,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 1.1102,
-          "m": -3.3015
-        },
         {
           "v": 1.9972,
           "m": -2.9735
@@ -10884,29 +10880,29 @@
         {
           "v": 2.8215,
           "m": 2.3547
+        },
+        {
+          "v": 3.4138,
+          "m": 2.4699
         }
       ]
     },
     {
       "ticker": "IDGT",
       "name": "Industrials & Infrastructure",
-      "price": 122.3,
-      "daily_chg": 1.5612,
-      "intraday_chg": 0.5261,
-      "chg_5d": 7.7818,
+      "price": 123.84,
+      "daily_chg": 1.2592,
+      "intraday_chg": 0.251,
+      "chg_5d": 6.6759,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 8.3431,
-      "rs_rating": 83,
+      "atr_multiple": 9.0607,
+      "rs_rating": 85,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 11.1267,
-          "m": 6.1974
-        },
         {
           "v": 10.9458,
           "m": 6.3423
@@ -10982,29 +10978,29 @@
         {
           "v": 17.5026,
           "m": 14.4625
+        },
+        {
+          "v": 18.5032,
+          "m": 14.8314
         }
       ]
     },
     {
       "ticker": "PPH",
       "name": "Pharma",
-      "price": 102.6044,
-      "daily_chg": 0.4743,
-      "intraday_chg": 0.4055,
-      "chg_5d": 2.8822,
+      "price": 102.23,
+      "daily_chg": -0.3606,
+      "intraday_chg": -0.5545,
+      "chg_5d": 3.3984,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "below_down",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -0.6585,
-      "rs_rating": 59,
+      "atr_multiple": -0.8141,
+      "rs_rating": 60,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -1.0464,
-          "m": -3.7768
-        },
         {
           "v": -0.9162,
           "m": -3.7529
@@ -11078,31 +11074,31 @@
           "m": -2.7844
         },
         {
-          "v": -0.9492,
-          "m": -2.6647
+          "v": -0.9536,
+          "m": -2.6649
+        },
+        {
+          "v": -1.17,
+          "m": -2.6711
         }
       ]
     },
     {
       "ticker": "DTCR",
       "name": "Data Center REIT",
-      "price": 29.41,
-      "daily_chg": 1.6943,
-      "intraday_chg": 0.6158,
-      "chg_5d": 4.7365,
+      "price": 30.31,
+      "daily_chg": 3.0602,
+      "intraday_chg": 0.9997,
+      "chg_5d": 7.4442,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 6.6302,
-      "rs_rating": 81,
+      "atr_multiple": 7.6848,
+      "rs_rating": 84,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 0.8996,
-          "m": -0.1633
-        },
         {
           "v": 1.0946,
           "m": -0.1651
@@ -11178,29 +11174,29 @@
         {
           "v": 3.4136,
           "m": 2.4196
+        },
+        {
+          "v": 4.2228,
+          "m": 2.5858
         }
       ]
     },
     {
       "ticker": "IBUY",
       "name": "E-Commerce",
-      "price": 66.9776,
-      "daily_chg": -0.0036,
-      "intraday_chg": -0.1527,
-      "chg_5d": -0.7798,
+      "price": 67.4866,
+      "daily_chg": 0.7594,
+      "intraday_chg": -0.3152,
+      "chg_5d": -0.3594,
       "ema9": "below_down",
-      "ema21": "below_down",
+      "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": 1.6465,
-      "rs_rating": 47,
+      "atr_multiple": 2.1128,
+      "rs_rating": 49,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -0.4808,
-          "m": -5.1907
-        },
         {
           "v": -0.3874,
           "m": -4.9277
@@ -11274,31 +11270,31 @@
           "m": 2.7244
         },
         {
-          "v": 1.7289,
-          "m": 2.9485
+          "v": 1.7293,
+          "m": 2.9486
+        },
+        {
+          "v": 2.1704,
+          "m": 3.0811
         }
       ]
     },
     {
       "ticker": "KIE",
       "name": "Insurance",
-      "price": 56.55,
-      "daily_chg": 0.5155,
-      "intraday_chg": 0.3371,
-      "chg_5d": -2.6343,
+      "price": 56.35,
+      "daily_chg": -0.3537,
+      "intraday_chg": -0.8969,
+      "chg_5d": -1.5204,
       "ema9": "below_down",
       "ema21": "below_down",
       "ema50": "below_down",
       "sma150": "below_down",
-      "sma200": "below_down",
-      "atr_multiple": 0.1924,
-      "rs_rating": 49,
+      "sma200": "below_up",
+      "atr_multiple": -0.0467,
+      "rs_rating": 48,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 0.4396,
-          "m": -2.231
-        },
         {
           "v": 0.3578,
           "m": -2.0645
@@ -11374,29 +11370,29 @@
         {
           "v": 0.1553,
           "m": 0.9447
+        },
+        {
+          "v": -0.0395,
+          "m": 0.9208
         }
       ]
     },
     {
       "ticker": "SPPP",
       "name": "Platinum & Palladium",
-      "price": 15.46,
-      "daily_chg": 0.3245,
-      "intraday_chg": -1.3401,
-      "chg_5d": 0.9797,
-      "ema9": "below_down",
-      "ema21": "below_down",
-      "ema50": "below_down",
-      "sma150": "below_up",
+      "price": 16.24,
+      "daily_chg": 5.0453,
+      "intraday_chg": 1.978,
+      "chg_5d": 8.0506,
+      "ema9": "above_up",
+      "ema21": "above_up",
+      "ema50": "above_up",
+      "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -1.6432,
-      "rs_rating": 65,
+      "atr_multiple": 0.0915,
+      "rs_rating": 71,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -0.6908,
-          "m": -2.2605
-        },
         {
           "v": -0.2896,
           "m": -2.2122
@@ -11472,29 +11468,29 @@
         {
           "v": -0.7676,
           "m": -0.4655
+        },
+        {
+          "v": 0.046,
+          "m": -0.4287
         }
       ]
     },
     {
       "ticker": "COPJ",
       "name": "Copper Juniors",
-      "price": 39.51,
-      "daily_chg": -0.8034,
-      "intraday_chg": -1.2497,
-      "chg_5d": -3.892,
-      "ema9": "below_down",
-      "ema21": "below_down",
-      "ema50": "below_down",
+      "price": 42.33,
+      "daily_chg": 7.1374,
+      "intraday_chg": 2.6929,
+      "chg_5d": 5.6401,
+      "ema9": "above_up",
+      "ema21": "above_up",
+      "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": -1.4582,
-      "rs_rating": 79,
+      "atr_multiple": 0.4916,
+      "rs_rating": 85,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": -1.6193,
-          "m": -5.9497
-        },
         {
           "v": -1.3157,
           "m": -5.9349
@@ -11570,29 +11566,29 @@
         {
           "v": -2.1227,
           "m": -0.0656
+        },
+        {
+          "v": 0.7941,
+          "m": 0.0551
         }
       ]
     },
     {
       "ticker": "SOLZ",
       "name": "Solana Strategy",
-      "price": 8.73,
-      "daily_chg": 2.5852,
-      "intraday_chg": 1.0417,
-      "chg_5d": 3.5587,
+      "price": 9.01,
+      "daily_chg": 3.2073,
+      "intraday_chg": 0.8959,
+      "chg_5d": 8.948,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "below_down",
       "sma150": "below_down",
       "sma200": "below_down",
-      "atr_multiple": 0.153,
-      "rs_rating": 19,
-      "rs_1m_new_high": false,
+      "atr_multiple": 1.1711,
+      "rs_rating": 28,
+      "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": -0.6276,
-          "m": -1.2201
-        },
         {
           "v": -0.4391,
           "m": -1.1403
@@ -11668,29 +11664,29 @@
         {
           "v": 0.0434,
           "m": -0.1229
+        },
+        {
+          "v": 0.3027,
+          "m": -0.0764
         }
       ]
     },
     {
       "ticker": "HYDR",
       "name": "Hydrogen",
-      "price": 62.64,
-      "daily_chg": 6.5487,
-      "intraday_chg": 5.8287,
-      "chg_5d": 24.756,
+      "price": 64.56,
+      "daily_chg": 3.0651,
+      "intraday_chg": -0.278,
+      "chg_5d": 13.0054,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 7.6035,
-      "rs_rating": 96,
+      "atr_multiple": 8.0521,
+      "rs_rating": 97,
       "rs_1m_new_high": true,
       "vars_history": [
-        {
-          "v": 0.1423,
-          "m": -0.4169
-        },
         {
           "v": 0.8828,
           "m": -0.4668
@@ -11766,29 +11762,29 @@
         {
           "v": 19.8658,
           "m": 9.8107
+        },
+        {
+          "v": 21.2777,
+          "m": 10.8675
         }
       ]
     },
     {
       "ticker": "PSIL",
       "name": "Psychedelics",
-      "price": 20.3312,
-      "daily_chg": 0.401,
-      "intraday_chg": 0.401,
-      "chg_5d": 3.8896,
+      "price": 20.7,
+      "daily_chg": 1.815,
+      "intraday_chg": 0.9264,
+      "chg_5d": 7.4209,
       "ema9": "above_up",
       "ema21": "above_up",
       "ema50": "above_up",
       "sma150": "above_up",
       "sma200": "above_up",
-      "atr_multiple": 3.0174,
-      "rs_rating": 79,
+      "atr_multiple": 3.4642,
+      "rs_rating": 83,
       "rs_1m_new_high": false,
       "vars_history": [
-        {
-          "v": 0.6102,
-          "m": -0.2207
-        },
         {
           "v": 0.8334,
           "m": -0.1946
@@ -11862,8 +11858,12 @@
           "m": 1.8662
         },
         {
-          "v": 2.4907,
+          "v": 2.4905,
           "m": 1.9684
+        },
+        {
+          "v": 2.7951,
+          "m": 2.0777
         }
       ]
     }
